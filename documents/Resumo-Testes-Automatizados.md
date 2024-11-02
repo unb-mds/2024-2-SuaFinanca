@@ -63,7 +63,7 @@ Os testes podem ser realizados manualmente ou com ferramentas de automação, de
   - **Act**: execução da ação a ser testada;
   - **Assert**: verificação do resultado esperado.
 
-- **Test Data Builder**: facilita a criação de dados complexos e reutilizáveis para testes;
+- **Test Data Builder**: facilita a criação de dados complexos e reutilizáveis para testes.
 
 - **Mock Objects**: objetos simulados para substituir dependências externas, garantindo que o teste seja isolado e previsível.
 
