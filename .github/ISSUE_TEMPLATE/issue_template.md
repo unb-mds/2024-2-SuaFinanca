@@ -1,4 +1,10 @@
-[Tipo] - [Módulo/Função] - [Resumo da Tarefa]
+---
+name: Issue Template
+about: Template para criar de novas issues no repositório
+title: "[Tipo] - [Módulo/Função] - [Resumo da Tarefa]"
+labels: ""
+assignees: ""
+---
 
 ### Descrição
 
