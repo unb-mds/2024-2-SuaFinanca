@@ -20,7 +20,9 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
 
 ## 2. Diagrama de Alto Nível
 
-![[Diagrama de Alto Nível.svg|450]]
+<div style="text-align: center;">
+    <img src="../img/Diagrama de Alto Nível.svg" alt="Diagrama de Alto Nível" width="350">
+</div>
 
 ## 3. Detalhamento das Camadas
 
@@ -28,42 +30,42 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
 
 - **Descrição Detalhada**: A camada de Entidades representa os conceitos centrais e tem as regras de negócio mais fundamentais do domínio. Em uma aplicação de controle financeiro pessoal, isso incluiria conceitos como "Usuário" e "Transação".
 - **Responsabilidades**:
-	- Modelar os dados essenciais do sistema, garantindo que todas as regras de negócio associadas a esses dados sejam respeitadas.
-	- Permanecer independente de detalhes de infraestrutura, frameworks ou aplicativos específicos.
+  - Modelar os dados essenciais do sistema, garantindo que todas as regras de negócio associadas a esses dados sejam respeitadas.
+  - Permanecer independente de detalhes de infraestrutura, frameworks ou aplicativos específicos.
 - **Interação com Outras Camadas**:
-	- As entidades são usadas pelos casos de uso para encapsular regras de negócio que são aplicadas em cenários de aplicação específicos. Não têm conhecimento de como são persistidas ou apresentadas.
+  - As entidades são usadas pelos casos de uso para encapsular regras de negócio que são aplicadas em cenários de aplicação específicos. Não têm conhecimento de como são persistidas ou apresentadas.
 
 ### 3.2. Casos de Uso (Use Cases)
 
 - **Descrição Detalhada**: Esta camada define os fluxos de aplicação centrados na realização de tarefas que são vantajosas para o usuário. Os casos de uso coordenam a interação entre as entidades para implementar uma funcionalidade específica, garantindo que todas as regras e lógicas de negócio sejam cumpridas.
 - **Responsabilidades**:
-	- Levar adiante os cenários específicos de aplicação que envolvem o uso das entidades.
-	- Gerenciar o fluxo de dados entre as entidades e a camada de adaptadores de interface, transformando as interações chamadas pelos usuários em ações significativas.
-	- Garantir que a lógica de aplicação seja independente dos frameworks UI e drivers de banco de dados.
+  - Levar adiante os cenários específicos de aplicação que envolvem o uso das entidades.
+  - Gerenciar o fluxo de dados entre as entidades e a camada de adaptadores de interface, transformando as interações chamadas pelos usuários em ações significativas.
+  - Garantir que a lógica de aplicação seja independente dos frameworks UI e drivers de banco de dados.
 - **Interação com Outras Camadas**:
-	- Interagem com adaptadores de interface para receber e responder a ações do usuário.
-	- Utilizam as entidades para aplicar a lógica de negócios.
+  - Interagem com adaptadores de interface para receber e responder a ações do usuário.
+  - Utilizam as entidades para aplicar a lógica de negócios.
 
 ### 3.3. Adaptadores de Interface
 
 - **Descrição Detalhada**: A camada de adaptadores de interface atua como um tradutor entre a interface do usuário (UI ou API HTTP) e os casos de uso. Essa camada é responsável por converter entradas de dados de um formato específico em algo que os casos de uso possam processar, e formatar saídas de dados dos casos de uso.
 - **Responsabilidades**:
-	- Validar e transformar dados de entrada vindo de interfaces externas.
-	- Chamar os casos de uso apropriados, fornecendo dados de uma maneira que possam ser facilmente processados pelo domínio.
-	- Formatando a saída de dados para uma forma utilizável por sistemas externos ou interfaces de apresentação.
+  - Validar e transformar dados de entrada vindo de interfaces externas.
+  - Chamar os casos de uso apropriados, fornecendo dados de uma maneira que possam ser facilmente processados pelo domínio.
+  - Formatando a saída de dados para uma forma utilizável por sistemas externos ou interfaces de apresentação.
 - **Interação com Outras Camadas**:
-	- Recebem comandos de sistemas de entrada e podem passar dados aos casos de uso adequados.
-	- Formatam a saída dos casos de uso para enviar de volta a sistemas externos ou interfaces de apresentação.
+  - Recebem comandos de sistemas de entrada e podem passar dados aos casos de uso adequados.
+  - Formatam a saída dos casos de uso para enviar de volta a sistemas externos ou interfaces de apresentação.
 
 ### 3.4. Frameworks e Drivers
 
 - **Descrição Detalhada**: Esta é a camada mais externa e contém todas as partes de comunicação e detalhes de implementação técnica que não são parte da lógica de negócios. Nesta camada, incluem-se elementos como frameworks web, bancos de dados, sistemas de arquivos e gerenciadores de autenticação.
 - **Responsabilidades**:
-	- Facilitar a integração técnica com componentes externos, como serviços de banco de dados, redes, bibliotecas de autenticação e outros.
-	- Satisfazer as requisições de dados persistentes através do armazenamento e recuperação.
-	- Manter a flexibilidade para que essas tecnologias possam ser modificadas ou atualizadas sem impactar as camadas de negócios de aplicação.
+  - Facilitar a integração técnica com componentes externos, como serviços de banco de dados, redes, bibliotecas de autenticação e outros.
+  - Satisfazer as requisições de dados persistentes através do armazenamento e recuperação.
+  - Manter a flexibilidade para que essas tecnologias possam ser modificadas ou atualizadas sem impactar as camadas de negócios de aplicação.
 - **Interação com Outras Camadas**:
-	- Fornece dependências necessárias para as camadas superiores, utilizando técnicas como injeção de dependência para manter a lógica de negócios desacoplada dos detalhes técnicos.
+  - Fornece dependências necessárias para as camadas superiores, utilizando técnicas como injeção de dependência para manter a lógica de negócios desacoplada dos detalhes técnicos.
 
 ## 4. Detalhes de Implementação
 
@@ -110,23 +112,23 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
 #### Explicações sobre cada diretório:
 
 - **src**: Diretório raiz onde todo o código do aplicativo deveria residir.
-	- **application**: Camada de aplicação que contém lógica de negócios específica do aplicativo.
-	  - **interfaces**: Definições de interfaces que servem como contratos para comunicação entre diferentes camadas/modules.
-	    - **repositories**: Interfaces para persistência e recuperação de entidades de domínio.
-	  - **services**: Serviços que encapsulam lógica de aplicação não específica de um caso de uso.
-	  - **useCases**: Implementações de casos de uso que orquestram a lógica do aplicativo para atingir os objetivos do usuário.
-	  - **utils**: Funções utilitárias não específicas a nenhum caso de uso ou serviço em particular.
-	- **domain**: Contém o núcleo do aplicativo, onde reside a lógica de negócios essencial.
-	  - **entities**: Definições de entidades de domínio que encapsulam regras de negócio.
-	  - **factories**: Fábricas para criação de objetos de domínio, facilitando construções complexas.
-	- **infrastructure**: Cumpre o papel de fornecer implementações concretas para interfaces definidas nas camadas superiores.
-	  - **database**: Implementações de repositórios, mapeadores e estratégias de conexão.
-	- **main**: A camada mais externa que configura e inicia o aplicativo.
-	  - **config**: Configurações e constantes globais.
-	  - **controllers**: Controladores que lidam com a entrada HTTP e transformam chamadas em ações.
-	  - **middlewares**: Middlewares que processam solicitações e respostas de forma genérica.
-	  - **routes**: Definições de rotas que mapeiam URLs para controladores.
-	- **test**: Onde todos os testes automatizados residem, como testes unitários, de integração, de aceitação, etc.
+  - **application**: Camada de aplicação que contém lógica de negócios específica do aplicativo.
+    - **interfaces**: Definições de interfaces que servem como contratos para comunicação entre diferentes camadas/modules.
+      - **repositories**: Interfaces para persistência e recuperação de entidades de domínio.
+    - **services**: Serviços que encapsulam lógica de aplicação não específica de um caso de uso.
+    - **useCases**: Implementações de casos de uso que orquestram a lógica do aplicativo para atingir os objetivos do usuário.
+    - **utils**: Funções utilitárias não específicas a nenhum caso de uso ou serviço em particular.
+  - **domain**: Contém o núcleo do aplicativo, onde reside a lógica de negócios essencial.
+    - **entities**: Definições de entidades de domínio que encapsulam regras de negócio.
+    - **factories**: Fábricas para criação de objetos de domínio, facilitando construções complexas.
+  - **infrastructure**: Cumpre o papel de fornecer implementações concretas para interfaces definidas nas camadas superiores.
+    - **database**: Implementações de repositórios, mapeadores e estratégias de conexão.
+  - **main**: A camada mais externa que configura e inicia o aplicativo.
+    - **config**: Configurações e constantes globais.
+    - **controllers**: Controladores que lidam com a entrada HTTP e transformam chamadas em ações.
+    - **middlewares**: Middlewares que processam solicitações e respostas de forma genérica.
+    - **routes**: Definições de rotas que mapeiam URLs para controladores.
+  - **test**: Onde todos os testes automatizados residem, como testes unitários, de integração, de aceitação, etc.
 
 ## 5. Estratégia de Testes
 
