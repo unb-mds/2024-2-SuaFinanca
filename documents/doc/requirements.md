@@ -56,14 +56,30 @@
      - Permitir a seleção de períodos customizados para visualização dos gráficos.
      - Opção para visualizar gráficos comparativos (ex: comparar despesas do mês atual com o mês anterior).
 
-7. **Metas de Poupança e Investimento** *Could Have (Opcional)*
+7. **Cores Personalizadas para Categorias** *Should Have (Desejáveis)*
+     - Permitir que o usuário escolha cores diferentes para cada categoria para facilitar a visualização (ex: Lazer em vermelho, transporte em azul, etc).
+
+8. **Metas de Redução de Dívidas Should Have** *Should Have (Desejáveis)*
+     - Permitir que o usuário estabeleça metas para redução de dívidas, além das metas de poupança (ex: Meta para reduzir a dívida do cartão de crédito em 20% nos próximos três meses).
+
+9.  **Metas de Poupança e Investimento** *Could Have (Opcional)*
 	- Estabelecimento de Metas de Poupança: O usuário deve poder definir metas específicas de economia para diferentes finalidades (ex: viagem, compra de imóvel).
 	- Monitoramento de Progresso: Exibir o progresso de cada meta com atualizações automáticas conforme o usuário faz novos depósitos.
+	- Alertas de Progresso de Metas: Notificações periódicas sobre o progresso em relação às metas estabelecidas (Notificação mensal sobre o progresso de uma meta de poupança para uma viagem).
 
-8. **Análise de Padrões de Gastos** *Could Have (Opcional)*
+10. **Análise de Padrões de Gastos** *Could Have (Opcional)*
 	- Identificação de Padrões: O sistema deve analisar transações passadas e identificar padrões de gastos recorrentes, exibindo insights para o usuário.
 	- Análise de Despesas Supérfluas: Classificar despesas como essenciais ou supérfluas e sugerir ajustes para otimizar o orçamento.
 	- Alertas de Padrões Negativos: Notificar o usuário quando identificar um padrão de gastos que pode ser prejudicial ao orçamento ou às metas de poupança.
+	- Repetição Automática de Transações: Permitir a configuração de transações recorrentes (ex: aluguel mensal).
+
+11. **Personalização Avançada** *Could Have (Opcional)*
+    - Notas Adicionais: Campo para o usuário adicionar notas ou comentários detalhados sobre a transação (ex: compra para o jantar de Natal).
+    - Subcategorias: Permitir a criação de subcategorias para uma organização mais detalhada das transações (ex: Transporte com subcategorias como "Combustível, Manutenção, Seguro").
+
+12. **Configurações de Transações** *Could Have (Opcional)*
+    - Repetição Automática de Transações: Permitir a configuração de transações recorrentes (ex: aluguel mensal).
+    - Saldo por Conta: Exibir saldos individuais para diferentes contas (ex: conta corrente, poupança, carteira digital).
 
 ## Requisitos Não-Funcionais Detalhados
 
@@ -79,3 +95,4 @@
      - Feedback visual de operações importantes (ex: salvamento de transações, emissão de notificações).
    - Funcionalidades adicionais:
      - Modo claro e escuro para conforto visual.
+     - Disponibilizar documentação detalhada e tutoriais passo-a-passo para uso do sistema.
