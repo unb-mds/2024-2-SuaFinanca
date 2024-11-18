@@ -84,6 +84,15 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
 - **JSON Web Token (JWT)**: Implementado para autenticação e autorização segura, permitindo que tokens sejam passados pela API como representações dos usuários autenticados.
 - **Winston**: Biblioteca para criação e controle de logs, capaz de gerenciar diferentes níveis de registro e integrando-se bem com grandes quantidades de dados logados.
 - **Bcrypt**: Utilizado para o hashing de senhas dos usuários antes de armazená-las, garantindo que os dados armazenados sejam seguros mesmo em caso de vazamento de informações.
+- **Next.js**: : Next.js é um framework React voltado para o desenvolvimento de aplicações web e sites otimizados, com suporte tanto para renderização no lado do servidor (SSR) quanto para a geração de páginas estáticas (SSG)
+- **JavaScript:**: Linguagem de programação amplamente usada para construir aplicações interativas e escaláveis
+- **CSS**: Linguagem de estilo usada para definir a aparência visual de elementos web, como cores, tamanhos, fontes e layouts.
+- **HTML**: Linguagem de marcação que estrutura e organiza o conteúdo de páginas web, utilizando tags para elementos como cabeçalhos, parágrafos e links
+- **Vercel**: Plataforma de implantação escalável, projetada para trabalhar com Next.js, fornecendo suporte a SSR, SSG e ferramentas de otimização.
+- **Chart.js**: Biblioteca para criação de gráficos interativos em JavaScript, com alta personalização e compatibilidade com React.
+- **Axios**: Biblioteca para realizar requisições HTTP, facilitando a comunicação entre o cliente e o servidor.
+- **Formik**: Ferramenta para criar e gerenciar formulários de forma simplificada, ideal para aplicações com grande inserção de dados.
+
 
 ### 4.2. Organização do Código no Backend
 
@@ -129,6 +138,66 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
     - **middlewares**: Middlewares que processam solicitações e respostas de forma genérica.
     - **routes**: Definições de rotas que mapeiam URLs para controladores.
   - **test**: Onde todos os testes automatizados residem, como testes unitários, de integração, de aceitação, etc.
+
+### 4.2.1. Organização do Código no Frontend
+'''text
+├── public/
+│   ├── images/            
+│   ├── fonts/              
+├── src/               
+│   ├── components        
+│   │    
+│   ├── layouts/           
+│   │   └── MainLayout.js   
+│   ├── pages  
+│   │   ├── index.js   
+│   │   ├── about.js
+│   │   └── dashboard/      
+│   │       ├── index.js         
+│   │ 
+│   ├── styles          
+│   │    
+│   ├── utils           
+│   │  
+│   ├── hooks/            
+│   │   ├── useAuth.js     
+│   │   └── useFetch.js     
+│   ├── context/           
+│   │   └── AuthContext.js  
+│   ├── services/
+│   │   ├── api.js          
+│   │      
+│   ├── config/    
+│   │   └── appConfig.js           
+├── .env.local              
+├── next.config.js          
+└── package.json    
+      
+#### Explicações sobre cada diretório:
+- **src**: Diretório principal que contém todo o código-fonte da aplicação.
+  - **components**: Armazena componentes reutilizáveis, como botões, cartões, modais, etc.
+  - **layouts**: 
+    - **MainLayout.js**: Define a estrutura de layout comum da aplicação, incluindo elementos compartilhados como barra de navegação e rodapé. 
+  - **pages**: Diretório obrigatório do Next.js para gerenciamento de rotas.
+    - **index.js**: Página inicial da aplicação, acessível pela URL raiz (/).
+    - **about.js**: Página "Sobre", acessível pela rota /about.
+    - **dashboard**: Subdiretório para páginas relacionadas ao painel de controle.
+      - **index.js**: Página principal do painel, acessível pela rota /dashboard.
+  - **styles**: Diretório para estilos globais e específicos.
+  - **utils**: Contém funções utilitárias que são genéricas e podem ser usadas em qualquer parte do projeto.
+  - **hooks**: Diretório para hooks personalizados do React, que encapsulam lógica reutilizável.
+    - **useAuth.js**: Hook para lidar com autenticação do usuário.
+    - **useFetch.js**: Hook para realizar requisições a APIs e gerenciar estados de carregamento/erro.
+  - **context**: Diretório para os contextos globais do React, que permitem o compartilhamento de estados entre diferentes partes da aplicação.
+    - **AuthContext.js**: Contexto para gerenciar informações de autenticação e estados do usuário logado.
+  - **services**: Contém a lógica para interagir com APIs externas.
+    - **api.js**: Configuração centralizada para requisições HTTP
+  - **config**: Armazena configurações globais e constantes.
+    - **appConfig.js**: Arquivo para variáveis de configuração.
+- **.env.local**: Arquivo para variáveis de ambiente específicas do ambiente local
+- **next.config.js**: Arquivo de configuração do Next.js, usado para customizações como redirecionamentos, otimizações e definições de ambiente.
+- **package.json**: Contém metadados do projeto e lista de dependências utilizadas.
+
 
 ## 5. Estratégia de Testes
 
