@@ -5,7 +5,6 @@ Este documento tem como objetivo orientar o processo de configuração do ambien
 A configuração correta do ambiente é essencial para que os testes reverso, direto e automatizado funcionem corretamente. Neste guia, você encontrará instruções detalhadas sobre instalação de dependências, configuração de variáveis ​​de ambiente, inicialização de serviços, uso de contêineres Docker e testes.
 
 Além disso, você aprenderá sobre comandos básicos de gerenciamento de projetos e práticas recomendadas para ajudar a manter um ambiente de desenvolvimento bom e funcional. Este documento é uma ótima referência para garantir que todos os aspectos técnicos do seu ambiente estejam devidamente configurados, para que você possa se concentrar no desenvolvimento da funcionalidade do seu projeto.
-
 ---
 
 ## Requisitos
