@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "commit": "cz"
+    "commit": "cz",
+    "dev": "tsx watch src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^22.10.1",
     "commitizen": "4.3.1",
     "cz-conventional-changelog": "3.3.0",
-    "init": "0.1.2"
+    "init": "0.1.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   },
   "config": {
     "commitizen": {
