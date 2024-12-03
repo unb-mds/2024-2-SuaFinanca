@@ -1,10 +1,10 @@
 # Documentação para Padrões de Commit e Nomeação de Branches
 
-Este documento estabelece os padrões de commit e nomeação das branches do projeto, com o objetivo de garantir consistência e rastreabilidade no histórico de commits e branches. Serão seguidos os padrões **Conventional Commits** (inspirados nas convenções do Angular) para os commits e um padrão específico para a nomeação de branches, com vinculação de commits e branches às issues para facilitar o monitoramento de mudanças e o desenvolvimento colaborativo.
+Este documento estabelece os padrões de commit e nomeação das branches do projeto, com o objetivo de garantir consistência e rastreabilidade no histórico de commits e branches. Serão seguidos os padrões **Conventional Commits** (inspirados nas convenções do Angular) para os commits e um padrão específico para a nomeação de branches, com vinculação de commits e branches às issues para facilitar o monitoramento de mudanças e o desenvolvimento colaborativo. 
 
 ---
 
-## 1. Padrões de Commit
+## 1. Padrões de Commit do grupo
 
 ### 1.1 Estrutura Geral dos Commits
 
