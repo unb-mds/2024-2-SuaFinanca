@@ -1,4 +1,4 @@
-import { CreateUserParams } from "../user/IauthUser";
+import { CreateUserParams } from "../entities/user/IauthUser";
 import { User } from "@/domain/entities/user";
 
 export interface IuserFactory {
