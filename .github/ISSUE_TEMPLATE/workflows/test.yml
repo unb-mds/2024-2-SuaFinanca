@@ -1,0 +1,43 @@
+name: Codecov Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+    contents: write
+
+jobs:
+  test:
+    name: api test coverage
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Config environment
+      run: make config
+    
+    - name: Start Docker Compose
+      run: docker compose up --build -d api
+
+    - name: Run Tests
+      run: |
+        docker exec django-api coverage run manage.py test
+        docker exec django-api coverage report
+        docker exec django-api coverage xml
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./api/coverage.xml
+          directory: ./api/coverage/reports/
+          fail_ci_if_error: true
+    
+    - name: Stop Docker Compose
+      run: docker compose down -v
+  
