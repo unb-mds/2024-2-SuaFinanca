@@ -1,7 +1,7 @@
 import { CreateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
 import { IuserFactory } from "@/application/interfaces/domain/factories/IuserFactory";
 import { PasswordHash } from "@/application/interfaces/utils/passwordHash";
-import { User } from "../entities/user";
+import { User } from "../entities/User";
 
 export class UserFactory implements IuserFactory {
   constructor(private readonly passwordHash: PasswordHash) {}

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { BcryptPassword } from "@/application/utils/hashUtils";
-import { User } from "@/domain/entities/user";
+import { User } from "@/domain/entities/User";
 import { UserFactory } from "@/domain/factories/userFactory";
 
 describe("UserFactory", () => {

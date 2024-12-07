@@ -2,7 +2,7 @@ import {
   CreateUserParams,
   IAuthUserRepository,
 } from "@/application/interfaces/domain/entities/user/IauthUser";
-import { IUser, IUserWithId } from "@/domain/entities/user";
+import { IUser, IUserWithId } from "@/domain/entities/User";
 
 export class InMemoryAuthUserRepository implements IAuthUserRepository {
   private users: any[] = [];

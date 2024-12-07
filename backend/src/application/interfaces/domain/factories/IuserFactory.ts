@@ -1,5 +1,5 @@
 import { CreateUserParams } from "../entities/user/IauthUser";
-import { User } from "@/domain/entities/user";
+import { User } from "@/domain/entities/User";
 
 export interface IuserFactory {
   createUser(params: CreateUserParams): Promise<User>;

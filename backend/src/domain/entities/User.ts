@@ -5,7 +5,7 @@ export interface IUser {
 }
 
 export interface IUserWithId {
-  id: string;
+  id: number;
   name: string;
   email: string;
   password: string;

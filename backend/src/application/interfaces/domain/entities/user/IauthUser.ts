@@ -1,4 +1,4 @@
-import { IUser, IUserWithId } from "@/domain/entities/user";
+import { IUser, IUserWithId } from "@/domain/entities/User";
 
 export interface CreateUserParams {
   name: string;
