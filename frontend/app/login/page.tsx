@@ -17,7 +17,7 @@ const Login = () => {
       alert("Login bem-sucedido!");
       router.push("/Dashboard"); 
     } else {
-      setError("Credenciais inválidas!");
+      setError("Credenciais inválidas!"); 
     }
   };
   

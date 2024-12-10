@@ -52,7 +52,7 @@ const Register = () => {
             name="nome"
             value={formData.nome}
             onChange={handleChange}
-          />
+          /> 
         </div>
         <div>
           <input
