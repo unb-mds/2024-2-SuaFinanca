@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import axios from "axios"; // Importa axios
 import "./register.css";
 
 const Register = () => {
@@ -10,34 +11,47 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    datadenascimento: "",
   });
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); // Adiciona mensagem de sucesso
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    // Validação de senha
     if (formData.password !== formData.confirmPassword) {
       setError("As senhas não correspondem!");
       return;
     }
 
-    console.log({
-      nome: formData.nome,
-      sobrenome: formData.sobrenome,
+    // Prepara os dados para enviar ao back-end
+    const userData = {
+      name: `${formData.nome} ${formData.sobrenome}`,
       email: formData.email,
       password: formData.password,
-      datadenascimento: formData.datadenascimento,
-    });
+    };
 
-    setError(""); // Limpa o erro caso tenha
-    alert("Usuário registrado com sucesso!");
+    try {
+      // Envia a requisição para o back-end
+      const response = await axios.post("http://localhost:8000/user", userData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log("Usuário criado:", response.data);
+      setSuccess("Usuário registrado com sucesso!");
+      setError(""); // Limpa mensagens de erro
+    } catch (err) {
+      console.error("Erro ao criar usuário:", err.response?.data || err.message);
+      setError("Ocorreu um erro ao registrar o usuário. Tente novamente.");
+    }
   };
 
   return (
@@ -45,6 +59,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <h1>Registrar</h1>
         {error && <p className="error-message">{error}</p>} {/* Mensagem de erro */}
+        {success && <p className="success-message">{success}</p>} {/* Mensagem de sucesso */}
         <div>
           <input
             type="text"
@@ -52,7 +67,7 @@ const Register = () => {
             name="nome"
             value={formData.nome}
             onChange={handleChange}
-          /> 
+          />
         </div>
         <div>
           <input
@@ -87,15 +102,6 @@ const Register = () => {
             placeholder="Confirmar Senha"
             name="confirmPassword"
             value={formData.confirmPassword}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <input
-            type="date"
-            placeholder="Data de nascimento"
-            name="datadenascimento"
-            value={formData.datadenascimento}
             onChange={handleChange}
           />
         </div>
