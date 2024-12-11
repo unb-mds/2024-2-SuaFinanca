@@ -1,4 +1,4 @@
-## 2024-2-Squad11
+## Sua Finança
 
 # Sistema de controle financeiro pessoal
 
