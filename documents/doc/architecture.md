@@ -67,9 +67,15 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
 - **Interação com Outras Camadas**:
   - Fornece dependências necessárias para as camadas superiores, utilizando técnicas como injeção de dependência para manter a lógica de negócios desacoplada dos detalhes técnicos.
 
-## 4. Detalhes de Implementação
+## 4. Diagrama de Pacotes
 
-### 4.1. Tecnologias Utilizadas
+<div style="text-align: center;">
+    <img src="../img/Diagrama de pacotes.png" alt="Diagrama de pacotes" width="650">
+</div>
+
+## 5. Detalhes de Implementação
+
+### 5.1. Tecnologias Utilizadas
 
 - **TypeScript**: Linguagem de programação que estende o JavaScript adicionando tipagem estática. No projeto, isso ajuda a reduzir erros e aumentar a legibilidade do código.
 - **Tsx**: Utilizado para executar arquivos TypeScript diretamente no Node.js, simplificando o desenvolvimento e eliminando a necessidade de configuração complexa.
@@ -93,8 +99,7 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
 - **Axios**: Biblioteca para realizar requisições HTTP, facilitando a comunicação entre o cliente e o servidor.
 - **Formik**: Ferramenta para criar e gerenciar formulários de forma simplificada, ideal para aplicações com grande inserção de dados.
 
-
-### 4.2. Organização do Código no Backend
+### 5.2. Organização do Código no Backend
 
 ```text
 .
@@ -139,45 +144,44 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
     - **routes**: Definições de rotas que mapeiam URLs para controladores.
   - **test**: Onde todos os testes automatizados residem, como testes unitários, de integração, de aceitação, etc.
 
-### 4.2.1. Organização do Código no Frontend
-'''text
-├── public/
-│   ├── images/            
-│   ├── fonts/              
-├── src/               
-│   ├── components        
-│   │    
-│   ├── layouts/           
-│   │   └── MainLayout.js   
-│   ├── pages  
-│   │   ├── index.js   
-│   │   ├── about.js
-│   │   └── dashboard/      
-│   │       ├── index.js         
-│   │ 
-│   ├── styles          
-│   │    
-│   ├── utils           
-│   │  
-│   ├── hooks/            
-│   │   ├── useAuth.js     
-│   │   └── useFetch.js     
-│   ├── context/           
-│   │   └── AuthContext.js  
-│   ├── services/
-│   │   ├── api.js          
-│   │      
-│   ├── config/    
-│   │   └── appConfig.js           
-├── .env.local              
-├── next.config.js          
-└── package.json    
-      
+### 5.2.1. Organização do Código no Frontend
+
+```text
+.
+├── public
+│ ├── images
+│ └── fonts
+├── src
+│ ├── components
+│ ├── layouts
+│ │ └── MainLayout.js
+│ ├── pages
+│ │ ├── index.js
+│ │ ├── about.js
+│ │ ├── dashboard
+│ │ └── index.js
+│ ├── styles
+│ ├── utils
+│ ├── hooks
+│ │ ├── useAuth.js
+│ │ └── useFetch.js
+│ ├── context
+│ │ └── AuthContext.js
+│ ├── services
+│ │ └── api.js
+│ ├── config
+│ │ └── appConfig.js
+├── .env.local
+├── next.config.js
+└── package.json
+```
+
 #### Explicações sobre cada diretório:
+
 - **src**: Diretório principal que contém todo o código-fonte da aplicação.
   - **components**: Armazena componentes reutilizáveis, como botões, cartões, modais, etc.
-  - **layouts**: 
-    - **MainLayout.js**: Define a estrutura de layout comum da aplicação, incluindo elementos compartilhados como barra de navegação e rodapé. 
+  - **layouts**:
+    - **MainLayout.js**: Define a estrutura de layout comum da aplicação, incluindo elementos compartilhados como barra de navegação e rodapé.
   - **pages**: Diretório obrigatório do Next.js para gerenciamento de rotas.
     - **index.js**: Página inicial da aplicação, acessível pela URL raiz (/).
     - **about.js**: Página "Sobre", acessível pela rota /about.
@@ -198,50 +202,49 @@ A arquitetura do sistema garante que os componentes centrais do domínio sejam i
 - **next.config.js**: Arquivo de configuração do Next.js, usado para customizações como redirecionamentos, otimizações e definições de ambiente.
 - **package.json**: Contém metadados do projeto e lista de dependências utilizadas.
 
+## 6. Estratégia de Testes
 
-## 5. Estratégia de Testes
-
-### 5.1. Testes Unitários
+### 6.1. Testes Unitários
 
 - **Framework**: Vitest.
 - **Cobertura**: Foco em funções de manipulação de dados em entidades e casos de uso.
 
-### 5.2. Testes de Integração
+### 6.2. Testes de Integração
 
 - **Framework**: Jest com Supertest.
 - **Cobertura**: Verificações de fluxos de dados entre módulos e API, incluindo autenticação e operações de CRUD.
 
-### 5.3. Testes End-to-End
+### 6.3. Testes End-to-End
 
 - **Ferramenta**: Cypress.
 - **Cobertura**: Simulação de interações completas do usuário com o sistema através de navegadores reais.
 
-## 6. Segurança
+## 7. Segurança
 
-### 6.1. Autenticação e Autorização
+### 7.1. Autenticação e Autorização
 
 - Implementação de JWT para sessões de usuário seguras e verificáveis.
 - Requisições de autenticação utilizando middlewares do Express para validação de tokens.
 
-### 6.2. Proteções contra Vulnerabilidades
+### 7.2. Proteções contra Vulnerabilidades
 
 - **Validação de Entrada**: Uso de Zod para garantir que as entradas do usuário sejam verificadas antes do processamento.
 - **Proteção de Senhas**: Senhas são armazenadas apenas pós-hashing com bcrypt, reforçando a segurança.
 
-## 7. Considerações Finais
+## 8. Considerações Finais
 
-### 7.1. Desafios e Soluções
+### 8.1. Desafios e Soluções
 
 - **Observabilidade e monitoramento**: Uso extensivo de logs com Winston para monitoramento da aplicação e busca de bugs.
 
-## 8. Anexos
+## 9. Anexos
 
-### 8.1. Glossário
+### 9.1. Glossário
 
 - **JWT**: Token de autenticação baseado em JSON.
 - **ORM**: Mapeamento objeto-relacional, usado para interagir com bancos de dados.
 
-### 8.2. Referências
+### 9.2. Referências
 
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [Tsx](https://tsx.is/)
