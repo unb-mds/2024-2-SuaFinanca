@@ -3,7 +3,7 @@ hide:
   - navigation
 ---
 
-# Sua Grade UnB
+# Sua Finança UnB
 
 ## Sobre
 
