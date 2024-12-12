@@ -1,13 +1,16 @@
+html, body {
+  height: 100%;
+  width: 100%; /* Adicionado para garantir que ocupe toda a largura */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 * {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
   box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  
 }
 
 .Home {
@@ -17,5 +20,3 @@ html, body {
   min-height: 100vh;
   background-color: #f8f9fa; 
 }
-
-

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Importa o useRouter
 import axios from "axios"; // Importa axios
 import "./register.css";
 
@@ -14,7 +15,8 @@ const Register = () => {
   });
 
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(""); // Adiciona mensagem de sucesso
+  const [success, setSuccess] = useState("");
+  const router = useRouter(); // Inicializa o hook useRouter
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,13 +26,11 @@ const Register = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Validação de senha
     if (formData.password !== formData.confirmPassword) {
       setError("As senhas não correspondem!");
       return;
     }
 
-    // Prepara os dados para enviar ao back-end
     const userData = {
       name: `${formData.nome} ${formData.sobrenome}`,
       email: formData.email,
@@ -38,7 +38,6 @@ const Register = () => {
     };
 
     try {
-      // Envia a requisição para o back-end
       const response = await axios.post("http://localhost:8000/user", userData, {
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +46,10 @@ const Register = () => {
 
       console.log("Usuário criado:", response.data);
       setSuccess("Usuário registrado com sucesso!");
-      setError(""); // Limpa mensagens de erro
+      setError("");
+
+      // Redireciona para a página de login
+      router.push("/login");
     } catch (err) {
       console.error("Erro ao criar usuário:", err.response?.data || err.message);
       setError("Ocorreu um erro ao registrar o usuário. Tente novamente.");
@@ -58,8 +60,8 @@ const Register = () => {
     <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>Registrar</h1>
-        {error && <p className="error-message">{error}</p>} {/* Mensagem de erro */}
-        {success && <p className="success-message">{success}</p>} {/* Mensagem de sucesso */}
+        {error && <p className="error-message">{error}</p>}
+        {success && <p className="success-message">{success}</p>}
         <div>
           <input
             type="text"

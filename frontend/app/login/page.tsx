@@ -3,7 +3,7 @@
 import { FaUser, FaLock } from "react-icons/fa";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios"; // Importa axios
+import axios from "axios";
 import "./login.css";
 
 const Login = () => {
@@ -20,14 +20,15 @@ const Login = () => {
         password: password,
       });
 
-      // Supondo que o back-end retorne um token JWT na resposta
-      const { token } = response.data;
+      // Supondo que o back-end retorne um token e o nome do usuário
+      const { token, name } = response.data;
 
-      // Armazene o token no localStorage (ou cookies, se preferir)
+      // Armazena o token e o nome do usuário no localStorage
       localStorage.setItem("token", token);
+      localStorage.setItem("username", name);
 
       alert("Login bem-sucedido!");
-      router.push("/Dashboard");
+      router.push("/dashboard");
     } catch (err) {
       setError("Credenciais inválidas!");
     }
