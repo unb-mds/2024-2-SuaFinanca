@@ -1,6 +1,6 @@
 site_name: Sua Finança
 repo_url: https://github.com/unb-mds/2024-2-SuaFinanca.git
-
+docs_dir: documents
 
 
 nav:
