@@ -1,0 +1,198 @@
+/* Estilos gerais da Dashboard */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+/* Menu Lateral */
+.sidebar {
+  background-color: #6e59ff;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 20px 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+  width: 250px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.sidebar.closed {
+  width: 60px;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.menu-content h2 {
+  display: block;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.sidebar.closed .menu-content h2 {
+  opacity: 0;
+  display: none;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: #5c48d3;
+}
+
+/* Botão de abrir/fechar */
+.toggle-button {
+  background-color: #5c48d3;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+}
+
+.toggle-button:hover {
+  background-color: #4a3ba6;
+}
+
+/* Conteúdo Principal */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;       
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Botão de sair */
+.main-header button {
+  background-color: #6e59ff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  min-width: 100px;
+  text-align: center;
+}
+
+.main-header button:hover {
+  background-color: #5c48d3;
+  transform: scale(1.05);
+}
+
+.main-header button:active {
+  background-color: #4a3ba6;
+  transform: scale(0.95);
+}
+
+.main-header button:focus {
+  outline: none;
+}
+
+/* Cards */
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-width: 150px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Seções */
+.sections {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.section {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  min-width: 200px;
+}
+
+.section h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+.section p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}

@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+      width: 450px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      
+    }
+    
+    .container h1 {
+      font-size: 31px;
+      color: #9163fa;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    .input-field {
+      position: relative;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    
+    .input-field input {
+      width: 100%;
+      height: 60px; 
+      padding: 0 15px;
+      border: 2px solid #000;
+      border-radius: 20px 20px 20px 20px; 
+      font-size: 18px;
+      color: #222;
+      outline: none;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+    
+    .input-field input:focus {
+      border-color: #000;
+      background-color: #f8f8f8;
+    }
+    
+    .input-field input::placeholder {
+      color: #aaa;
+    }
+    
+    .input-field .icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #000;
+      font-size: 18px;
+    }
+    
+    .recall-forget {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .recall-forget label {
+      display: flex;
+      align-items: center;
+      color: #222;
+    }
+    
+    .recall-forget input {
+      margin-right: 5px;
+    }
+    
+    .recall-forget a {
+      color: #000;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .recall-forget a:hover {
+      text-decoration: underline;
+    }
+    
+    button {
+      width: 100%;
+      height: 60px; 
+      background-color: #9163fa; 
+      border: none;
+      border-radius: 20px 20px 20px 20px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      background-color: #7746d4; 
+    }
+    
+    .signup-link {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #222;
+    }
+    
+    .signup-link a {
+      color: #9163fa; 
+      text-decoration: none;
+    }
+    
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+    
