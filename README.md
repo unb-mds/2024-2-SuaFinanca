@@ -34,8 +34,8 @@ Esses fatores podem levar à perda de controle financeiro, dificultando a identi
 
 ## 3. Tecnologias Utilizadas
 
-- **Back-end:** [Node.js, Django, etc]
-- **Front-end:**[Next.js, react..., etc]
+- **Back-end:** [TypeScript, Tsx, Vitest, Jest e Supertest, Cypress, Express, CORS, Prisma ORM, Dotenv, JSON Web Token (JWT), Winston, Bcrypt]
+- **Front-end:**[next.js, JavaScript, css, html, Vercel, Chart.js, Axios, Formik]
 
 ## 4. Como Usar
 
