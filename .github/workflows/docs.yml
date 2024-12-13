@@ -29,17 +29,20 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     
-    - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
-
-    - name: Using cache to MkDocs
+    - name: Cache pip dependencies
       uses: actions/cache@v3
       with:
-        key: mkdocs-material-${{ env.cache_id }}
-        path: .cache
+        path: ~/.cache/pip
+        key: pip-cache-${{ matrix.python-version }}-${{ github.sha }}
         restore-keys: |
-          mkdocs-material-
+          pip-cache-${{ matrix.python-version }}-
+          pip-cache-
 
-    - run: pip install mkdocs-material 
+    - name: Install MkDocs and dependencies
+      run: pip install mkdocs-material
+
+    - name: Check MkDocs Version
+      run: mkdocs --version
 
     - name: Deploy Docs
       run: mkdocs gh-deploy --force
