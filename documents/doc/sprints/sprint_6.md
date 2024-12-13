@@ -28,5 +28,3 @@ Nessa sprint tinha como objetivo de implementar a feature de autenticação de u
 
 ---
 
-## Notas Adicionais
-Adicione qualquer informação relevante ou contexto adicional que ajude na compreensão da sprint.

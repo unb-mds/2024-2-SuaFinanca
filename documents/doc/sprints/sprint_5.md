@@ -6,7 +6,6 @@ Nessa sprint tinha como objetivo de criação da feature sistema de usuário e a
 ---
 
 ## Tarefas Associadas
-Liste as tarefas realizadas nesta sprint com links para as issues correspondentes:
 
 - [ ] Feature - Autenticação - Cadastro e Login de Usuários #20 https://github.com/unb-mds/2024-2-SuaFinanca/issues/20
 - [ ] Docs - Protótipo de Baixa Fidelidade - Criação do Protótipo de Baixa Fidelidade #23 https://github.com/unb-mds/2024-2-SuaFinanca/issues/23
