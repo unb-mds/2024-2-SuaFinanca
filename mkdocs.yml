@@ -35,7 +35,7 @@ nav:
     #- Sprint 12: sprints/sprint-12.md
     #- Sprint 13: sprints/sprint-13.md
 
-  - Prototipo: doc/prototype/documents/doc/prototype/highFidelity.md
+  - Prototipo: doc/prototype/highFidelity.md
   - Estudos:
       - Como Commitar em Grupo: studies/Resumo-Commit-Grupo.md
       - Resumo de Solid: studies/Resumo-de-SOLID.md
