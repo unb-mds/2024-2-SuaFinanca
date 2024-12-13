@@ -1,0 +1,2035 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../contributing/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Arquitetura - Sua Finança</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentacao-da-arquitetura-do-sistema" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sua Finança" class="md-header__button md-logo" aria-label="Sua Finança" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sua Finança
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Arquitetura
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 2c-1.82 0-3.53.5-5 1.35C8 5.08 10 8.3 10 12s-2 6.92-5 8.65C6.47 21.5 8.18 22 10 22a10 10 0 0 0 10-10A10 10 0 0 0 10 2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/unb-mds/2024-2-SuaFinanca.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Sobre
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Arquitetura
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contributing/" class="md-tabs__link">
+        
+  
+    
+  
+  Como contribuir?
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../backend/" class="md-tabs__link">
+          
+  
+  Documentação
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../sprints/sprint_0/" class="md-tabs__link">
+          
+  
+  Sprints
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../prototype/documents/doc/prototype/highFidelity.md" class="md-tabs__link">
+        
+  
+    
+  
+  Prototipo
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../studies/Resumo-Commit-Grupo/" class="md-tabs__link">
+          
+  
+  Estudos
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sua Finança" class="md-nav__button md-logo" aria-label="Sua Finança" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sua Finança
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/unb-mds/2024-2-SuaFinanca.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sobre
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Arquitetura
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Arquitetura
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-visao-geral-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Visão Geral da Arquitetura
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Visão Geral da Arquitetura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-introducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Introdução
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Objetivos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-principios-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Princípios da Arquitetura
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-diagrama-de-alto-nivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Diagrama de Alto Nível
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-detalhamento-das-camadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Detalhamento das Camadas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Detalhamento das Camadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Entidades
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-casos-de-uso-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Casos de Uso (Use Cases)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-adaptadores-de-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Adaptadores de Interface
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-frameworks-e-drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4. Frameworks e Drivers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-diagrama-de-pacotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Diagrama de Pacotes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-detalhes-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Detalhes de Implementação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Detalhes de Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-tecnologias-utilizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. Tecnologias Utilizadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-organizacao-do-codigo-no-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2. Organização do Código no Backend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2. Organização do Código no Backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicacoes-sobre-cada-diretorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicações sobre cada diretório:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#521-organizacao-do-codigo-no-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.1. Organização do Código no Frontend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2.1. Organização do Código no Frontend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicacoes-sobre-cada-diretorio_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicações sobre cada diretório:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-estrategia-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Estratégia de Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Estratégia de Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-testes-unitarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1. Testes Unitários
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-testes-de-integracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2. Testes de Integração
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-testes-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3. Testes End-to-End
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Segurança
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Segurança">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-autenticacao-e-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. Autenticação e Autorização
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-protecoes-contra-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2. Proteções contra Vulnerabilidades
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-consideracoes-finais" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Considerações Finais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Considerações Finais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-desafios-e-solucoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1. Desafios e Soluções
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-anexos" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Anexos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Anexos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-glossario" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1. Glossário
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2. Referências
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Como contribuir?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Documentação
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Documentação
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Backend.md
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentação Para Padrões de Commit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configAmbiente/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuração do Ambiente
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relatório de Avaliação do Framework Next.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentação Básica sobre React.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requisitos Funcionais Detalhados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Sprints
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Sprints
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sprints/sprint_0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sprint 0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sprints/sprint_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sprint 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sprints/sprint_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sprint 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sprints/sprint_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sprint 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sprints/sprint_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sprint 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sprints/sprint_5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sprint 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prototype/documents/doc/prototype/highFidelity.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prototipo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Estudos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Estudos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../studies/Resumo-Commit-Grupo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Como Commitar em Grupo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../studies/Resumo-de-SOLID/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumo de Solid
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../studies/Resumo-Docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumo Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../studies/Resumo-Estudo-GIT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumo Estudo GIT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../studies/Resumo-Testes-Automatizados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumo Teste Automatizados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-visao-geral-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Visão Geral da Arquitetura
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Visão Geral da Arquitetura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-introducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Introdução
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Objetivos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-principios-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Princípios da Arquitetura
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-diagrama-de-alto-nivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Diagrama de Alto Nível
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-detalhamento-das-camadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Detalhamento das Camadas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Detalhamento das Camadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Entidades
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-casos-de-uso-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Casos de Uso (Use Cases)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-adaptadores-de-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Adaptadores de Interface
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-frameworks-e-drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4. Frameworks e Drivers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-diagrama-de-pacotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Diagrama de Pacotes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-detalhes-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Detalhes de Implementação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Detalhes de Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-tecnologias-utilizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. Tecnologias Utilizadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-organizacao-do-codigo-no-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2. Organização do Código no Backend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2. Organização do Código no Backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicacoes-sobre-cada-diretorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicações sobre cada diretório:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#521-organizacao-do-codigo-no-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.1. Organização do Código no Frontend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2.1. Organização do Código no Frontend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicacoes-sobre-cada-diretorio_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicações sobre cada diretório:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-estrategia-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Estratégia de Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Estratégia de Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-testes-unitarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1. Testes Unitários
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-testes-de-integracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2. Testes de Integração
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-testes-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3. Testes End-to-End
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Segurança
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Segurança">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-autenticacao-e-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. Autenticação e Autorização
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-protecoes-contra-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2. Proteções contra Vulnerabilidades
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-consideracoes-finais" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Considerações Finais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Considerações Finais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-desafios-e-solucoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1. Desafios e Soluções
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-anexos" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Anexos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Anexos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-glossario" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1. Glossário
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2. Referências
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="documentacao-da-arquitetura-do-sistema">Documentação da Arquitetura do Sistema</h1>
+<h2 id="1-visao-geral-da-arquitetura">1. Visão Geral da Arquitetura</h2>
+<h3 id="11-introducao">1.1. Introdução</h3>
+<p>Este documento descreve a arquitetura de um sistema projetado para auxiliar indivíduos no gerenciamento de suas finanças pessoais. O sistema se concentra em fornecer uma plataforma onde os usuários possam registrar suas receitas e despesas, obter uma visão clara de seu saldo disponível e identificar padrões de gastos.</p>
+<h3 id="12-objetivos">1.2. Objetivos</h3>
+<ul>
+<li>
+<p>Facilitar o monitoramento de transações financeiras pessoais.</p>
+</li>
+<li>
+<p>Oferecer insights sobre hábitos financeiros através de relatórios e análises.</p>
+</li>
+<li>
+<p>Garantir a segurança e a privacidade das informações financeiras dos usuários.</p>
+</li>
+</ul>
+<h3 id="13-principios-da-arquitetura">1.3. Princípios da Arquitetura</h3>
+<p>A arquitetura do sistema garante que os componentes centrais do domínio sejam independentes de frameworks, facilitando testes, manutenção e evolução contínua. Isso é alcançado através da clara separação de responsabilidades em camadas distintas.</p>
+<h2 id="2-diagrama-de-alto-nivel">2. Diagrama de Alto Nível</h2>
+<div style="text-align: center;">
+    <img src="../img/Diagrama de Alto Nível.svg" alt="Diagrama de Alto Nível" width="350">
+</div>
+
+<h2 id="3-detalhamento-das-camadas">3. Detalhamento das Camadas</h2>
+<h3 id="31-entidades">3.1. Entidades</h3>
+<ul>
+<li><strong>Descrição Detalhada</strong>: A camada de Entidades representa os conceitos centrais e tem as regras de negócio mais fundamentais do domínio. Em uma aplicação de controle financeiro pessoal, isso incluiria conceitos como "Usuário" e "Transação".</li>
+<li><strong>Responsabilidades</strong>:</li>
+<li>Modelar os dados essenciais do sistema, garantindo que todas as regras de negócio associadas a esses dados sejam respeitadas.</li>
+<li>Permanecer independente de detalhes de infraestrutura, frameworks ou aplicativos específicos.</li>
+<li><strong>Interação com Outras Camadas</strong>:</li>
+<li>As entidades são usadas pelos casos de uso para encapsular regras de negócio que são aplicadas em cenários de aplicação específicos. Não têm conhecimento de como são persistidas ou apresentadas.</li>
+</ul>
+<h3 id="32-casos-de-uso-use-cases">3.2. Casos de Uso (Use Cases)</h3>
+<ul>
+<li><strong>Descrição Detalhada</strong>: Esta camada define os fluxos de aplicação centrados na realização de tarefas que são vantajosas para o usuário. Os casos de uso coordenam a interação entre as entidades para implementar uma funcionalidade específica, garantindo que todas as regras e lógicas de negócio sejam cumpridas.</li>
+<li><strong>Responsabilidades</strong>:</li>
+<li>Levar adiante os cenários específicos de aplicação que envolvem o uso das entidades.</li>
+<li>Gerenciar o fluxo de dados entre as entidades e a camada de adaptadores de interface, transformando as interações chamadas pelos usuários em ações significativas.</li>
+<li>Garantir que a lógica de aplicação seja independente dos frameworks UI e drivers de banco de dados.</li>
+<li><strong>Interação com Outras Camadas</strong>:</li>
+<li>Interagem com adaptadores de interface para receber e responder a ações do usuário.</li>
+<li>Utilizam as entidades para aplicar a lógica de negócios.</li>
+</ul>
+<h3 id="33-adaptadores-de-interface">3.3. Adaptadores de Interface</h3>
+<ul>
+<li><strong>Descrição Detalhada</strong>: A camada de adaptadores de interface atua como um tradutor entre a interface do usuário (UI ou API HTTP) e os casos de uso. Essa camada é responsável por converter entradas de dados de um formato específico em algo que os casos de uso possam processar, e formatar saídas de dados dos casos de uso.</li>
+<li><strong>Responsabilidades</strong>:</li>
+<li>Validar e transformar dados de entrada vindo de interfaces externas.</li>
+<li>Chamar os casos de uso apropriados, fornecendo dados de uma maneira que possam ser facilmente processados pelo domínio.</li>
+<li>Formatando a saída de dados para uma forma utilizável por sistemas externos ou interfaces de apresentação.</li>
+<li><strong>Interação com Outras Camadas</strong>:</li>
+<li>Recebem comandos de sistemas de entrada e podem passar dados aos casos de uso adequados.</li>
+<li>Formatam a saída dos casos de uso para enviar de volta a sistemas externos ou interfaces de apresentação.</li>
+</ul>
+<h3 id="34-frameworks-e-drivers">3.4. Frameworks e Drivers</h3>
+<ul>
+<li><strong>Descrição Detalhada</strong>: Esta é a camada mais externa e contém todas as partes de comunicação e detalhes de implementação técnica que não são parte da lógica de negócios. Nesta camada, incluem-se elementos como frameworks web, bancos de dados, sistemas de arquivos e gerenciadores de autenticação.</li>
+<li><strong>Responsabilidades</strong>:</li>
+<li>Facilitar a integração técnica com componentes externos, como serviços de banco de dados, redes, bibliotecas de autenticação e outros.</li>
+<li>Satisfazer as requisições de dados persistentes através do armazenamento e recuperação.</li>
+<li>Manter a flexibilidade para que essas tecnologias possam ser modificadas ou atualizadas sem impactar as camadas de negócios de aplicação.</li>
+<li><strong>Interação com Outras Camadas</strong>:</li>
+<li>Fornece dependências necessárias para as camadas superiores, utilizando técnicas como injeção de dependência para manter a lógica de negócios desacoplada dos detalhes técnicos.</li>
+</ul>
+<h2 id="4-diagrama-de-pacotes">4. Diagrama de Pacotes</h2>
+<div style="text-align: center;">
+    <img src="../img/Diagrama de pacotes.png" alt="Diagrama de pacotes" width="650">
+</div>
+
+<h2 id="5-detalhes-de-implementacao">5. Detalhes de Implementação</h2>
+<h3 id="51-tecnologias-utilizadas">5.1. Tecnologias Utilizadas</h3>
+<ul>
+<li><strong>TypeScript</strong>: Linguagem de programação que estende o JavaScript adicionando tipagem estática. No projeto, isso ajuda a reduzir erros e aumentar a legibilidade do código.</li>
+<li><strong>Tsx</strong>: Utilizado para executar arquivos TypeScript diretamente no Node.js, simplificando o desenvolvimento e eliminando a necessidade de configuração complexa.</li>
+<li><strong>Vitest</strong>: Utilizado para testes unitários devido à sua compatibilidade com TypeScript e interface simples.</li>
+<li><strong>Jest e Supertest</strong>: Jest é usado para a realização de testes de unidade mais extensos, enquanto Supertest permite simulação e verificação de requisições HTTP para testes de integração.</li>
+<li><strong>Cypress</strong>: Ferramenta de teste end-to-end que simula o comportamento do usuário e verifica o funcionamento do sistema de ponta a ponta em ambientes de navegador.</li>
+<li><strong>Express</strong>: Framework minimalista para Node.js, utilizado para construir a API RESTful do projeto, facilitando o tratamento de requisições e respostas HTTP.</li>
+<li><strong>CORS (Cross-Origin Resource Sharing)</strong>: Mecanismo que permite ou restringe solicitação de recursos dependendo da origem do solicitante, configurado para proteger a API de acessos não autorizados.</li>
+<li><strong>Prisma ORM</strong>: Abstração de banco de dados que simplifica consultas e mutações, além de fornecer ferramentas automáticas de migração.</li>
+<li><strong>Dotenv</strong>: Biblioteca para carregamento de variáveis de ambiente a partir de um arquivo <code>.env</code>, permitindo a configuração de variáveis sensíveis de forma segura.</li>
+<li><strong>Zod</strong>: Biblioteca para validação de esquemas de dados que garante que as entradas do usuário sejam verificadas antes do processamento.</li>
+<li><strong>JSON Web Token (JWT)</strong>: Implementado para autenticação e autorização segura, permitindo que tokens sejam passados pela API como representações dos usuários autenticados.</li>
+<li><strong>Winston</strong>: Biblioteca para criação e controle de logs, capaz de gerenciar diferentes níveis de registro e integrando-se bem com grandes quantidades de dados logados.</li>
+<li><strong>Bcrypt</strong>: Utilizado para o hashing de senhas dos usuários antes de armazená-las, garantindo que os dados armazenados sejam seguros mesmo em caso de vazamento de informações.</li>
+<li><strong>Next.js</strong>: : Next.js é um framework React voltado para o desenvolvimento de aplicações web e sites otimizados, com suporte tanto para renderização no lado do servidor (SSR) quanto para a geração de páginas estáticas (SSG)</li>
+<li><strong>JavaScript:</strong>: Linguagem de programação amplamente usada para construir aplicações interativas e escaláveis</li>
+<li><strong>CSS</strong>: Linguagem de estilo usada para definir a aparência visual de elementos web, como cores, tamanhos, fontes e layouts.</li>
+<li><strong>HTML</strong>: Linguagem de marcação que estrutura e organiza o conteúdo de páginas web, utilizando tags para elementos como cabeçalhos, parágrafos e links</li>
+<li><strong>Vercel</strong>: Plataforma de implantação escalável, projetada para trabalhar com Next.js, fornecendo suporte a SSR, SSG e ferramentas de otimização.</li>
+<li><strong>Chart.js</strong>: Biblioteca para criação de gráficos interativos em JavaScript, com alta personalização e compatibilidade com React.</li>
+<li><strong>Axios</strong>: Biblioteca para realizar requisições HTTP, facilitando a comunicação entre o cliente e o servidor.</li>
+<li><strong>Formik</strong>: Ferramenta para criar e gerenciar formulários de forma simplificada, ideal para aplicações com grande inserção de dados.</li>
+</ul>
+<h3 id="52-organizacao-do-codigo-no-backend">5.2. Organização do Código no Backend</h3>
+<pre><code class="language-text">.
+├── src
+│   ├── application
+│   │   ├── interfaces
+│   │   │   └── repositories
+│   │   ├── services
+│   │   ├── useCases
+│   │   └── utils
+│   ├── domain
+│   │   ├── entities
+│   │   └── factories
+│   ├── infrastructure
+│   │   └── database
+│   ├── main
+│   │   ├── config
+│   │   ├── controllers
+│   │   ├── middlewares
+│   │   └── routes
+└── test
+</code></pre>
+<h4 id="explicacoes-sobre-cada-diretorio">Explicações sobre cada diretório:</h4>
+<ul>
+<li><strong>src</strong>: Diretório raiz onde todo o código do aplicativo deveria residir.</li>
+<li><strong>application</strong>: Camada de aplicação que contém lógica de negócios específica do aplicativo.<ul>
+<li><strong>interfaces</strong>: Definições de interfaces que servem como contratos para comunicação entre diferentes camadas/modules.</li>
+<li><strong>repositories</strong>: Interfaces para persistência e recuperação de entidades de domínio.</li>
+<li><strong>services</strong>: Serviços que encapsulam lógica de aplicação não específica de um caso de uso.</li>
+<li><strong>useCases</strong>: Implementações de casos de uso que orquestram a lógica do aplicativo para atingir os objetivos do usuário.</li>
+<li><strong>utils</strong>: Funções utilitárias não específicas a nenhum caso de uso ou serviço em particular.</li>
+</ul>
+</li>
+<li><strong>domain</strong>: Contém o núcleo do aplicativo, onde reside a lógica de negócios essencial.<ul>
+<li><strong>entities</strong>: Definições de entidades de domínio que encapsulam regras de negócio.</li>
+<li><strong>factories</strong>: Fábricas para criação de objetos de domínio, facilitando construções complexas.</li>
+</ul>
+</li>
+<li><strong>infrastructure</strong>: Cumpre o papel de fornecer implementações concretas para interfaces definidas nas camadas superiores.<ul>
+<li><strong>database</strong>: Implementações de repositórios, mapeadores e estratégias de conexão.</li>
+</ul>
+</li>
+<li><strong>main</strong>: A camada mais externa que configura e inicia o aplicativo.<ul>
+<li><strong>config</strong>: Configurações e constantes globais.</li>
+<li><strong>controllers</strong>: Controladores que lidam com a entrada HTTP e transformam chamadas em ações.</li>
+<li><strong>middlewares</strong>: Middlewares que processam solicitações e respostas de forma genérica.</li>
+<li><strong>routes</strong>: Definições de rotas que mapeiam URLs para controladores.</li>
+</ul>
+</li>
+<li><strong>test</strong>: Onde todos os testes automatizados residem, como testes unitários, de integração, de aceitação, etc.</li>
+</ul>
+<h3 id="521-organizacao-do-codigo-no-frontend">5.2.1. Organização do Código no Frontend</h3>
+<pre><code class="language-text">.
+├── public
+│ ├── images
+│ └── fonts
+├── src
+│ ├── components
+│ ├── layouts
+│ │ └── MainLayout.js
+│ ├── pages
+│ │ ├── index.js
+│ │ ├── about.js
+│ │ ├── dashboard
+│ │ └── index.js
+│ ├── styles
+│ ├── utils
+│ ├── hooks
+│ │ ├── useAuth.js
+│ │ └── useFetch.js
+│ ├── context
+│ │ └── AuthContext.js
+│ ├── services
+│ │ └── api.js
+│ ├── config
+│ │ └── appConfig.js
+├── .env.local
+├── next.config.js
+└── package.json
+</code></pre>
+<h4 id="explicacoes-sobre-cada-diretorio_1">Explicações sobre cada diretório:</h4>
+<ul>
+<li><strong>src</strong>: Diretório principal que contém todo o código-fonte da aplicação.</li>
+<li><strong>components</strong>: Armazena componentes reutilizáveis, como botões, cartões, modais, etc.</li>
+<li><strong>layouts</strong>:<ul>
+<li><strong>MainLayout.js</strong>: Define a estrutura de layout comum da aplicação, incluindo elementos compartilhados como barra de navegação e rodapé.</li>
+</ul>
+</li>
+<li><strong>pages</strong>: Diretório obrigatório do Next.js para gerenciamento de rotas.<ul>
+<li><strong>index.js</strong>: Página inicial da aplicação, acessível pela URL raiz (/).</li>
+<li><strong>about.js</strong>: Página "Sobre", acessível pela rota /about.</li>
+<li><strong>dashboard</strong>: Subdiretório para páginas relacionadas ao painel de controle.</li>
+<li><strong>index.js</strong>: Página principal do painel, acessível pela rota /dashboard.</li>
+</ul>
+</li>
+<li><strong>styles</strong>: Diretório para estilos globais e específicos.</li>
+<li><strong>utils</strong>: Contém funções utilitárias que são genéricas e podem ser usadas em qualquer parte do projeto.</li>
+<li><strong>hooks</strong>: Diretório para hooks personalizados do React, que encapsulam lógica reutilizável.<ul>
+<li><strong>useAuth.js</strong>: Hook para lidar com autenticação do usuário.</li>
+<li><strong>useFetch.js</strong>: Hook para realizar requisições a APIs e gerenciar estados de carregamento/erro.</li>
+</ul>
+</li>
+<li><strong>context</strong>: Diretório para os contextos globais do React, que permitem o compartilhamento de estados entre diferentes partes da aplicação.<ul>
+<li><strong>AuthContext.js</strong>: Contexto para gerenciar informações de autenticação e estados do usuário logado.</li>
+</ul>
+</li>
+<li><strong>services</strong>: Contém a lógica para interagir com APIs externas.<ul>
+<li><strong>api.js</strong>: Configuração centralizada para requisições HTTP</li>
+</ul>
+</li>
+<li><strong>config</strong>: Armazena configurações globais e constantes.<ul>
+<li><strong>appConfig.js</strong>: Arquivo para variáveis de configuração.</li>
+</ul>
+</li>
+<li><strong>.env.local</strong>: Arquivo para variáveis de ambiente específicas do ambiente local</li>
+<li><strong>next.config.js</strong>: Arquivo de configuração do Next.js, usado para customizações como redirecionamentos, otimizações e definições de ambiente.</li>
+<li><strong>package.json</strong>: Contém metadados do projeto e lista de dependências utilizadas.</li>
+</ul>
+<h2 id="6-estrategia-de-testes">6. Estratégia de Testes</h2>
+<h3 id="61-testes-unitarios">6.1. Testes Unitários</h3>
+<ul>
+<li><strong>Framework</strong>: Vitest.</li>
+<li><strong>Cobertura</strong>: Foco em funções de manipulação de dados em entidades e casos de uso.</li>
+</ul>
+<h3 id="62-testes-de-integracao">6.2. Testes de Integração</h3>
+<ul>
+<li><strong>Framework</strong>: Jest com Supertest.</li>
+<li><strong>Cobertura</strong>: Verificações de fluxos de dados entre módulos e API, incluindo autenticação e operações de CRUD.</li>
+</ul>
+<h3 id="63-testes-end-to-end">6.3. Testes End-to-End</h3>
+<ul>
+<li><strong>Ferramenta</strong>: Cypress.</li>
+<li><strong>Cobertura</strong>: Simulação de interações completas do usuário com o sistema através de navegadores reais.</li>
+</ul>
+<h2 id="7-seguranca">7. Segurança</h2>
+<h3 id="71-autenticacao-e-autorizacao">7.1. Autenticação e Autorização</h3>
+<ul>
+<li>Implementação de JWT para sessões de usuário seguras e verificáveis.</li>
+<li>Requisições de autenticação utilizando middlewares do Express para validação de tokens.</li>
+</ul>
+<h3 id="72-protecoes-contra-vulnerabilidades">7.2. Proteções contra Vulnerabilidades</h3>
+<ul>
+<li><strong>Validação de Entrada</strong>: Uso de Zod para garantir que as entradas do usuário sejam verificadas antes do processamento.</li>
+<li><strong>Proteção de Senhas</strong>: Senhas são armazenadas apenas pós-hashing com bcrypt, reforçando a segurança.</li>
+</ul>
+<h2 id="8-consideracoes-finais">8. Considerações Finais</h2>
+<h3 id="81-desafios-e-solucoes">8.1. Desafios e Soluções</h3>
+<ul>
+<li><strong>Observabilidade e monitoramento</strong>: Uso extensivo de logs com Winston para monitoramento da aplicação e busca de bugs.</li>
+</ul>
+<h2 id="9-anexos">9. Anexos</h2>
+<h3 id="91-glossario">9.1. Glossário</h3>
+<ul>
+<li><strong>JWT</strong>: Token de autenticação baseado em JSON.</li>
+<li><strong>ORM</strong>: Mapeamento objeto-relacional, usado para interagir com bancos de dados.</li>
+</ul>
+<h3 id="92-referencias">9.2. Referências</h3>
+<ul>
+<li><a href="https://www.typescriptlang.org/docs/">TypeScript</a></li>
+<li><a href="https://tsx.is/">Tsx</a></li>
+<li><a href="https://expressjs.com/">Express</a></li>
+<li><a href="https://github.com/expressjs/cors#readme">CORS</a></li>
+<li><a href="https://zod.dev/">Zod</a></li>
+<li><a href="https://github.com/kelektiv/node.bcrypt.js#readme">Bcrypt</a></li>
+<li><a href="https://www.prisma.io/docs/">Prisma</a></li>
+<li><a href="https://github.com/motdotla/dotenv#readme">Dotenv</a></li>
+<li><a href="https://github.com/auth0/node-jsonwebtoken#readme">Jsonwebtoken</a></li>
+<li><a href="https://vitest.dev/guide/">Vitest</a></li>
+<li><a href="https://jestjs.io/pt-BR/docs/getting-started">Jest</a></li>
+<li><a href="https://github.com/ladjs/supertest#readme">Supertest</a></li>
+<li><a href="https://docs.cypress.io/app/get-started/why-cypress">Cypress</a></li>
+<li><a href="https://github.com/winstonjs/winston#readme">Winston</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.top"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
