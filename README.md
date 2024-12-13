@@ -1,8 +1,8 @@
 ## Sua Finança
 
-# Sistema de controle financeiro pessoal
+### Sistema de controle financeiro pessoal
 
-Este projeto é um sistema de controle financeiro pessoal projetado para ajudar pessoas a gerenciar melhor suas finanças, proporcionando uma visão clara de receitas, despesas e saldo disponível. Ele visa simplificar o acompanhamento de finanças pessoais, facilitando o controle dos gastos diários e auxiliando na prevenção de dívidas indesejadas.
+O **Sua Finança** é um sistema desenvolvido para facilitar o gerenciamento financeiro pessoal, proporcionando uma visão consolidada de receitas, despesas e saldo disponível. Com uma abordagem intuitiva e prática, a solução ajuda a simplificar o controle dos gastos diários e contribui para a prevenção de dívidas indesejadas.
 
 ## Indice 
 
@@ -26,12 +26,40 @@ Esses fatores podem levar à perda de controle financeiro, dificultando a identi
 
 ## 2. Funcionalidades
 
+- Registro de receitas e despesas;  
+- Categorização de gastos e fontes de renda;  
+- Cálculo automático do saldo disponível;  
+- Gráficos e relatórios financeiros;  
+- Exportação de dados para análise externa;  
+
 ## 3. Tecnologias Utilizadas
 
-- Back-end:
-- Front-end:[Tecnologia de interface, Node.js, react...]
+- **Back-end:** [Node.js, Django, etc]
+- **Front-end:**[Next.js, react..., etc]
 
 ## 4. Como Usar
+
+### **Pré-requisitos** 
+- **node** v22.8.0.
+- **npx** 10.8.2
+
+### **Passos para Instalação**  
+
+1. Clone o repositório:  
+```bash
+ git clone https://github.com/unb-mds/2024-2-SuaFinanca.git
+```
+
+2. Instale as dependências:
+```bash
+npm install
+```
+3. Inicie o servidor:
+```bash
+npm start
+```
+
+4. Acesse a aplicação em http://localhost:3000.
 
 
 ## 5. Contribuição
@@ -41,7 +69,18 @@ Contribuições são bem-vindas! Se você tiver sugestões de novas funcionalida
 
 1. Fork este repositório.
 2. Crie uma nova branch para sua funcionalidade/correção.
-3. Envie suas alterações e faça um pull request.
+```bash
+git checkout -b minha-feature
+```
+3. Faça as alterações e commit:
+```bash
+git commit -m "Veja o padrão de commit"
+```
+4. Envie sua branch para o repositório remoto:
+```bash
+git push origin minha-feature
+```
+5. Abra um pull request.
 
 ## 6. Licença
 
