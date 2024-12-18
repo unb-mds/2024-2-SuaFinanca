@@ -47,31 +47,11 @@ nav:
 theme:
   name: material
   palette:
-    # Palette toggle for automatic mode
+    # Configuração fixa para fundo preto (modo escuro como padrão)
     - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Switch to light mode
-
-    # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default 
-      primary: deep purple
-      accent: pink
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: deep purple
       accent: pink
-      toggle:
-        icon: material/brightness-2
-        name: Switch to system preference
-
-    - media: "(prefers-color-scheme)"
       toggle:
         icon: material/brightness-auto
         name: Switch to light mode

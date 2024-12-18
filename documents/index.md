@@ -41,9 +41,4 @@ O [Sua Finança](https://github.com/unb-mds/2024-2-SuaFinanca.git) é um sistema
             <img src="https://github.com/LucasAlves71.png" alt="Foto Lucas" width="130px" height="50%" style="border-radius:50%"/>
         </div>
         <div style="text-align: center;">
-            Pedro Araujo
-            <br/>
-            <img src="https://github.com/PedroAraujo004.png" alt="Foto Pedro" width="130px" height="50%" style="border-radius:50%"/>
-        </div>
-    </div>
-</div>
+            

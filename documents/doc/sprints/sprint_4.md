@@ -1,14 +1,14 @@
-# Documentação da Sprint: Sprint 4
+# Sprint 4
 
 ## Objetivo Geral
-Nessa sprint tinha como objetivo a criação de uma documentação de configurações e configurar o ambiente de desenvolvimento do backend.
+> Nessa sprint tinha como objetivo a criação de uma documentação de configurações e configurar o ambiente de desenvolvimento do backend.
 
 ---
 
 ## Tarefas Associadas
 
-- [ ] Setup - Backend - Configurar o ambiente de desenvolvimento do backend #15 https://github.com/unb-mds/2024-2-SuaFinanca/issues/15
-- [ ] Docs - Configuração de Ambiente - Criação de uma documentação de configuração de ambiente #16 https://github.com/unb-mds/2024-2-SuaFinanca/issues/16
+- [ ] Setup - Backend - Configurar o ambiente de desenvolvimento do backend 
+- [ ] Docs - Configuração de Ambiente - Criação de uma documentação de configuração de ambiente 
 
 ---
 

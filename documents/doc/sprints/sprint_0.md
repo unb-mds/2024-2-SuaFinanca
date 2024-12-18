@@ -1,16 +1,16 @@
-# Documentação da Sprint: Sprint 0
+# Sprint 0
 
 ## Objetivo Geral
-Esta sprint foi uma sprint de estudo, se baseando nos estudos de GIT e versionamento, SOLID, Docker e teste automatizados. O Objtivo final foi com que todos estivessem capacitados dentro desses estudos.
+> Esta sprint foi uma sprint de estudo, se baseando nos estudos de GIT e versionamento, SOLID, Docker e teste automatizados. O Objtivo final foi com que todos estivessem capacitados dentro desses estudos.
 
 ---
 
 ## Tarefas Associadas
 
-- [ ] Estudo - Docker/Dev Containers - Conceitos Básicos e Fundamentos #1 https://github.com/unb-mds/2024-2-Squad11/issues/1
-- [ ] Estudo - Testes Automatizados - Fundamentos e Práticas (Unitários, Integração, E2E) #2 https://github.com/unb-mds/2024-2-Squad11/issues/2
-- [ ] Estudo - SOLID - Princípios de Design de Software #3 https://github.com/unb-mds/2024-2-Squad11/issues/3 
-- [ ] Estudo - Git/Controle de Versão - Fundamentos e Fluxos de Trabalho Colaborativos #4 https://github.com/unb-mds/2024-2-Squad11/issues/4
+- [ ] Estudo do Docker - Conceitos Básicos e Fundamentos 
+- [ ] Estudo de Testes Automatizados - Fundamentos e Práticas (Unitários, Integração, E2E) 
+- [ ] Estudo do SOLID - Princípios de Design de Software 
+- [ ] Estudo do Git/Controle de Versão - Fundamentos e Fluxos de Trabalho Colaborativos 
 
 ---
 

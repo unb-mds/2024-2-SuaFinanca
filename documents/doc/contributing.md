@@ -1,4 +1,10 @@
-# Documentação da Comunidade
+# **Guia de Contribuição - AcheiUnB**
+
+## **Bem-vindo(a)!**
+
+Obrigado por se interessar em contribuir para o projeto **Sua Finança!** Este guia foi elaborado para ajudá-lo a colaborar de forma produtiva e consistente com nossa equipe.
+
+---
 
 ## Índice
 

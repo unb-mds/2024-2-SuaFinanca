@@ -1,17 +1,16 @@
-# Documentação da Sprint: Sprint 6
+# Sprint 6
 
 ## Objetivo Geral
-Nessa sprint tinha como objetivo de implementar a feature de autenticação de usuário, por parte do frontend, teve criação do documento de visão de produto, o protótipo de alta fidelidade e a revisão do story map.
+> Nessa sprint tinha como objetivo de implementar a feature de autenticação de usuário, por parte do frontend, teve criação do documento de visão de produto, o protótipo de alta fidelidade e a revisão do story map.
 
 ---
 
 ## Tarefas Associadas
 
-- [ ] Feature - Autentificação - Cadastro e Registro de Usuário Frontend #25 https://github.com/unb-mds/2024-2-SuaFinanca/issues/25
-- [ ] Docs - Protótipo de Alta Fidelidade - Criação do Protótipo de Alta Fidelidade #26 https://github.com/unb-mds/2024-2-SuaFinanca/issues/26
-- [ ] Docs - Visão de produto - Adiciona um documento de visão do projeto. #29 https://github.com/unb-mds/2024-2-SuaFinanca/issues/29
-- [ ] Docs - Story Map - Revisão do Story Map do Projeto #14 https://github.com/unb-mds/2024-2-SuaFinanca/issues/14
-
+- [ ] Feature - Autentificação - Cadastro e Registro de Usuário Frontend 
+- [ ] Docs - Protótipo de Alta Fidelidade - Criação do Protótipo de Alta Fidelidade 
+- [ ] Docs - Visão de produto - Adiciona um documento de visão do projeto. 
+- [ ] Docs - Story Map - Revisão do Story Map do Projeto 
 ---
 
 ## Período
