@@ -3,7 +3,7 @@ import {
   ICategoryRepository,
 } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 
-import { CreateCategoryReturn } from "@/main/config/helpers/protocol/createCategoryProtocols";
+import { CreateCategoryReturn } from "@/main/config/helpers/protocol/category/createCategoryProtocols";
 import { ICreateCategoryUseCase } from "@/main/config/helpers/useCases/IuseCases";
 
 export class CreateCategoryUseCase implements ICreateCategoryUseCase {
