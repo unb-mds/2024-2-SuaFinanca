@@ -1,4 +1,4 @@
-@TOKEN = 
+@TOKEN =
 @BASE_URL = http://localhost:8000
 
 POST {{BASE_URL}}/user
