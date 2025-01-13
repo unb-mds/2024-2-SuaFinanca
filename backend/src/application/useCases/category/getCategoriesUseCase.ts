@@ -1,4 +1,4 @@
-import { GetCategoryByUserIdReturn } from "@/main/config/helpers/protocol/createCategoryProtocols";
+import { GetCategoryByUserIdReturn } from "@/main/config/helpers/protocol/category/getCategoryProtocols";
 import { ICategoryRepository } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 import { IGetCategoriesByUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
 
