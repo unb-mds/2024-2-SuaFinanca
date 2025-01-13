@@ -11,6 +11,7 @@ import {
 
 import { CreateCategoryParams } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 import { CreateCategoryResponse } from "@/main/config/helpers/protocol/category/createCategoryProtocols";
+import { CreateCategorySchema } from "@/application/services/createCategorySchema";
 import { ICreateCategoryUseCase } from "@/main/config/helpers/useCases/IuseCases";
 
 export class CreateCategoryController implements IController {
@@ -19,16 +20,19 @@ export class CreateCategoryController implements IController {
     httpRequest: HttpRequest<CreateCategoryParams>,
   ): Promise<HttpResponse<CreateCategoryResponse | string>> {
     try {
-      const { name, userId } = httpRequest.body!;
+      const parsedData = CreateCategorySchema.safeParse(httpRequest.body);
 
-      if (!httpRequest.body) {
-        return badRequest("Name and userId are required");
+      if (!parsedData.success) {
+        const errorMessage = parsedData.error.errors
+          .map((error) => error.message)
+          .join(", ");
+
+        return badRequest(errorMessage);
       }
 
-      const newCategory = await this.createCategoryUseCase.execute({
-        name,
-        userId,
-      });
+      const newCategory = await this.createCategoryUseCase.execute(
+        httpRequest.body!,
+      );
 
       if (typeof newCategory === "string") {
         return badRequest(newCategory);
