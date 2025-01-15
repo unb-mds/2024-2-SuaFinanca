@@ -8,9 +8,17 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   name      String
-  email     String   @unique
+  email     String     @unique
   password  String
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
+  Category  Category[]
+}
+
+model Category {
+  id     Int    @id @default(autoincrement())
+  name   String 
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
 }
