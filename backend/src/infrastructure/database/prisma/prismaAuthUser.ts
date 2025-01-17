@@ -2,12 +2,12 @@ import {
   CreateUserParams,
   IAuthUserRepository,
 } from "@/application/interfaces/domain/entities/user/IauthUser";
-import { IUser, IUserWithId } from "@/domain/entities/User";
 
+import { IUserWithId } from "@/domain/entities/User";
 import { prisma } from "@/main/config/database/prisma";
 
 export class PrismaAuthUser implements IAuthUserRepository {
-  async createUser(params: CreateUserParams): Promise<IUser> {
+  async createUser(params: CreateUserParams): Promise<IUserWithId> {
     const newUser = await prisma.user.create({
       data: {
         name: params.name,
