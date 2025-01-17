@@ -5,15 +5,18 @@ import {
 
 import { CreateUserReturn } from "@/main/config/helpers/protocol/user/authUserProtocols";
 import { ICreateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
+import { IDefaultCategoryService } from "../interfaces/services/IdefaultCategoryService";
 import { IuserFactory } from "../interfaces/domain/factories/IuserFactory";
 
 export class CreateUserUseCase implements ICreateUserUseCase {
   constructor(
     private readonly userFactory: IuserFactory,
-    private readonly authUserRepositor: IAuthUserRepository,
+    private readonly authUserRepository: IAuthUserRepository,
+    private readonly defaultCategoryService: IDefaultCategoryService,
   ) {}
+
   async execute(params: CreateUserParams): Promise<CreateUserReturn | string> {
-    const existingUser = await this.authUserRepositor.findUserByEmail(
+    const existingUser = await this.authUserRepository.findUserByEmail(
       params.email,
     );
 
@@ -23,11 +26,13 @@ export class CreateUserUseCase implements ICreateUserUseCase {
 
     const newUser = await this.userFactory.createUser(params);
 
-    const User = await this.authUserRepositor.createUser({
+    const User = await this.authUserRepository.createUser({
       name: newUser.name,
       email: newUser.email,
       password: newUser.getPassword(),
     });
+
+    await this.defaultCategoryService.createDefaultCategories(User.id);
 
     return {
       user: {
