@@ -25,4 +25,22 @@ export class PrismaAuthUser implements IAuthUserRepository {
 
     return user || null;
   }
+
+  async findUserById(id: number): Promise<IUserWithId | null> {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    return user || null;
+  }
+
+  async deleteUser(id: number): Promise<undefined> {
+    await prisma.user.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
 }
