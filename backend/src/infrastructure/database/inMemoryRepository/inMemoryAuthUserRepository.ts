@@ -2,13 +2,14 @@ import {
   CreateUserParams,
   IAuthUserRepository,
 } from "@/application/interfaces/domain/entities/user/IauthUser";
-import { IUser, IUserWithId } from "@/domain/entities/User";
+
+import { IUserWithId } from "@/domain/entities/User";
 
 export class InMemoryAuthUserRepository implements IAuthUserRepository {
   private users: any[] = [];
 
-  async createUser(params: CreateUserParams): Promise<IUser> {
-    const newUser = { ...params };
+  async createUser(params: CreateUserParams): Promise<IUserWithId> {
+    const newUser: IUserWithId = { id: this.users.length + 1, ...params };
     this.users.push(newUser);
     return newUser;
   }
