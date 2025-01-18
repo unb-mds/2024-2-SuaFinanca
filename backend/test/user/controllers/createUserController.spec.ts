@@ -3,23 +3,32 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { BcryptPassword } from "@/application/utils/hashUtils";
 import { CreateUserController } from "@/main/controllers/user/createUserController";
 import { CreateUserUseCase } from "@/application/useCases/createUseCases";
+import { DefaultCategoryService } from "@/application/services/defaultCategoryService";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
+import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
 import { UserFactory } from "@/domain/factories/userFactory";
 
 describe("CreateUserController", () => {
   let bcryptPassword: BcryptPassword;
   let userFactory: UserFactory;
   let inMemoryAuthUserRepository: InMemoryAuthUserRepository;
+  let inMemoryCategoryRepository: InMemoryCategoryRepository;
   let createUserUseCase: CreateUserUseCase;
   let createUserController: CreateUserController;
+  let defaultCategoryService: DefaultCategoryService;
 
   beforeEach(() => {
     bcryptPassword = new BcryptPassword();
     userFactory = new UserFactory(bcryptPassword);
     inMemoryAuthUserRepository = new InMemoryAuthUserRepository();
+    inMemoryCategoryRepository = new InMemoryCategoryRepository();
+    defaultCategoryService = new DefaultCategoryService(
+      inMemoryCategoryRepository,
+    );
     createUserUseCase = new CreateUserUseCase(
       userFactory,
       inMemoryAuthUserRepository,
+      defaultCategoryService,
     );
     createUserController = new CreateUserController(createUserUseCase);
   });
