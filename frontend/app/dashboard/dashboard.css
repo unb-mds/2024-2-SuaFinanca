@@ -9,7 +9,7 @@
 
 /* Menu Lateral */
 .sidebar {
-  background-color: #6e59ff;
+  background-color: #4CAF50;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -70,12 +70,12 @@
 }
 
 .sidebar ul li a:hover {
-  background-color: #5c48d3;
+  background-color: #4CAF50;
 }
 
 /* Botão de abrir/fechar */
 .toggle-button {
-  background-color: #5c48d3;
+  background-color: #4CAF50;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -89,7 +89,7 @@
 }
 
 .toggle-button:hover {
-  background-color: #4a3ba6;
+  background-color: #4CAF50;
 }
 
 /* Conteúdo Principal */
@@ -111,7 +111,7 @@
 
 /* Botão de sair */
 .main-header button {
-  background-color: #6e59ff;
+  background-color: #4CAF50;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -125,12 +125,12 @@
 }
 
 .main-header button:hover {
-  background-color: #5c48d3;
+  background-color: #4CAF50;
   transform: scale(1.05);
 }
 
 .main-header button:active {
-  background-color: #4a3ba6;
+  background-color: #4CAF50;
   transform: scale(0.95);
 }
 

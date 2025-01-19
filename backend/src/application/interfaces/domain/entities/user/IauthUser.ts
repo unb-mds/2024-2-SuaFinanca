@@ -14,4 +14,6 @@ export interface LoginUserParams {
 export interface IAuthUserRepository {
   createUser(params: CreateUserParams): Promise<IUserWithId>;
   findUserByEmail(email: string): Promise<IUserWithId | null>;
+  findUserById(id: number): Promise<IUserWithId | null>;
+  deleteUser(id: number): Promise<undefined>;
 }
