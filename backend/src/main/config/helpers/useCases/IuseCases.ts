@@ -39,3 +39,7 @@ export interface ICreateTransactionUseCase {
 export interface IDeleteUserUseCase {
   execute(id: number): Promise<DeleteUserReturn | string>;
 }
+
+export interface IDeleteCategoryUseCase {
+  execute(categoryId: number, userId: number): Promise<void | string>;
+}
