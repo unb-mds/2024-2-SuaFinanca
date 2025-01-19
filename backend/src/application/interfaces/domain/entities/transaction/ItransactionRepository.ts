@@ -7,6 +7,14 @@ export interface CreateTransactionParams {
   type: TransactionType;
   amount: number;
   userId: number;
+  categoryId?: number;
+  date?: string;
+}
+
+export interface CreateTransactionParamsWithCategoryName {
+  type: TransactionType;
+  amount: number;
+  userId: number;
   categoryName?: string;
   date?: string;
 }
