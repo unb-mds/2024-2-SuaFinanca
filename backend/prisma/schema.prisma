@@ -7,6 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
 model User {
   id          Int           @id @default(autoincrement())
   name        String
@@ -26,12 +31,13 @@ model Category {
 }
 
 model Transaction {
-  id         Int      @id @default(autoincrement())
-  type       String
+  id         Int             @id @default(autoincrement())
+  type       TransactionType
   amount     Float
   userId     Int
-  user       User     @relation(fields: [userId], references: [id])
-  categoryId Int
-  category   Category @relation(fields: [categoryId], references: [id])
-  createdAt  DateTime @default(now())
+  user       User            @relation(fields: [userId], references: [id])
+  categoryId Int?
+  category   Category?       @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime        @default(now())
+  date       DateTime?
 }
