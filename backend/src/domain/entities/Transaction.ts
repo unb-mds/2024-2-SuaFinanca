@@ -7,8 +7,8 @@ export interface ITransaction {
   type: TransactionType;
   amount: number;
   userId: number;
-  categoryId?: number;
-  date?: Date;
+  categoryId?: number | null;
+  date?: Date | null;
 }
 
 export interface ITransactionWithId {
@@ -16,6 +16,6 @@ export interface ITransactionWithId {
   type: TransactionType;
   amount: number;
   userId: number;
-  categoryId?: number;
-  date?: Date;
+  categoryId?: number | null;
+  date?: Date | null;
 }
