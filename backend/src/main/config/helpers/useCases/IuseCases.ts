@@ -9,6 +9,8 @@ import {
 
 import { CreateCategoryParams } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 import { CreateCategoryReturn } from "@/main/config/helpers/protocol/category/createCategoryProtocols";
+import { CreateTransactionParams } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
+import { CreateTransactionReturn } from "../protocol/transaction/createTransactionProtocols";
 import { DeleteUserReturn } from "../protocol/user/deleteUserProtocols";
 import { GetCategoryByUserIdReturn } from "@/main/config/helpers/protocol/category/getCategoryProtocols";
 
@@ -26,6 +28,12 @@ export interface ICreateCategoryUseCase {
 
 export interface IGetCategoriesByUserUseCase {
   execute(userId: number): Promise<GetCategoryByUserIdReturn | string>;
+}
+
+export interface ICreateTransactionUseCase {
+  execute(
+    params: CreateTransactionParams,
+  ): Promise<CreateTransactionReturn | string>;
 }
 
 export interface IDeleteUserUseCase {
