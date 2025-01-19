@@ -13,4 +13,9 @@ export interface ICategoryRepository {
     name: string,
     userId: number,
   ): Promise<ICategoryWithId | null>;
+  findByIdAndUserId(
+    categoryId: number,
+    userId: number,
+  ): Promise<ICategoryWithId | null>;
+  deleteCategory(categoryId: number): Promise<void>;
 }
