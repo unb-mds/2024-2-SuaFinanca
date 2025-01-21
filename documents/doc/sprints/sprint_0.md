@@ -7,10 +7,10 @@ Esta sprint foi uma sprint de estudo, se baseando nos estudos de GIT e versionam
 
 ## Tarefas Associadas
 
-- [ ] Estudo - Docker/Dev Containers - Conceitos Básicos e Fundamentos #1 https://github.com/unb-mds/2024-2-Squad11/issues/1
-- [ ] Estudo - Testes Automatizados - Fundamentos e Práticas (Unitários, Integração, E2E) #2 https://github.com/unb-mds/2024-2-Squad11/issues/2
-- [ ] Estudo - SOLID - Princípios de Design de Software #3 https://github.com/unb-mds/2024-2-Squad11/issues/3 
-- [ ] Estudo - Git/Controle de Versão - Fundamentos e Fluxos de Trabalho Colaborativos #4 https://github.com/unb-mds/2024-2-Squad11/issues/4
+- [ ] [Estudo - Docker/Dev Containers - Conceitos Básicos e Fundamentos #1](https://github.com/unb-mds/2024-2-Squad11/issues/1)
+- [ ] [Estudo - Testes Automatizados - Fundamentos e Práticas (Unitários, Integração, E2E) #2](https://github.com/unb-mds/2024-2-Squad11/issues/2)
+- [ ] [Estudo - SOLID - Princípios de Design de Software #3](https://github.com/unb-mds/2024-2-Squad11/issues/3 )
+- [ ] [Estudo - Git/Controle de Versão - Fundamentos e Fluxos de Trabalho Colaborativos #4](https://github.com/unb-mds/2024-2-Squad11/issues/4)
 
 ---
 
