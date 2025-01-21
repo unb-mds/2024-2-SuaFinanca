@@ -1,4 +1,8 @@
 import {
+  CreateCategoryParams,
+  UpdateCategoryParams,
+} from "@/application/interfaces/domain/entities/category/IcategoryRepository";
+import {
   CreateUserParams,
   LoginUserParams,
 } from "@/application/interfaces/domain/entities/user/IauthUser";
@@ -7,10 +11,10 @@ import {
   LoginUserReturn,
 } from "../protocol/user/authUserProtocols";
 
-import { CreateCategoryParams } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 import { CreateCategoryReturn } from "@/main/config/helpers/protocol/category/createCategoryProtocols";
-import { GetCategoryByUserIdReturn } from "@/main/config/helpers/protocol/category/getCategoryProtocols";
 import { DeleteUserReturn } from "../protocol/user/deleteUserProtocols";
+import { GetCategoryByUserIdReturn } from "@/main/config/helpers/protocol/category/getCategoryProtocols";
+import { UpdateCategoryReturn } from "../protocol/category/updateCategoryProtocols";
 
 export interface ICreateUserUseCase {
   execute(params: CreateUserParams): Promise<CreateUserReturn | string>;
@@ -30,4 +34,8 @@ export interface IGetCategoriesByUserUseCase {
 
 export interface IDeleteUserUseCase {
   execute(id: number): Promise<DeleteUserReturn | string>;
+}
+
+export interface IUpdateCategoryUseCase {
+  execute(params: UpdateCategoryParams): Promise<UpdateCategoryReturn | string>;
 }
