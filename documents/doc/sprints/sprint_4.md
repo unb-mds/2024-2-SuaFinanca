@@ -7,8 +7,8 @@ Nessa sprint tinha como objetivo a criação de uma documentação de configura�
 
 ## Tarefas Associadas
 
-- [ ] Setup - Backend - Configurar o ambiente de desenvolvimento do backend #15 https://github.com/unb-mds/2024-2-SuaFinanca/issues/15
-- [ ] Docs - Configuração de Ambiente - Criação de uma documentação de configuração de ambiente #16 https://github.com/unb-mds/2024-2-SuaFinanca/issues/16
+- [ ] [Setup - Backend - Configurar o ambiente de desenvolvimento do backend #15](https://github.com/unb-mds/2024-2-SuaFinanca/issues/15)
+- [ ] [Docs - Configuração de Ambiente - Criação de uma documentação de configuração de ambiente #16](https://github.com/unb-mds/2024-2-SuaFinanca/issues/16)
 
 ---
 
