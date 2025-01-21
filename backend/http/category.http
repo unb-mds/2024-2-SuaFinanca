@@ -14,3 +14,12 @@ Content-Type: application/json
 GET {{BASE_URL}}/categories
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
+
+###
+PATCH  {{BASE_URL}}/category/50
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+    "name": "NewCategory"
+}
