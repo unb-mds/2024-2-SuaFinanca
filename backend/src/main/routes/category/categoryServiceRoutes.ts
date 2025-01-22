@@ -3,6 +3,7 @@ import {
   createCategoryController,
   deleteCategoryController,
   getCategoriesByUserController,
+  updateCategoryController,
 } from "@/main/config/dependencyInjection/categoryDependencyInjection";
 
 export async function createCategory(
@@ -21,6 +22,17 @@ export async function getCategoriesByUser(
 ): Promise<void> {
   const { body, statusCode } = await getCategoriesByUserController.handle({
     userId: req.userId,
+  });
+  res.status(statusCode).send(body);
+}
+
+export async function updateCategory(
+  req: Request,
+  res: Response,
+): Promise<void> {
+  const { body, statusCode } = await updateCategoryController.handle({
+    params: { id: req.params.id },
+    body: { ...req.body, userId: req.userId },
   });
   res.status(statusCode).send(body);
 }

@@ -1,6 +1,7 @@
 import {
   CreateCategoryParams,
   ICategoryRepository,
+  UpdateCategoryParams,
 } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 
 import { ICategoryWithId } from "@/domain/entities/Category";
@@ -15,6 +16,16 @@ export class PrismaCategoryRepository implements ICategoryRepository {
       },
     });
     return newCategory;
+  }
+
+  async updateCategory(params: UpdateCategoryParams): Promise<ICategoryWithId> {
+    const updatedCategory = await prisma.category.update({
+      where: { id: params.id },
+      data: {
+        name: params.name,
+      },
+    });
+    return updatedCategory;
   }
 
   async findByName(name: string): Promise<ICategoryWithId | null> {
@@ -45,14 +56,11 @@ export class PrismaCategoryRepository implements ICategoryRepository {
   }
 
   async findByIdAndUserId(
-    categoryId: number,
+    id: number,
     userId: number,
   ): Promise<ICategoryWithId | null> {
     const category = await prisma.category.findFirst({
-      where: {
-        id: categoryId,
-        userId,
-      },
+      where: { id, userId },
     });
     return category;
   }

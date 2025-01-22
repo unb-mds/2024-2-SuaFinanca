@@ -5,8 +5,15 @@ export interface CreateCategoryParams {
   userId: number;
 }
 
+export interface UpdateCategoryParams {
+  id: number;
+  name: string;
+  userId: number;
+}
+
 export interface ICategoryRepository {
   createCategory(category: CreateCategoryParams): Promise<ICategoryWithId>;
+  updateCategory(category: UpdateCategoryParams): Promise<ICategoryWithId>;
   findByName(name: string): Promise<ICategoryWithId | null>;
   findByUserId(userId: number): Promise<ICategoryWithId[]>;
   findByNameAndUserId(
@@ -18,4 +25,8 @@ export interface ICategoryRepository {
     userId: number,
   ): Promise<ICategoryWithId | null>;
   deleteCategory(categoryId: number): Promise<void>;
+  findByIdAndUserId(
+    id: number,
+    userId: number,
+  ): Promise<ICategoryWithId | null>;
 }
