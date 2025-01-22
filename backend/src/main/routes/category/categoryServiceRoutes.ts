@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   createCategoryController,
+  deleteCategoryController,
   getCategoriesByUserController,
   updateCategoryController,
 } from "@/main/config/dependencyInjection/categoryDependencyInjection";
@@ -32,6 +33,17 @@ export async function updateCategory(
   const { body, statusCode } = await updateCategoryController.handle({
     params: { id: req.params.id },
     body: { ...req.body, userId: req.userId },
+  });
+  res.status(statusCode).send(body);
+}
+
+export async function deleteCategory(
+  req: Request,
+  res: Response,
+): Promise<void> {
+  const { body, statusCode } = await deleteCategoryController.handle({
+    params: req.params,
+    userId: req.userId,
   });
   res.status(statusCode).send(body);
 }

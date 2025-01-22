@@ -1,5 +1,6 @@
 import {
   createCategory,
+  deleteCategory,
   getCategoriesByUser,
   updateCategory,
 } from "./categoryServiceRoutes";
@@ -11,6 +12,7 @@ const categoryRoutes = express.Router();
 
 categoryRoutes.post("/category", authMiddleware, createCategory);
 categoryRoutes.get("/categories", authMiddleware, getCategoriesByUser);
+categoryRoutes.delete("/category/:id", authMiddleware, deleteCategory);
 categoryRoutes.patch("/category/:id", authMiddleware, updateCategory);
 
 export default categoryRoutes;

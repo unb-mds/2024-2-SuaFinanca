@@ -7,9 +7,9 @@ Essa sprint tinha como objetivo a criação do protótipo do projeto, a criaçã
 
 ## Tarefas Associadas
 
-- [ ] Docs - Story Map - Criação do Story Map do Projeto #11 https://github.com/unb-mds/2024-2-Squad11/issues/11
-- [ ] Docs - Protótipo - Criação de um protótipo no Figma #12 https://github.com/unb-mds/2024-2-Squad11/issues/12
-- [ ] Docs - Documentação das Sprints - Criação de um documento para registrar as Sprints #13 https://github.com/unb-mds/2024-2-Squad11/issues/13
+- [ ] [Docs - Story Map - Criação do Story Map do Projeto #11](https://github.com/unb-mds/2024-2-Squad11/issues/11)
+- [ ] [Docs - Protótipo - Criação de um protótipo no Figma #12](https://github.com/unb-mds/2024-2-Squad11/issues/12)
+- [ ] [Docs - Documentação das Sprints - Criação de um documento para registrar as Sprints #13](https://github.com/unb-mds/2024-2-Squad11/issues/13)
 
 ---
 

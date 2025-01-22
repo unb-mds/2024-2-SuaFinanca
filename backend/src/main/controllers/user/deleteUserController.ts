@@ -21,9 +21,9 @@ export class DeleteUserController implements IController {
     httpRequest: HttpRequest<unknown>,
   ): Promise<HttpResponse<DeleteUserResponse | string>> {
     try {
-      const userId = httpRequest.body
+      const userId = httpRequest.body;
 
-      const typeId = typeof(userId)
+      const typeId = typeof userId;
       logger.info(userId);
       logger.info(typeId);
 
