@@ -1,13 +1,14 @@
 import {
   CreateCategoryParams,
   ICategoryRepository,
+  UpdateCategoryParams,
 } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 
 import { ICategoryWithId } from "@/domain/entities/Category";
 
 export class InMemoryCategoryRepository implements ICategoryRepository {
-  private categories: ICategoryWithId[] = [];
   private currentId = 1;
+  private categories: ICategoryWithId[] = [];
 
   async createCategory(params: CreateCategoryParams): Promise<ICategoryWithId> {
     const newCategory: ICategoryWithId = {
@@ -35,5 +36,36 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
       (category) => category.name === name && category.userId === userId,
     );
     return category || null;
+  }
+
+  async findByIdAndUserId(
+    categoryId: number,
+    userId: number,
+  ): Promise<ICategoryWithId | null> {
+    const category = this.categories.find(
+      (category) => category.id === categoryId && category.userId === userId,
+    );
+    return category || null;
+  }
+
+  async updateCategory(
+    category: UpdateCategoryParams,
+  ): Promise<ICategoryWithId> {
+    const index = this.categories.findIndex((cat) => cat.id === category.id);
+    if (index === -1) {
+      throw new Error("Category not found.");
+    }
+    this.categories[index] = { ...this.categories[index], ...category };
+    return this.categories[index];
+  }
+
+  async deleteCategory(categoryId: number): Promise<void> {
+    const index = this.categories.findIndex(
+      (category) => category.id === categoryId,
+    );
+    if (index === -1) {
+      throw new Error("Category not found.");
+    }
+    this.categories.splice(index, 1);
   }
 }
