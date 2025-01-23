@@ -43,3 +43,10 @@ export interface IDeleteUserUseCase {
 export interface IDeleteCategoryUseCase {
   execute(categoryId: number, userId: number): Promise<void | string>;
 }
+
+import { UpdateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
+import { UpdateUserReturn } from "../protocol/user/updateUserProtocols";
+
+export interface IUpdateUserUseCase {
+  execute(params: UpdateUserParams): Promise<UpdateUserReturn | string>;
+}
