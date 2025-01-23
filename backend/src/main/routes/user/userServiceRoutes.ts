@@ -25,10 +25,16 @@ export async function authUser(req: Request, res: Response): Promise<void> {
   });
 }
 
-
-export async function deleteUser(req: Request, res: Response): Promise<void> { 
+export async function deleteUser(req: Request, res: Response): Promise<void> {
   const { body, statusCode } = await deleteUserController.handle({
     body: req.userId,
+  });
+  res.status(statusCode).send(body);
+}
+
+export async function updateUser(req: Request, res: Response): Promise<void> {
+  const { body, statusCode } = await updateUserController.handle({
+    body: { ...req.body, id: req.userId },
   });
   res.status(statusCode).send(body);
 }
