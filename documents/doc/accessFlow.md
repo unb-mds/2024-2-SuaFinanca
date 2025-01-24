@@ -27,22 +27,22 @@ No novo fluxo, todas as funcionalidades além do **Dashboard** estão condiciona
    - A sessão expire.
 
 ### Benefícios do Novo Fluxo:
-- **Segurança:** Restrição do acesso a funcionalidades sensíveis.
-- **Personalização:** Permite que as funcionalidades sejam adaptadas para cada usuário.
-- **Controle e monitoramento:** Registra atividades e facilita auditorias.
+- **Mais segurança:** Funcionalidades sensíveis agora só podem ser acessadas por usuários autenticados, reduzindo riscos.
+- **Experiência personalizada:** Permite que cada usuário receba conteúdos e recursos ajustados às suas necessidades.
+- **Controle aprimorado:** Proporciona registro de atividades e facilita auditorias para monitoramento e análise.
 
 ## Impactos
 
 ### Impactos no Usuário:
-- **Ações adicionais:** Os usuários precisam criar contas e autenticar-se regularmente.
-- **Experiência aprimorada:** A interface pode exibir conteúdos e funcionalidades personalizadas.
+- **Novas exigências:** É necessário criar uma conta e realizar login para acessar certas funcionalidades.
+- **Interface mais intuitiva:** O sistema pode oferecer uma experiência mais adaptada aos perfis individuais dos usuários.
 
 ## Orientações para Suporte
 
 ### Perguntas Frequentes:
-1. **O que fazer se um usuário esquecer a senha?**
-   - Orientá-lo a utilizar a função "Esqueci minha senha".
-2. **Como lidar com erros de autenticação?**
-   - Confirmar se o usuário está inserindo as credenciais corretas.
-3. **Quais são os limites para tentativa de login?**
-   - Verificar a configuração de bloqueio após tentativas repetidas.
+1. **Esqueci minha senha, o que fazer?**
+   - Oriente o usuário a utilizar a opção "Esqueci minha senha" para redefini-la de forma segura.
+2. **Erro ao tentar autenticar, como resolver?**
+   - Verifique se as credenciais fornecidas estão corretas e instrua o usuário a corrigir possíveis erros.
+3. **Quantas tentativas de login são permitidas?**
+   - Consulte as configurações do sistema para confirmar os limites e informe o usuário sobre bloqueios temporários após tentativas fracassadas.
