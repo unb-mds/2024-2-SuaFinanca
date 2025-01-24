@@ -1,11 +1,11 @@
 import { Sidebar } from "@/components/sidebar"
-import { DashboardContent } from "@/components/dashboard-content"
+import { TransactionsContent } from "@/components/transactions-content"
 
-export default function DashboardPage() {
+export default function TransactionsPage() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar className="w-64 flex-shrink-0" />
-      <DashboardContent />
+      <TransactionsContent />
     </div>
   )
 }
