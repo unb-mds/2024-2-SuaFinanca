@@ -1,10 +1,11 @@
 # Atualização da Documentação do Projeto: Novo Fluxo de Acesso
 
+
 ## Contextualização
-Esta atualização da documentação tem como objetivo descrever o novo fluxo de acesso implementado no site, que altera a forma como os usuários interagem com as funcionalidades disponíveis. Este documento detalha o fluxo anterior e o novo fluxo, destacando as motivações para a mudança e fornecendo orientações para desenvolvimento e suporte.
+Esta atualização da documentação tem como objetivo apresentar o novo fluxo de acesso implementado no site, que redefine a maneira como os usuários interagem com as funcionalidades disponibilizadas. O documento fornece uma comparação entre o fluxo anterior e o atual, destacando as razões para a alteração e oferecendo diretrizes para implementação e suporte.
 
 ## Fluxo Anterior
-No fluxo anterior, os usuários acessavam primeiramente a página de login para poderem navegar no site, o que limitava um acesso prévio ao site.
+Anteriormente, os usuários eram direcionados inicialmente para a página de login antes de poderem acessar o site, restringindo a experiência inicial e limitando o acesso prévio ao conteúdo ou funcionalidades.
 
 ### Características do Fluxo Anterior:
 - **Início na página de Login:** O site carregava diretamente a página de login e senha.
