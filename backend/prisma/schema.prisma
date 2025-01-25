@@ -17,6 +17,7 @@ model User {
   name        String
   email       String        @unique
   password    String
+  balance     Float         @default(0)
   createdAt   DateTime      @default(now())
   Category    Category[]
   Transaction Transaction[]
