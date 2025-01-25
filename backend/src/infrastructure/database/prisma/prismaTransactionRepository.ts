@@ -8,7 +8,10 @@ import {
 } from "@/domain/entities/Transaction";
 import { endOfDay, startOfDay } from "date-fns";
 
+import { log } from "@/main/config/logs/log";
 import { prisma } from "@/main/config/database/prisma";
+
+const logger = log("PrismaTransactionRepository");
 
 export class PrismaTransactionRepository implements ITransactionRepository {
   async createTransaction(
@@ -43,6 +46,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
     return {
       ...newTransaction,
       type: newTransaction.type as unknown as TransactionType,
+      date: newTransaction.date!,
     };
   }
 
@@ -55,6 +59,9 @@ export class PrismaTransactionRepository implements ITransactionRepository {
     const startDate = startOfDay(new Date(year, month, 1));
     const endDate = endOfDay(new Date(year, month + 1, 0));
 
+    logger.debug(`startDate: ${startDate}`);
+    logger.debug(`endDate: ${endDate}`);
+
     const transactions = await prisma.transaction.findMany({
       where: {
         userId,
@@ -66,9 +73,12 @@ export class PrismaTransactionRepository implements ITransactionRepository {
       },
     });
 
-    return transactions.map((transaction) => ({
-      ...transaction,
-      type: transaction.type as unknown as TransactionType,
-    }));
+    return transactions
+      .filter((transaction) => transaction.date !== null)
+      .map((transaction) => ({
+        ...transaction,
+        type: transaction.type as unknown as TransactionType,
+        date: transaction.date as Date,
+      }));
   }
 }
