@@ -10,9 +10,9 @@ import {
 } from "@/main/config/helpers/helpers";
 import { UpdateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
 import { UpdateUserResponse } from "@/main/config/helpers/protocol/user/updateUserProtocols";
-import { UpdateUserSchema } from "@/application/services/updateUserSchema";
 import { IUpdateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
 import { log } from "@/main/config/logs/log";
+import { UpdateUserSchema } from "@/application/services/updateUserSchema";
 
 const logger = log("UpdateUserController");
 
@@ -48,9 +48,8 @@ export class UpdateUserController implements IController {
         },
       };
 
-      logger.info(`User updated successfully: ${updatedUser.user.email}`);
       return niceRequest<UpdateUserResponse>(responseBody);
-    } catch {
+    } catch (error) {
       logger.error(`Error: ${error}`);
       return serverError();
     }
