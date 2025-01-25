@@ -5,11 +5,15 @@ import {
 import { IUpdateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
 import { UpdateUserReturn } from "@/main/config/helpers/protocol/user/updateUserProtocols";
 import { log } from "@/main/config/logs/log";
+import { PasswordHash } from "../interfaces/utils/passwordHash";
 
 const logger = log("UpdateUserUseCase");
 
 export class UpdateUserUseCase implements IUpdateUserUseCase {
-  constructor(private readonly authUserRepository: IAuthUserRepository) {}
+  constructor(
+    private readonly authUserRepository: IAuthUserRepository,
+    private readonly passwordHash: PasswordHash,
+  ) {}
 
   async execute(params: UpdateUserParams): Promise<UpdateUserReturn | string> {
     const user = await this.authUserRepository.findUserById(params.id);
@@ -17,6 +21,11 @@ export class UpdateUserUseCase implements IUpdateUserUseCase {
     if (!user) {
       logger.warn(`User not found: ${params.id}`);
       return "User not found";
+    }
+
+    if (params.password) {
+      const passwordHash = await this.passwordHash.hash(params.password);
+      params.password = passwordHash;
     }
 
     const updatedUser = await this.authUserRepository.updateUser(params);
