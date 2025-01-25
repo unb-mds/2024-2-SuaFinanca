@@ -1,12 +1,12 @@
-@TOKEN =
+@TOKEN = 
 @BASE_URL = http://localhost:8000
 
 POST {{BASE_URL}}/user
 Content-Type: application/json
 
 {
-    "name": "John Doe",
-    "email": "john.doe@example.com",
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
     "password": "default"
 }
 
@@ -15,7 +15,7 @@ POST {{BASE_URL}}/user/login
 Content-Type: application/json
 
 {
-    "email": "john.doe@example.com",
+    "email": "mary.doe@example.com",
     "password": "default"
 }
 
@@ -25,11 +25,18 @@ Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
 
 ###
+PATCH {{BASE_URL}}/user/update
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+    "name": "Mary Doe",
+    "email": "mary.doe@example.com",
+    "password": "default"
+}
+
+###
 DELETE {{BASE_URL}}/user/delete
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
 
-###
-DELETE {{BASE_URL}}/user/update
-Authorization: Bearer {{TOKEN}}
-Content-Type: application/json
