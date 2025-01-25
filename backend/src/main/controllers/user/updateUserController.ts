@@ -8,11 +8,12 @@ import {
   niceRequest,
   serverError,
 } from "@/main/config/helpers/helpers";
+
+import { IUpdateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
 import { UpdateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
 import { UpdateUserResponse } from "@/main/config/helpers/protocol/user/updateUserProtocols";
-import { IUpdateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
-import { log } from "@/main/config/logs/log";
 import { UpdateUserSchema } from "@/application/services/updateUserSchema";
+import { log } from "@/main/config/logs/log";
 
 const logger = log("UpdateUserController");
 

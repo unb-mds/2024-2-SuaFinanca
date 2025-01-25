@@ -2,16 +2,16 @@ import { BcryptPassword } from "@/application/utils/hashUtils";
 import { CreateUserController } from "@/main/controllers/user/createUserController";
 import { CreateUserUseCase } from "@/application/useCases/createUseCases";
 import { DefaultCategoryService } from "@/application/services/defaultCategoryService";
+import { DeleteUserController } from "@/main/controllers/user/deleteUserController";
+import { DeleteUserUseCase } from "@/application/useCases/deleteUserUseCase";
 import { JWTTokenGenerator } from "@/application/utils/authUtils";
 import { LoginUserController } from "@/main/controllers/user/loginUserController";
 import { LoginUserUseCase } from "@/application/useCases/loginUserUseCase";
 import { PrismaAuthUser } from "@/infrastructure/database/prisma/prismaAuthUser";
 import { PrismaCategoryRepository } from "@/infrastructure/database/prisma/prismaCategoryRepository";
-import { UserFactory } from "@/domain/factories/userFactory";
-import { DeleteUserUseCase } from "@/application/useCases/deleteUserUseCase";
-import { DeleteUserController } from "@/main/controllers/user/deleteUserController";
-import { UpdateUserUseCase } from "@/application/useCases/updateUserUseCase";
 import { UpdateUserController } from "@/main/controllers/user/updateUserController";
+import { UpdateUserUseCase } from "@/application/useCases/updateUserUseCase";
+import { UserFactory } from "@/domain/factories/userFactory";
 
 // Auth
 const bcryptPassword = new BcryptPassword();
