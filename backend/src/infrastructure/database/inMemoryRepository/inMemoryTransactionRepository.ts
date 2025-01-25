@@ -20,7 +20,7 @@ export class InMemoryTransactionRepository implements ITransactionRepository {
     const newTransaction: ITransactionWithId = {
       id: this.currentId++,
       ...params,
-      date: params.date ? new Date(params.date) : undefined,
+      date: new Date(params.date),
     };
     this.transactions.push(newTransaction);
 
