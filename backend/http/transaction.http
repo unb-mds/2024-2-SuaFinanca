@@ -10,7 +10,7 @@ Content-Type: application/json
     "type": "INCOME",
     "amount": 1000,
     "categoryName": "Salário",
-    "date": "2025-01-01T03:00:00Z"
+    "date": "2025-01-01"
 }
 
 ###
@@ -22,7 +22,7 @@ Content-Type: application/json
     "type": "EXPENSE",
     "amount": 1000,
     "categoryName": "Salário",
-    "date": "2025-01-01T03:00:00Z"
+    "date": "2025-01-01"
 }
 
 ###
