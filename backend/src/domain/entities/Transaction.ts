@@ -8,7 +8,7 @@ export interface ITransaction {
   amount: number;
   userId: number;
   categoryId?: number | null;
-  date?: Date | null;
+  date: Date;
 }
 
 export interface ITransactionWithId {
@@ -17,5 +17,5 @@ export interface ITransactionWithId {
   amount: number;
   userId: number;
   categoryId?: number | null;
-  date?: Date | null;
+  date: Date;
 }

@@ -8,7 +8,7 @@ export interface CreateTransactionParams {
   amount: number;
   userId: number;
   categoryId?: number;
-  date?: string;
+  date: string;
 }
 
 export interface CreateTransactionParamsWithCategoryName {
@@ -16,7 +16,7 @@ export interface CreateTransactionParamsWithCategoryName {
   amount: number;
   userId: number;
   categoryName?: string;
-  date?: string;
+  date: string;
 }
 
 export interface GetUserBalanceParams {
