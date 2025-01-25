@@ -13,7 +13,7 @@ const userRoutes = express.Router();
 userRoutes.post("/user", createUser);
 userRoutes.post("/user/login", loginUser);
 userRoutes.get("/user/protected", authMiddleware, authUser);
-userRoutes.delete("/user/delete", authMiddleware, deleteUser);
 userRoutes.patch("/user/update", authMiddleware, updateUser);
+userRoutes.delete("/user/delete", authMiddleware, deleteUser);
 
 export default userRoutes;
