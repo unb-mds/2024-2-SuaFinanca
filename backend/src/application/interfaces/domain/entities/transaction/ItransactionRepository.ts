@@ -19,8 +19,20 @@ export interface CreateTransactionParamsWithCategoryName {
   date?: string;
 }
 
+export interface GetUserBalanceParams {
+  userId: number;
+  month: number;
+  year: number;
+}
+
 export interface ITransactionRepository {
   createTransaction(
     params: CreateTransactionParams,
   ): Promise<ITransactionWithId>;
+  findByUserIdAndMonthAndYearAndType(
+    userId: number,
+    month: number,
+    year: number,
+    type: TransactionType,
+  ): Promise<ITransactionWithId[]>;
 }
