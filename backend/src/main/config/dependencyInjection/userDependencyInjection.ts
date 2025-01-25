@@ -10,6 +10,8 @@ import { PrismaCategoryRepository } from "@/infrastructure/database/prisma/prism
 import { UserFactory } from "@/domain/factories/userFactory";
 import { DeleteUserUseCase } from "@/application/useCases/deleteUserUseCase";
 import { DeleteUserController } from "@/main/controllers/user/deleteUserController";
+import { UpdateUserUseCase } from "@/application/useCases/updateUserUseCase";
+import { UpdateUserController } from "@/main/controllers/user/updateUserController";
 
 // Auth
 const bcryptPassword = new BcryptPassword();
@@ -37,8 +39,17 @@ const loginUserUseCase = new LoginUserUseCase(
 );
 const loginUserController = new LoginUserController(loginUserUseCase);
 
+// Update
+const updateUserUseCase = new UpdateUserUseCase(prismaAuthUser, bcryptPassword);
+const updateUserController = new UpdateUserController(updateUserUseCase);
+
 // Delete
 const deleteUserUseCase = new DeleteUserUseCase(prismaAuthUser);
 const deleteUserController = new DeleteUserController(deleteUserUseCase);
 
-export { createUserController, loginUserController, deleteUserController };
+export {
+  createUserController,
+  loginUserController,
+  deleteUserController,
+  updateUserController,
+};
