@@ -15,14 +15,6 @@
 
 <!-- Descreva os testes realizados para verificar a correção ou funcionalidade. Inclua detalhes de ambientes, configurações e resultados. -->
 
-## Descrição dos commits
-
-<!-- Descreva cada commit presente nesta pull request. Seja específico sobre o que foi feito em cada commit. -->
-
-- **Commit 1**: Descrição do primeiro commit.
-- **Commit 2**: Descrição do segundo commit.
-- **Commit 3**: Descrição do terceiro commit.
-- [ ] (continue conforme necessário)
 
 ## Checklist
 
