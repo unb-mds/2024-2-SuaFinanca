@@ -8,6 +8,7 @@ import {
   createdRequest,
   serverError,
 } from "@/main/config/helpers/helpers";
+import { formatISO, parseISO } from "date-fns";
 
 import { CreateTransactionParams } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 import { CreateTransactionResponse } from "@/main/config/helpers/protocol/transaction/createTransactionProtocols";
@@ -36,9 +37,18 @@ export class CreateTransactionController implements IController {
         return badRequest(errorMessage);
       }
 
-      const newTransaction = await this.createTransactionUseCase.execute(
-        httpRequest.body!,
-      );
+      const { date, ...rest } = httpRequest.body!;
+
+      logger.debug(`date: ${date}`);
+      logger.debug(`parseISO: ${parseISO(date)}`);
+      logger.debug(`formatISO: ${formatISO(parseISO(date))}`);
+
+      const formattedDate = formatISO(parseISO(date));
+
+      const newTransaction = await this.createTransactionUseCase.execute({
+        ...rest,
+        date: formattedDate,
+      });
 
       if (typeof newTransaction === "string") {
         return badRequest(newTransaction);
