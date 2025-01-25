@@ -39,4 +39,3 @@ Content-Type: application/json
 DELETE {{BASE_URL}}/user/delete
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
-

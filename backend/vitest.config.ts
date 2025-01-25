@@ -13,7 +13,21 @@ export default defineConfig({
     include: ["**/*.spec.ts"],
     exclude: ["node_modules", "dist", "coverage"],
     coverage: {
-      exclude: ["node_modules", "dist"],
+      exclude: [
+        "node_modules",
+        "dist",
+        "vitest.config.ts",
+        "eslint.config.mjs",
+        "**/authUtils.ts",
+        "**/server.ts",
+        "**/routes/**",
+        "**/test/**",
+        "**/logs/**",
+        "**/middlewares/**",
+        "**/prisma/**",
+        "**/dependencyInjection/**",
+        "**/database/**",
+      ],
     },
   },
 });
