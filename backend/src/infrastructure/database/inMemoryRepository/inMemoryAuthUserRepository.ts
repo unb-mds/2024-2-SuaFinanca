@@ -6,22 +6,24 @@ import {
 import { IUserWithId } from "@/domain/entities/User";
 
 export class InMemoryAuthUserRepository implements IAuthUserRepository {
-  private users: any[] = [];
+  public users: IUserWithId[] = [];
 
   async createUser(params: CreateUserParams): Promise<IUserWithId> {
-    const newUser: IUserWithId = { id: this.users.length + 1, ...params };
+    const newUser: IUserWithId = {
+      id: this.users.length + 1,
+      balance: 0,
+      ...params,
+    };
     this.users.push(newUser);
     return newUser;
   }
 
   async findUserById(id: number): Promise<IUserWithId | null> {
-    const user = this.users.find((user) => user.id === id);
-    return user || null;
+    return this.users.find((user) => user.id === id) || null;
   }
 
   async findUserByEmail(email: string): Promise<IUserWithId | null> {
-    const user = this.users.find((user) => user.email === email);
-    return user || null;
+    return this.users.find((user) => user.email === email) || null;
   }
 
   async deleteUser(id: number): Promise<undefined> {
