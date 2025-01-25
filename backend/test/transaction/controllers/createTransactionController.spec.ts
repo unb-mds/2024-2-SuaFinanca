@@ -36,6 +36,7 @@ describe("CreateTransactionController", () => {
         type: TransactionType.INCOME,
         amount: 1000,
         userId: 1,
+        date: "2025-02-01",
       },
     };
 
@@ -60,6 +61,7 @@ describe("CreateTransactionController", () => {
         type: "INVALID_TYPE" as unknown as TransactionType,
         amount: 1000,
         userId: 1,
+        date: "2025-02-01",
       },
     };
 
@@ -73,6 +75,44 @@ describe("CreateTransactionController", () => {
     );
   });
 
+  it("should return bad request if date format is incorrect", async () => {
+    // Arrange
+    const httpRequest: HttpRequest<CreateTransactionParamsWithCategoryName> = {
+      body: {
+        type: TransactionType.INCOME,
+        amount: 1000,
+        userId: 1,
+        date: "01-02-2025",
+      },
+    };
+
+    // Act
+    const httpResponse = await createTransactionController.handle(httpRequest);
+
+    // Assert
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toBe("Date must be in the format YYYY-MM-DD");
+  });
+
+  it("should return bad request if data is empty", async () => {
+    // Arrange
+    const httpRequest: HttpRequest<CreateTransactionParamsWithCategoryName> = {
+      body: {
+        type: TransactionType.INCOME,
+        amount: 1000,
+        userId: 1,
+        date: "",
+      },
+    };
+
+    // Act
+    const httpResponse = await createTransactionController.handle(httpRequest);
+
+    // Assert
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toBe("Date must be in the format YYYY-MM-DD");
+  });
+
   it("should return bad request if category does not exist", async () => {
     // Arrange
     const httpRequest: HttpRequest<CreateTransactionParamsWithCategoryName> = {
@@ -81,6 +121,7 @@ describe("CreateTransactionController", () => {
         amount: 1000,
         userId: 1,
         categoryName: "Non-existent Category",
+        date: "2025-02-01",
       },
     };
 
@@ -99,6 +140,7 @@ describe("CreateTransactionController", () => {
         type: TransactionType.INCOME,
         amount: 1000,
         userId: 1,
+        date: "2025-02-01",
       },
     };
     vi.spyOn(createTransactionUseCase, "execute").mockRejectedValueOnce(
