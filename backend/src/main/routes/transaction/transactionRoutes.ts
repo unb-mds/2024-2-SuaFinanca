@@ -1,9 +1,11 @@
+import { createTransaction, getUserBalance } from "./transactionServiceRoutes";
+
 import { authMiddleware } from "@/main/middlewares/authMiddleware";
-import { createTransaction } from "./transactionServiceRoutes";
 import express from "express";
 
 const transactionRoutes = express.Router();
 
 transactionRoutes.post("/transaction", authMiddleware, createTransaction);
+transactionRoutes.get("/transaction/balance", authMiddleware, getUserBalance);
 
 export default transactionRoutes;

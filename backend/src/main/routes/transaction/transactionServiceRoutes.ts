@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
-
-import { createTransactionController } from "@/main/config/dependencyInjection/transactionDependencyInjection";
+import {
+  createTransactionController,
+  getUserBalanceController,
+} from "@/main/config/dependencyInjection/transactionDependencyInjection";
 
 export async function createTransaction(
   req: Request,
@@ -8,6 +10,17 @@ export async function createTransaction(
 ): Promise<void> {
   const { body, statusCode } = await createTransactionController.handle({
     body: { ...req.body, userId: req.userId },
+  });
+  res.status(statusCode).send(body);
+}
+
+export async function getUserBalance(
+  req: Request,
+  res: Response,
+): Promise<void> {
+  const { body, statusCode } = await getUserBalanceController.handle({
+    query: req.query,
+    userId: req.userId,
   });
   res.status(statusCode).send(body);
 }
