@@ -6,6 +6,7 @@ import {
   ITransactionWithId,
   TransactionType,
 } from "@/domain/entities/Transaction";
+import { endOfDay, startOfDay } from "date-fns";
 
 import { prisma } from "@/main/config/database/prisma";
 
@@ -51,13 +52,16 @@ export class PrismaTransactionRepository implements ITransactionRepository {
     year: number,
     type: TransactionType,
   ): Promise<ITransactionWithId[]> {
+    const startDate = startOfDay(new Date(year, month, 1));
+    const endDate = endOfDay(new Date(year, month + 1, 0));
+
     const transactions = await prisma.transaction.findMany({
       where: {
         userId,
         type,
         date: {
-          gte: new Date(year, month, 1),
-          lt: new Date(year, month + 1, 1),
+          gte: startDate,
+          lt: endDate,
         },
       },
     });
