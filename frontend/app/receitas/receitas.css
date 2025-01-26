@@ -20,7 +20,7 @@
   }
   
   .back-button {
-    color: #9163fa;
+    color: #4caf50;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@
   }
   
   .page-title {
-    color: #9163fa;
+    color: #4caf50;
     font-size: 1.5rem;
     margin: 0;
   }
@@ -48,16 +48,16 @@
   .month-nav-button {
     background: none;
     border: none;
-    color: #9163fa;
+    color: #4caf50;
     cursor: pointer;
     padding: 0.5rem;
   }
   
   .current-month {
     padding: 0.5rem 1rem;
-    border: 1px solid #9163fa;
+    border: 1px solid #4caf50;
     border-radius: 20px;
-    color: #9163fa;
+    color: #4caf50;
   }
   
   .table-container {
@@ -88,7 +88,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: #9163fa;
+    background: #4caf50;
     color: white;
     border: none;
     border-radius: 20px;
@@ -134,15 +134,15 @@
   }
   
   .up-arrow {
-    color: #9163fa;
+    color: #4caf50;
   }
   
   .down-arrow {
-    color: #9163fa;
+    color: #4caf50;
   }
   
   .balance {
-    color: #9163fa;
+    color: #4caf50;
   }
   
   
