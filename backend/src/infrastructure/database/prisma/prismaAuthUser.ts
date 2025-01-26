@@ -43,4 +43,16 @@ export class PrismaAuthUser implements IAuthUserRepository {
       },
     });
   }
+
+  async updateUser(params: UpdateUserParams): Promise<IUserWithId> {
+    const updatedUser = await prisma.user.update({
+      where: { id: params.id },
+      data: {
+        name: params.name,
+        email: params.email,
+        password: params.password,
+      },
+    });
+    return updatedUser;
+  }
 }

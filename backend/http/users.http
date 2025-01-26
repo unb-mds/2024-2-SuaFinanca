@@ -15,7 +15,7 @@ POST {{BASE_URL}}/user/login
 Content-Type: application/json
 
 {
-    "email": "john.doe@example.com",
+    "email": "jane.doe@example.com",
     "password": "default"
 }
 
@@ -23,6 +23,17 @@ Content-Type: application/json
 GET {{BASE_URL}}/user/protected
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
+
+###
+PATCH {{BASE_URL}}/user/update
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "password": "default"
+}
 
 ###
 DELETE {{BASE_URL}}/user/delete
