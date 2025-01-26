@@ -1,4 +1,4 @@
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTczNzY3ODE5MCwiZXhwIjoxNzM3NjgxNzkwfQ.IqydFkyGfXI5DfRmE18uGpswcykxVDM9FiJ31fRpE5E
+@TOKEN =
 @BASE_URL = http://localhost:8000
 
 ###
