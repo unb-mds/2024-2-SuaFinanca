@@ -1,0 +1,30 @@
+@TOKEN =
+@BASE_URL = http://localhost:8000
+
+POST {{BASE_URL}}/user
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "default"
+}
+
+###
+POST {{BASE_URL}}/user/login
+Content-Type: application/json
+
+{
+    "email": "john.doe@example.com",
+    "password": "default"
+}
+
+###
+GET {{BASE_URL}}/user/protected
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+###
+DELETE {{BASE_URL}}/user/delete
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
