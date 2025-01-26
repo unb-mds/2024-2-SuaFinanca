@@ -52,7 +52,7 @@ const months = [
                 <th>Valor</th>
               </tr>
             </thead>
-            <tbody>{/* Table content will be populated here */}</tbody>
+            <tbody></tbody>
           </table>
         </div>
 
