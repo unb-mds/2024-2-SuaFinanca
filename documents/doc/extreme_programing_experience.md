@@ -91,4 +91,4 @@ Para garantir eficiência e comunicação clara, a divisão de responsabilidades
 
 ## Conclusão
 
-A adaptação das práticas do XP para equipes pequenas exige flexibilidade e foco em comunicação constante. Este guia oferece um caminho prático para equilibrar as demandas e limitações das equipes backend e frontend, mantendo os princípios ágeis que tornam o XP eficiente.
+A adaptação das práticas do XP para equipes pequenas exige flexibilidade e foco em comunicação constante. Este guia oferece um caminho prático para equilibrar as demandas e limitações das equipes backend e frontend, mantendo os princípios ágeis que tornam o XP eficiente. Ademais, adicionando o contexto das equipes ao realizar o desenvolvimento deste software.
