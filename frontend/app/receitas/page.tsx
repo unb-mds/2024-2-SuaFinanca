@@ -28,7 +28,7 @@ export default function Despesas() {
           <Link href="/dashboard" className="back-button">
             <FaArrowLeft />
           </Link>
-          <h1 className="page-title">Despesas</h1>
+          <h1 className="page-title">receitas</h1>
         </div>
 
         <div className="month-selector">
@@ -57,7 +57,7 @@ export default function Despesas() {
         </div>
 
         <button className="new-button">
-          <FaPlus /> Nova Despesa
+          <FaPlus /> Nova Receita
         </button>
       </div>
 
@@ -68,12 +68,12 @@ export default function Despesas() {
           <div className="icon up-arrow">↑</div>
         </div>
         <div className="summary-card expenses">
-          <h3>Receitas</h3>
+          <h3>Receitas Recebidas</h3>
           <p className="amount">R$ 0,00</p>
           <div className="icon down-arrow">↓</div>
         </div>
         <div className="summary-card total">
-          <h3>Despesas</h3>
+          <h3>Total</h3>
           <p className="amount">R$ 0,00</p>
           <div className="icon balance">⚖</div>
         </div>
