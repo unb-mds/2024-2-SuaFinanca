@@ -81,4 +81,25 @@ export class PrismaTransactionRepository implements ITransactionRepository {
         date: transaction.date as Date,
       }));
   }
+
+  async findRecentTransactions(
+    userId: number,
+    limit: number,
+  ): Promise<ITransactionWithId[]> {
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        date: "desc",
+      },
+      take: limit,
+    });
+
+    return transactions.map((transaction) => ({
+      ...transaction,
+      type: transaction.type as unknown as TransactionType,
+      date: transaction.date as Date,
+    }));
+  }
 }
