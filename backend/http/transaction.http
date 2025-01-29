@@ -29,3 +29,8 @@ Content-Type: application/json
 GET {{BASE_URL}}/transaction/balance?month=01&year=2025
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
+
+###
+GET {{BASE_URL}}/transaction/summary?month=03&year=2025
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
