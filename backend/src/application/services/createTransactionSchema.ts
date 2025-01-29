@@ -9,7 +9,9 @@ const CreateTransactionSchema = z.object({
   amount: z.number().positive("Amount must be a positive number"),
   userId: z.number().int().positive("User ID must be a positive integer"),
   categoryName: z.string().optional(),
-  date: z.string().optional(),
+  date: z.string().refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
+    message: "Date must be in the format YYYY-MM-DD",
+  }),
 });
 
 export { CreateTransactionSchema };

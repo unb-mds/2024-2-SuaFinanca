@@ -2,6 +2,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
+  balance: number;
 }
 
 export interface IUserWithId {
@@ -9,6 +10,7 @@ export interface IUserWithId {
   name: string;
   email: string;
   password: string;
+  balance: number;
 }
 
 export class User {

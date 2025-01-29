@@ -9,5 +9,23 @@ Content-Type: application/json
 {
     "type": "INCOME",
     "amount": 1000,
-    "categoryName": "Salário"
+    "categoryName": "Salário",
+    "date": "2025-01-01"
 }
+
+###
+POST {{BASE_URL}}/transaction
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+    "type": "EXPENSE",
+    "amount": 1000,
+    "categoryName": "Salário",
+    "date": "2025-01-01"
+}
+
+###
+GET {{BASE_URL}}/transaction/balance?month=01&year=2025
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
