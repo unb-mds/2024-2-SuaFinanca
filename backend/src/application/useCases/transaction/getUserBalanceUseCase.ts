@@ -44,6 +44,8 @@ export class GetUserBalanceUseCase implements IGetUserBalanceUseCase {
         balance: user?.balance || 0,
         totalIncome,
         totalExpense,
+        incomeTransactions,
+        expenseTransactions,
       },
     };
   }
