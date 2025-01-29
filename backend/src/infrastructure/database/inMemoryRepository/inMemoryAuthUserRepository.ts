@@ -1,6 +1,7 @@
 import {
   CreateUserParams,
   IAuthUserRepository,
+  UpdateUserParams,
 } from "@/application/interfaces/domain/entities/user/IauthUser";
 
 import { IUserWithId } from "@/domain/entities/User";
@@ -32,5 +33,15 @@ export class InMemoryAuthUserRepository implements IAuthUserRepository {
       this.users.splice(index, 1);
     }
     return undefined;
+  }
+
+  async updateUser(params: UpdateUserParams): Promise<IUserWithId> {
+    const userIndex = this.users.findIndex((user) => user.id === params.id);
+    if (userIndex === -1) {
+      throw new Error("User not found.");
+    }
+    const updatedUser = { ...this.users[userIndex], ...params };
+    this.users[userIndex] = updatedUser;
+    return updatedUser;
   }
 }

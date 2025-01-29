@@ -59,6 +59,24 @@ describe("GetUserBalanceUseCase", () => {
         balance: 1500,
         totalIncome: 2000,
         totalExpense: 500,
+        incomeTransactions: [
+          {
+            id: 1,
+            userId: 1,
+            amount: 2000,
+            date: new Date("2025-02-01T03:00:00.000Z"),
+            type: TransactionType.INCOME,
+          },
+        ],
+        expenseTransactions: [
+          {
+            id: 2,
+            userId: 1,
+            amount: 500,
+            date: new Date("2025-02-10T03:00:00.000Z"),
+            type: TransactionType.EXPENSE,
+          },
+        ],
       },
     });
   });
@@ -88,6 +106,12 @@ describe("GetUserBalanceUseCase", () => {
         balance: 0,
         totalIncome: 0,
         totalExpense: 0,
+        incomeTransactions: [
+          // No transactions
+        ],
+        expenseTransactions: [
+          // No transactions
+        ],
       },
     });
   });
@@ -145,6 +169,38 @@ describe("GetUserBalanceUseCase", () => {
         balance: 1000,
         totalIncome: 1500,
         totalExpense: 500,
+        incomeTransactions: [
+          {
+            id: 1,
+            userId: 1,
+            amount: 1000,
+            date: new Date("2025-02-01T03:00:00.000Z"),
+            type: TransactionType.INCOME,
+          },
+          {
+            id: 2,
+            userId: 1,
+            amount: 500,
+            date: new Date("2025-02-05T03:00:00.000Z"),
+            type: TransactionType.INCOME,
+          },
+        ],
+        expenseTransactions: [
+          {
+            id: 3,
+            userId: 1,
+            amount: 300,
+            date: new Date("2025-02-10T03:00:00.000Z"),
+            type: TransactionType.EXPENSE,
+          },
+          {
+            id: 4,
+            userId: 1,
+            amount: 200,
+            date: new Date("2025-02-15T03:00:00.000Z"),
+            type: TransactionType.EXPENSE,
+          },
+        ],
       },
     });
   });
