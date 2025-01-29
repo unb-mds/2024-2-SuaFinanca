@@ -1,6 +1,8 @@
 import { CreateTransactionController } from "@/main/controllers/transaction/createTransactionController";
 import { CreateTransactionUseCase } from "@/application/useCases/transaction/createTransactionUseCase";
 import { GetCategoryService } from "@/application/services/getCategoryService";
+import { GetRecentTransactionsController } from "@/main/controllers/transaction/getRecentTransactionsController";
+import { GetRecentTransactionsUseCase } from "@/application/useCases/transaction/getRecentTransactionsUseCase";
 import { GetUserBalanceController } from "@/main/controllers/transaction/getUserBalanceController";
 import { GetUserBalanceUseCase } from "@/application/useCases/transaction/getUserBalanceUseCase";
 import { PrismaAuthUser } from "@/infrastructure/database/prisma/prismaAuthUser";
@@ -30,4 +32,15 @@ const getUserBalanceController = new GetUserBalanceController(
   getUserBalanceUseCase,
 );
 
-export { createTransactionController, getUserBalanceController };
+const getRecentTransactionsUseCase = new GetRecentTransactionsUseCase(
+  prismaTransactionRepository,
+);
+const getRecentTransactionsController = new GetRecentTransactionsController(
+  getRecentTransactionsUseCase,
+);
+
+export {
+  createTransactionController,
+  getUserBalanceController,
+  getRecentTransactionsController,
+};
