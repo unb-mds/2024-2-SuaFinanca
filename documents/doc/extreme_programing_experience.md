@@ -6,7 +6,7 @@ O Extreme Programming (XP) é uma metodologia ágil focada em entregas frequente
 
 ## Contexto das Equipes
 
-**Equipe Backend:** Composta por duas pessoas, sem a prática de programação em par, já que cada membro avança independentemente em funcionalidades diferentes para atender às demandas previstas na lista de requisitos. Nesse projeto, o Samuel implementa a criação de funcionalidades e gerenciamento de banco de dados, enquanto o Lucas Alves implementa a atualização e sistema de deletar essas funcionalidades aplicadas no projeto e mantém a documentação atualizada, como as sprints e outros documentos.
+**Equipe Backend:** Composta por duas pessoas, sem a prática de programação em par, já que cada membro avança independentemente em funcionalidades diferentes para atender às demandas previstas na lista de requisitos. Nesse projeto, o Samuel implementa a criação de funcionalidades, gerenciamento de banco de dados, mantendo a arquitetura organizada e garantindo que os padrões de projetos sejam seguidos, enquanto o Lucas Alves implementa a atualização e sistema de deletar essas funcionalidades aplicadas no projeto, além de mantém a documentação atualizada, como as sprints e outros documentos que fazem parte da composição do projeto.
 
 **Equipe Frontend:** Composta por três pessoas que trabalham em colaboração para a implementação das interfaces e interações com o backend.
 
