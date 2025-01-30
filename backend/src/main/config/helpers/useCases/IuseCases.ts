@@ -5,6 +5,7 @@ import {
 import {
   CreateTransactionParams,
   GetUserBalanceParams,
+  UpdateTransactionParams,
 } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 import {
   CreateUserParams,
@@ -23,6 +24,7 @@ import { GetUserBalanceReturn } from "../protocol/transaction/getUserBalanceProt
 import { UpdateCategoryReturn } from "../protocol/category/updateCategoryProtocols";
 import { UpdateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
 import { UpdateUserReturn } from "../protocol/user/updateUserProtocols";
+import { UpdateTransactionReturn } from "../protocol/transaction/updateTransactionProtocols";
 
 // User
 export interface ICreateUserUseCase {
@@ -67,4 +69,10 @@ export interface ICreateTransactionUseCase {
 
 export interface IGetUserBalanceUseCase {
   execute(params: GetUserBalanceParams): Promise<GetUserBalanceReturn>;
+}
+
+export interface IUpdateTransactionUseCase {
+  execute(
+    params: UpdateTransactionParams,
+  ): Promise<UpdateTransactionReturn | string>;
 }
