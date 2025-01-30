@@ -26,6 +26,18 @@ Content-Type: application/json
 }
 
 ###
+PATCH {{BASE_URL}}/transaction/update/
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+    "type": "EXPENSE",
+    "amount": 5000,
+    "categoryName": "Transporte",
+    "date": "2025-12-01"
+}
+
+###
 GET {{BASE_URL}}/transaction/balance?month=01&year=2025
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json

@@ -1,6 +1,7 @@
 import {
   CreateTransactionParams,
   ITransactionRepository,
+  UpdateTransactionParams,
 } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 import {
   ITransactionWithId,
@@ -80,5 +81,41 @@ export class PrismaTransactionRepository implements ITransactionRepository {
         type: transaction.type as unknown as TransactionType,
         date: transaction.date as Date,
       }));
+  }
+
+  async findByIdAndUserId(
+    id: number,
+    userId: number,
+  ): Promise<ITransactionWithId | null> {
+    const transaction = await prisma.transaction.findFirst({
+      where: { id, userId },
+    });
+    return transaction
+      ? {
+          ...transaction,
+          type: transaction.type as unknown as TransactionType,
+          date: transaction.date!,
+        }
+      : null;
+  }
+
+  async updateTransaction(
+    params: UpdateTransactionParams,
+  ): Promise<ITransactionWithId> {
+    const updatedTransaction = await prisma.transaction.update({
+      where: { id: params.id, userId: params.userId },
+      data: {
+        type: params.type,
+        amount: params.amount,
+        categoryId: params.categoryId,
+        date: params.date,
+      },
+    });
+
+    return {
+      ...updatedTransaction,
+      type: updatedTransaction.type as unknown as TransactionType,
+      date: updatedTransaction.date!,
+    };
   }
 }
