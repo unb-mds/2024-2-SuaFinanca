@@ -35,6 +35,7 @@ const getUserBalanceController = new GetUserBalanceController(
 // Update
 const updateTransactionUseCase = new UpdateTransactionUseCase(
   prismaTransactionRepository,
+  getCategoryService,
 );
 const updateTransactionController = new UpdateTransactionController(
   updateTransactionUseCase,
