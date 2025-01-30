@@ -32,6 +32,7 @@ export async function updateTransaction(
 ): Promise<void> {
   const { body, statusCode } = await updateTransactionController.handle({
     params: req.params,
+    userId: req.userId,
     body: req.body,
   });
   res.status(statusCode).send(body);
