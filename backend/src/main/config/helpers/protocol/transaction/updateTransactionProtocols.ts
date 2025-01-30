@@ -2,9 +2,8 @@ export interface UpdateTransactionReturn {
   transaction: {
     type: string;
     amount: number;
-    userId: number;
-    categoryId?: number;
-    date: string;
+    categoryName?: string;
+    date: Date;
   };
 }
 
@@ -13,8 +12,7 @@ export interface UpdateTransactionResponse {
   transaction: {
     type: string;
     amount: number;
-    userId: number;
-    categoryId?: number;
-    date: string;
+    categoryName?: string;
+    date: Date;
   };
 }
