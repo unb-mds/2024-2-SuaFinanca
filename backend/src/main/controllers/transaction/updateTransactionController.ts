@@ -8,11 +8,13 @@ import {
   niceRequest,
   serverError,
 } from "@/main/config/helpers/helpers";
+import { formatISO, parseISO } from "date-fns";
 
 import { IUpdateTransactionUseCase } from "@/main/config/helpers/useCases/IuseCases";
-import { UpdateTransactionParams } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
+import { TransactionType } from "@/domain/entities/Transaction";
 import { UpdateTransactionResponse } from "@/main/config/helpers/protocol/transaction/updateTransactionProtocols";
 import { UpdateTransactionSchema } from "@/application/services/updateTransactionSchema";
+import { UpdateTransactionWithCategoryNameParams } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 import { log } from "@/main/config/logs/log";
 
 const logger = log("UpdateTransactionController");
@@ -23,10 +25,24 @@ export class UpdateTransactionController implements IController {
   ) {}
 
   async handle(
-    httpRequest: HttpRequest<UpdateTransactionParams>,
+    httpRequest: HttpRequest<UpdateTransactionWithCategoryNameParams>,
   ): Promise<HttpResponse<UpdateTransactionResponse | string>> {
     try {
-      const parsedData = UpdateTransactionSchema.safeParse(httpRequest.body);
+      let formattedDate;
+      const id = Number(httpRequest.params.id);
+      const userId = httpRequest.userId;
+      const { amount, date, type, categoryName } = httpRequest.body!;
+
+      logger.info(`Update transaction request: ${JSON.stringify(httpRequest)}`);
+
+      const parsedData = UpdateTransactionSchema.safeParse({
+        id,
+        amount,
+        date,
+        type,
+        userId,
+        categoryName,
+      });
 
       if (!parsedData.success) {
         const errorMessage = parsedData.error.errors
@@ -35,9 +51,15 @@ export class UpdateTransactionController implements IController {
         return badRequest(errorMessage);
       }
 
-      const updatedTransaction = await this.updateTransactionUseCase.execute(
-        httpRequest.body!,
-      );
+      if (parsedData.data.date) {
+        formattedDate = formatISO(parseISO(date!));
+      }
+
+      const updatedTransaction = await this.updateTransactionUseCase.execute({
+        ...parsedData.data,
+        type: parsedData.data.type as TransactionType,
+        date: formattedDate,
+      });
 
       if (typeof updatedTransaction === "string") {
         return badRequest(updatedTransaction);
@@ -48,6 +70,8 @@ export class UpdateTransactionController implements IController {
         transaction: {
           type: updatedTransaction.transaction.type,
           amount: updatedTransaction.transaction.amount,
+          categoryName: updatedTransaction.transaction.categoryName,
+          date: updatedTransaction.transaction.date,
         },
       };
 
