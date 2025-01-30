@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   createTransactionController,
   getUserBalanceController,
+  updateTransactionController,
 } from "@/main/config/dependencyInjection/transactionDependencyInjection";
 
 export async function createTransaction(
@@ -21,6 +22,17 @@ export async function getUserBalance(
   const { body, statusCode } = await getUserBalanceController.handle({
     query: req.query,
     userId: req.userId,
+  });
+  res.status(statusCode).send(body);
+}
+
+export async function updateTransaction(
+  req: Request,
+  res: Response,
+): Promise<void> {
+  const { body, statusCode } = await updateTransactionController.handle({
+    params: req.params,
+    body: req.body,
   });
   res.status(statusCode).send(body);
 }
