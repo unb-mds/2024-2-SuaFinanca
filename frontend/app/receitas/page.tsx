@@ -56,9 +56,9 @@ export default function Despesas() {
           </table>
         </div>
 
-        <button className="new-button">
-          <FaPlus /> Nova Receita
-        </button>
+        <Link href="/receitas/nova" className="new-button">
+            <FaPlus /> Nova Receita
+          </Link>
       </div>
 
       <div className="summary-cards">
