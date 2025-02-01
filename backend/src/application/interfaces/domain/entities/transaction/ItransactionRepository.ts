@@ -49,7 +49,7 @@ export interface ITransactionRepository {
   ): Promise<ITransactionWithId>;
   updateTransaction(
     params: UpdateTransactionParams,
-  ): Promise<ITransactionWithId>;
+  ): Promise<ITransactionWithId | null>;
   findByUserIdAndMonthAndYearAndType(
     userId: number,
     month: number,

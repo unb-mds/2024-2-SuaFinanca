@@ -101,7 +101,15 @@ export class PrismaTransactionRepository implements ITransactionRepository {
 
   async updateTransaction(
     params: UpdateTransactionParams,
-  ): Promise<ITransactionWithId> {
+  ): Promise<ITransactionWithId | null> {
+    const existingTransaction = await prisma.transaction.findUnique({
+      where: { id: params.id },
+    });
+
+    if (!existingTransaction) {
+      return null;
+    }
+
     const updatedTransaction = await prisma.transaction.update({
       where: { id: params.id, userId: params.userId },
       data: {
@@ -111,6 +119,31 @@ export class PrismaTransactionRepository implements ITransactionRepository {
         date: params.date,
       },
     });
+
+    const user = await prisma.user.findUnique({
+      where: { id: params.userId },
+    });
+
+    if (user) {
+      let newBalance = user.balance;
+
+      if (existingTransaction.type === TransactionType.INCOME) {
+        newBalance -= existingTransaction.amount;
+      } else {
+        newBalance += existingTransaction.amount;
+      }
+
+      if (updatedTransaction.type === TransactionType.INCOME) {
+        newBalance += updatedTransaction.amount;
+      } else {
+        newBalance -= updatedTransaction.amount;
+      }
+
+      await prisma.user.update({
+        where: { id: params.userId },
+        data: { balance: newBalance },
+      });
+    }
 
     return {
       ...updatedTransaction,
