@@ -1,6 +1,7 @@
 import {
   CreateTransactionParams,
   ITransactionRepository,
+  UpdateTransactionParams,
 } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 import {
   ITransactionWithId,
@@ -52,5 +53,40 @@ export class InMemoryTransactionRepository implements ITransactionRepository {
         transaction.date.getMonth() === month &&
         transaction.date.getFullYear() === year,
     );
+  }
+
+  async findByIdAndUserId(
+    id: number,
+    userId: number,
+  ): Promise<ITransactionWithId | null> {
+    const transaction = this.transactions.find(
+      (transaction) => transaction.id === id && transaction.userId === userId,
+    );
+    return transaction || null;
+  }
+
+  async updateTransaction(
+    params: UpdateTransactionParams,
+  ): Promise<ITransactionWithId> {
+    const transactionIndex = this.transactions.findIndex(
+      (transaction) =>
+        transaction.id === params.id && transaction.userId === params.userId,
+    );
+
+    if (transactionIndex === -1) {
+      throw new Error("Transaction not found.");
+    }
+
+    const updatedTransaction = {
+      ...this.transactions[transactionIndex],
+      ...params,
+      date: params.date
+        ? new Date(params.date)
+        : this.transactions[transactionIndex].date,
+    };
+
+    this.transactions[transactionIndex] = updatedTransaction;
+
+    return updatedTransaction;
   }
 }
