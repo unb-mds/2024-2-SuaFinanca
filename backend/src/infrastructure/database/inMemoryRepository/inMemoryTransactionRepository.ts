@@ -89,4 +89,16 @@ export class InMemoryTransactionRepository implements ITransactionRepository {
 
     return updatedTransaction;
   }
+
+  async deleteTransaction(id: number, userId: number): Promise<void> {
+    const transactionIndex = this.transactions.findIndex(
+      (transaction) => transaction.id === id && transaction.userId === userId,
+    );
+
+    if (transactionIndex === -1) {
+      throw new Error("Transaction not found.");
+    }
+
+    this.transactions.splice(transactionIndex, 1);
+  }
 }
