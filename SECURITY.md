@@ -4,7 +4,7 @@
 
 The security of the "Sua Finança" project is a priority for us. If you find a security vulnerability, please follow the steps below to report it:
 
-1. **Send an Email**: Report the vulnerability by sending an email to [your-email@domain.com]. Include as many details as possible, such as:
+1. **Send an Email**: Report the vulnerability by sending an email to [lucasalves2005gmail.com]. Include as many details as possible, such as:
    - Description of the vulnerability.
    - Steps to reproduce the issue.
    - Potential impact of the vulnerability.
@@ -26,4 +26,4 @@ To ensure the ongoing security of the project, we follow these practices:
 
 ## Contact
 
-If you have any questions or concerns about the security of the project, please contact us at [your-email@domain.com].
+If you have any questions or concerns about the security of the project, please contact us at [lucasalves2005@gmail.com].

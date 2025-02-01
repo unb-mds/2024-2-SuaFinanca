@@ -27,6 +27,16 @@ export class InMemoryAuthUserRepository implements IAuthUserRepository {
     return this.users.find((user) => user.email === email) || null;
   }
 
+  async updateUser(params: UpdateUserParams): Promise<IUserWithId> {
+    const index = this.users.findIndex((user) => user.id === params.id);
+    if (index === -1) {
+      throw new Error("User not found");
+    }
+    const updatedUser = { ...this.users[index], ...params };
+    this.users[index] = updatedUser;
+    return updatedUser;
+  }
+
   async deleteUser(id: number): Promise<undefined> {
     const index = this.users.findIndex((user) => user.id === id);
     if (index !== -1) {

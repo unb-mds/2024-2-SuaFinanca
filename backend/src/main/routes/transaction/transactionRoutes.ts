@@ -2,6 +2,7 @@ import {
   createTransaction,
   getUserBalance,
   getUserBalanceSummary,
+  updateTransaction,
 } from "./transactionServiceRoutes";
 
 import { authMiddleware } from "@/main/middlewares/authMiddleware";
@@ -15,6 +16,10 @@ transactionRoutes.get(
   "/transaction/summary",
   authMiddleware,
   getUserBalanceSummary,
+transactionRoutes.patch(
+  "/transaction/update/:id",
+  authMiddleware,
+  updateTransaction,
 );
 
 export default transactionRoutes;
