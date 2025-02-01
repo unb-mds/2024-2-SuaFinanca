@@ -76,3 +76,7 @@ export interface IUpdateTransactionUseCase {
     params: UpdateTransactionWithCategoryNameParams,
   ): Promise<UpdateTransactionReturn | string>;
 }
+
+export interface IDeleteTransactionUseCase {
+  execute(transactionId: number, userId: number): Promise<void | string>;
+}
