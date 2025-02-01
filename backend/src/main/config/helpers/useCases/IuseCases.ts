@@ -6,6 +6,7 @@ import {
   CreateTransactionParams,
   GetRecentTransactionsParams,
   GetUserBalanceParams,
+  UpdateTransactionWithCategoryNameParams,
 } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 import {
   CreateUserParams,
@@ -23,6 +24,7 @@ import { GetCategoryByUserIdReturn } from "@/main/config/helpers/protocol/catego
 import { GetRecentTransactionsReturn } from "../protocol/transaction/getRecentTransactionsProtocols";
 import { GetUserBalanceReturn } from "../protocol/transaction/getUserBalanceProtocols";
 import { UpdateCategoryReturn } from "../protocol/category/updateCategoryProtocols";
+import { UpdateTransactionReturn } from "../protocol/transaction/updateTransactionProtocols";
 import { UpdateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
 import { UpdateUserReturn } from "../protocol/user/updateUserProtocols";
 
@@ -71,8 +73,15 @@ export interface IGetUserBalanceUseCase {
   execute(params: GetUserBalanceParams): Promise<GetUserBalanceReturn>;
 }
 
+
 export interface IGetRecentTransactionsUseCase {
   execute(
     params: GetRecentTransactionsParams,
   ): Promise<GetRecentTransactionsReturn>;
+
+export interface IUpdateTransactionUseCase {
+  execute(
+    params: UpdateTransactionWithCategoryNameParams,
+  ): Promise<UpdateTransactionReturn | string>;
+
 }

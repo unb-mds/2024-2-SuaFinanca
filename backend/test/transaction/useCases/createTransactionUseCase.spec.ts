@@ -29,6 +29,7 @@ describe("CreateTransactionUseCase", () => {
       type: TransactionType.INCOME,
       amount: 1000,
       userId: 1,
+      date: "01-02-2025",
     };
 
     // Act
@@ -52,6 +53,7 @@ describe("CreateTransactionUseCase", () => {
       amount: 1000,
       userId: 1,
       categoryName: "Salary",
+      date: "01-02-2025",
     };
 
     // Act
@@ -73,6 +75,7 @@ describe("CreateTransactionUseCase", () => {
       amount: 1000,
       userId: 1,
       categoryName: "Non-existent Category",
+      date: "01-02-2025",
     };
 
     // Act

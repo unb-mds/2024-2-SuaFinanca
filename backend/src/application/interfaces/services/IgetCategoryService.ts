@@ -5,4 +5,8 @@ export interface IGetCategoryService {
     name: string,
     userId: number,
   ): Promise<ICategoryWithId | null>;
+  getCategoryByIdAndUserId(
+    id: number,
+    userId: number,
+  ): Promise<ICategoryWithId | null>;
 }

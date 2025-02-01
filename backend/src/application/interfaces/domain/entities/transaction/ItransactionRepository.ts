@@ -19,6 +19,24 @@ export interface CreateTransactionParamsWithCategoryName {
   date: string;
 }
 
+export interface UpdateTransactionWithCategoryNameParams {
+  id: number;
+  userId: number;
+  type?: TransactionType;
+  amount?: number;
+  categoryName?: string | null;
+  date?: string;
+}
+
+export interface UpdateTransactionParams {
+  id: number;
+  userId: number;
+  type?: TransactionType;
+  amount?: number;
+  categoryId?: number | null;
+  date?: string;
+}
+
 export interface GetUserBalanceParams {
   userId: number;
   month: number;
@@ -34,6 +52,9 @@ export interface ITransactionRepository {
   createTransaction(
     params: CreateTransactionParams,
   ): Promise<ITransactionWithId>;
+  updateTransaction(
+    params: UpdateTransactionParams,
+  ): Promise<ITransactionWithId | null>;
   findByUserIdAndMonthAndYearAndType(
     userId: number,
     month: number,
@@ -44,4 +65,8 @@ export interface ITransactionRepository {
     userId: number,
     limit: number,
   ): Promise<ITransactionWithId[]>;
+  findByIdAndUserId(
+    id: number,
+    userId: number,
+  ): Promise<ITransactionWithId | null>;
 }

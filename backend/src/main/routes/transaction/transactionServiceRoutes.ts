@@ -3,6 +3,7 @@ import {
   createTransactionController,
   getRecentTransactionsController,
   getUserBalanceController,
+  updateTransactionController,
 } from "@/main/config/dependencyInjection/transactionDependencyInjection";
 
 export async function createTransaction(
@@ -33,6 +34,15 @@ export async function getRecentTransactions(
   const { body, statusCode } = await getRecentTransactionsController.handle({
     userId: req.userId,
     query: req.query,
+    
+export async function updateTransaction(
+  req: Request,
+  res: Response,
+): Promise<void> {
+  const { body, statusCode } = await updateTransactionController.handle({
+    params: req.params,
+    userId: req.userId,
+    body: req.body,
   });
   res.status(statusCode).send(body);
 }

@@ -1,6 +1,7 @@
 import {
   CreateUserParams,
   IAuthUserRepository,
+  UpdateUserParams,
 } from "@/application/interfaces/domain/entities/user/IauthUser";
 
 import { IUserWithId } from "@/domain/entities/User";
