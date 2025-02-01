@@ -1,6 +1,7 @@
 import {
   CreateUserParams,
   IAuthUserRepository,
+  UpdateUserParams,
 } from "@/application/interfaces/domain/entities/user/IauthUser";
 
 import { IUserWithId } from "@/domain/entities/User";
@@ -24,6 +25,16 @@ export class InMemoryAuthUserRepository implements IAuthUserRepository {
 
   async findUserByEmail(email: string): Promise<IUserWithId | null> {
     return this.users.find((user) => user.email === email) || null;
+  }
+
+  async updateUser(params: UpdateUserParams): Promise<IUserWithId> {
+    const index = this.users.findIndex((user) => user.id === params.id);
+    if (index === -1) {
+      throw new Error("User not found");
+    }
+    const updatedUser = { ...this.users[index], ...params };
+    this.users[index] = updatedUser;
+    return updatedUser;
   }
 
   async deleteUser(id: number): Promise<undefined> {
