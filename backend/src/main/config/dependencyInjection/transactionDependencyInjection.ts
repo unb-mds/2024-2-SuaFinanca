@@ -1,5 +1,7 @@
 import { CreateTransactionController } from "@/main/controllers/transaction/createTransactionController";
 import { CreateTransactionUseCase } from "@/application/useCases/transaction/createTransactionUseCase";
+import { DeleteTransactionController } from "@/main/controllers/transaction/deleteTransactionController";
+import { DeleteTransactionUseCase } from "@/application/useCases/transaction/deleteTransactionUseCase";
 import { GetCategoryService } from "@/application/services/getCategoryService";
 import { GetRecentTransactionsController } from "@/main/controllers/transaction/getRecentTransactionsController";
 import { GetRecentTransactionsUseCase } from "@/application/useCases/transaction/getRecentTransactionsUseCase";
@@ -57,10 +59,20 @@ const updateTransactionController = new UpdateTransactionController(
   updateTransactionUseCase,
 );
 
+// Delete
+const deleteTransactionUseCase = new DeleteTransactionUseCase(
+  prismaTransactionRepository,
+  getCategoryService,
+);
+const deleteTransactionController = new DeleteTransactionController(
+  deleteTransactionUseCase,
+);
+
 export {
   createTransactionController,
   getUserBalanceController,
   getUserBalanceSummaryController,
   getRecentTransactionsController,
   updateTransactionController,
+  deleteTransactionController,
 };

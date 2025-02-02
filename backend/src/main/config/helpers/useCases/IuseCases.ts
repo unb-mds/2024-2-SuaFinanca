@@ -19,6 +19,7 @@ import {
 
 import { CreateCategoryReturn } from "@/main/config/helpers/protocol/category/createCategoryProtocols";
 import { CreateTransactionReturn } from "../protocol/transaction/createTransactionProtocols";
+import { DeleteTransactionReturn } from "../protocol/transaction/deleteTransactionProtocols";
 import { DeleteUserReturn } from "../protocol/user/deleteUserProtocols";
 import { GetCategoryByUserIdReturn } from "@/main/config/helpers/protocol/category/getCategoryProtocols";
 import { GetRecentTransactionsReturn } from "../protocol/transaction/getRecentTransactionsProtocols";
@@ -83,4 +84,11 @@ export interface IUpdateTransactionUseCase {
   execute(
     params: UpdateTransactionWithCategoryNameParams,
   ): Promise<UpdateTransactionReturn | string>;
+}
+
+export interface IDeleteTransactionUseCase {
+  execute(
+    transactionId: number,
+    userId: number,
+  ): Promise<DeleteTransactionReturn | string>;
 }

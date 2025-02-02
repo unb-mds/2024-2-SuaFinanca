@@ -1,5 +1,6 @@
 import {
   createTransaction,
+  deleteTransaction,
   getRecentTransactions,
   getUserBalance,
   getUserBalanceSummary,
@@ -27,6 +28,11 @@ transactionRoutes.patch(
   "/transaction/update/:id",
   authMiddleware,
   updateTransaction,
+);
+transactionRoutes.delete(
+  "/transaction/delete/:id",
+  authMiddleware,
+  deleteTransaction,
 );
 
 export default transactionRoutes;

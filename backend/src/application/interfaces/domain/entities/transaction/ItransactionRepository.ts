@@ -65,6 +65,7 @@ export interface ITransactionRepository {
     userId: number,
     limit: number,
   ): Promise<ITransactionWithId[]>;
+  deleteTransaction(id: number, userId: number): Promise<void>;
   findByIdAndUserId(
     id: number,
     userId: number,
