@@ -1,0 +1,129 @@
+.page-container {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+  }
+  
+  .content-area {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .header-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .back-button {
+    color: #4caf50;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.1);
+  }
+  
+  .page-title {
+    color: #4caf50;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .month-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .month-nav-button {
+    background: none;
+    border: none;
+    color: #4caf50;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  
+  .current-month {
+    padding: 0.5rem 1rem;
+    border: 1px solid #4caf50;
+    border-radius: 20px;
+    color: #4caf50;
+  }
+  
+  .charts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .summary-charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .chart-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .chart-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+  }
+  
+  .chart-card canvas {
+    max-width: 250px;
+    max-height: 250px;
+  }
+  
+  .download-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0 auto;
+  }
+  
+  .download-button:hover {
+    background: #43a047;
+  }
+  
+  @media (max-width: 768px) {
+    .charts-grid,
+    .summary-charts {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  

@@ -43,6 +43,11 @@ export interface GetUserBalanceParams {
   year: number;
 }
 
+export interface GetRecentTransactionsParams {
+  userId: number;
+  limit: number;
+}
+
 export interface ITransactionRepository {
   createTransaction(
     params: CreateTransactionParams,
@@ -55,6 +60,10 @@ export interface ITransactionRepository {
     month: number,
     year: number,
     type: TransactionType,
+  ): Promise<ITransactionWithId[]>;
+  findRecentTransactions(
+    userId: number,
+    limit: number,
   ): Promise<ITransactionWithId[]>;
   deleteTransaction(id: number, userId: number): Promise<void>;
   findByIdAndUserId(

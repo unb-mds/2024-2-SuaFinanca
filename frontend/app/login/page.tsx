@@ -24,7 +24,7 @@ const Login = () => {
       localStorage.setItem("token", token)
       localStorage.setItem("username", name)
 
-      router.push("/dashboard")
+      window.location.href = "/dashboard";
     } catch (err) {
       setError("Credenciais inválidas!")
     }
