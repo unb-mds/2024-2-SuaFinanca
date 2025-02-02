@@ -44,14 +44,4 @@ export class InMemoryAuthUserRepository implements IAuthUserRepository {
     }
     return undefined;
   }
-
-  async updateUser(params: UpdateUserParams): Promise<IUserWithId> {
-    const userIndex = this.users.findIndex((user) => user.id === params.id);
-    if (userIndex === -1) {
-      throw new Error("User not found.");
-    }
-    const updatedUser = { ...this.users[userIndex], ...params };
-    this.users[userIndex] = updatedUser;
-    return updatedUser;
-  }
 }
