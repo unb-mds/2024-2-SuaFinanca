@@ -19,3 +19,10 @@ export interface ITransactionWithId {
   categoryId?: number | null;
   date: Date;
 }
+
+export interface ITransactionSummary {
+  type: TransactionType;
+  amount: number;
+  categoryId?: number | null;
+  date: Date;
+}
