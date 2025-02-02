@@ -1,6 +1,8 @@
 import { CreateTransactionController } from "@/main/controllers/transaction/createTransactionController";
 import { CreateTransactionUseCase } from "@/application/useCases/transaction/createTransactionUseCase";
 import { GetCategoryService } from "@/application/services/getCategoryService";
+import { GetRecentTransactionsController } from "@/main/controllers/transaction/getRecentTransactionsController";
+import { GetRecentTransactionsUseCase } from "@/application/useCases/transaction/getRecentTransactionsUseCase";
 import { GetUserBalanceController } from "@/main/controllers/transaction/getUserBalanceController";
 import { GetUserBalanceSummaryController } from "@/main/controllers/transaction/getUserBalanceSummaryController";
 import { GetUserBalanceUseCase } from "@/application/useCases/transaction/getUserBalanceUseCase";
@@ -33,6 +35,14 @@ const getUserBalanceController = new GetUserBalanceController(
   getUserBalanceUseCase,
 );
 
+// GetRecentTransactions
+const getRecentTransactionsUseCase = new GetRecentTransactionsUseCase(
+  prismaTransactionRepository,
+);
+const getRecentTransactionsController = new GetRecentTransactionsController(
+  getRecentTransactionsUseCase,
+);
+
 // GetBalanceSummary
 const getUserBalanceSummaryController = new GetUserBalanceSummaryController(
   getUserBalanceUseCase,
@@ -51,5 +61,6 @@ export {
   createTransactionController,
   getUserBalanceController,
   getUserBalanceSummaryController,
+  getRecentTransactionsController,
   updateTransactionController,
 };

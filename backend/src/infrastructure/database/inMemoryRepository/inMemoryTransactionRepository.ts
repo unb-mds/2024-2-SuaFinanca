@@ -54,6 +54,16 @@ export class InMemoryTransactionRepository implements ITransactionRepository {
         transaction.date.getFullYear() === year,
     );
   }
+  async findRecentTransactions(
+    userId: number,
+    limit: number,
+  ): Promise<ITransactionWithId[]> {
+    const userTransactions = this.transactions
+      .filter((transaction) => transaction.userId === userId)
+      .sort((a, b) => b.date.getTime() - a.date.getTime());
+
+    return userTransactions.slice(0, limit);
+  }
 
   async findByIdAndUserId(
     id: number,
@@ -86,7 +96,6 @@ export class InMemoryTransactionRepository implements ITransactionRepository {
     };
 
     this.transactions[transactionIndex] = updatedTransaction;
-
     return updatedTransaction;
   }
 }

@@ -1,5 +1,6 @@
 import {
   createTransaction,
+  getRecentTransactions,
   getUserBalance,
   getUserBalanceSummary,
   updateTransaction,
@@ -16,6 +17,11 @@ transactionRoutes.get(
   "/transaction/summary",
   authMiddleware,
   getUserBalanceSummary,
+);
+transactionRoutes.get(
+  "/transaction/recent",
+  authMiddleware,
+  getRecentTransactions,
 );
 transactionRoutes.patch(
   "/transaction/update/:id",
