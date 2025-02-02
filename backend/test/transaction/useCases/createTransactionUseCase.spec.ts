@@ -30,7 +30,6 @@ describe("CreateTransactionUseCase", () => {
       amount: 1000,
       userId: 1,
       date: new Date().toISOString(),
-      date: "01-02-2025",
     };
 
     // Act
@@ -55,7 +54,6 @@ describe("CreateTransactionUseCase", () => {
       userId: 1,
       categoryName: "Salary",
       date: new Date().toISOString(),
-      date: "01-02-2025",
     };
 
     // Act
@@ -78,7 +76,6 @@ describe("CreateTransactionUseCase", () => {
       userId: 1,
       categoryName: "Non-existent Category",
       date: new Date().toISOString(),
-      date: "01-02-2025",
     };
 
     // Act
