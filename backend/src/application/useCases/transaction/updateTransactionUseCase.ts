@@ -55,6 +55,10 @@ export class UpdateTransactionUseCase implements IUpdateTransactionUseCase {
         date: params.date ?? existingTransaction.date.toISOString(),
       });
 
+    if (!updatedTransaction) {
+      return "Transaction update failed";
+    }
+
     let categoryName: string | undefined;
 
     if (updatedTransaction.categoryId) {
