@@ -1,5 +1,7 @@
 import { CreateTransactionController } from "@/main/controllers/transaction/createTransactionController";
 import { CreateTransactionUseCase } from "@/application/useCases/transaction/createTransactionUseCase";
+import { DeleteTransactionController } from "@/main/controllers/transaction/deleteTransactionController";
+import { DeleteTransactionUseCase } from "@/application/useCases/transaction/deleteTransactionUseCase";
 import { GetCategoryService } from "@/application/services/getCategoryService";
 import { GetUserBalanceController } from "@/main/controllers/transaction/getUserBalanceController";
 import { GetUserBalanceUseCase } from "@/application/useCases/transaction/getUserBalanceUseCase";
@@ -8,8 +10,6 @@ import { PrismaCategoryRepository } from "@/infrastructure/database/prisma/prism
 import { PrismaTransactionRepository } from "@/infrastructure/database/prisma/prismaTransactionRepository";
 import { UpdateTransactionController } from "@/main/controllers/transaction/updateTransactionController";
 import { UpdateTransactionUseCase } from "@/application/useCases/transaction/updateTransactionUseCase";
-import { DeleteTransactionUseCase } from "@/application/useCases/transaction/deleteTransactionUseCase";
-import { DeleteTransactionController } from "@/main/controllers/transaction/deleteTransactionController";
 
 const prismaTransactionRepository = new PrismaTransactionRepository();
 const prismaCategoryRepository = new PrismaCategoryRepository();
@@ -46,6 +46,7 @@ const updateTransactionController = new UpdateTransactionController(
 // Delete
 const deleteTransactionUseCase = new DeleteTransactionUseCase(
   prismaTransactionRepository,
+  getCategoryService,
 );
 const deleteTransactionController = new DeleteTransactionController(
   deleteTransactionUseCase,
