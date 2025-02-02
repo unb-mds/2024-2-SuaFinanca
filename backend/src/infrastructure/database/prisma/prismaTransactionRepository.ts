@@ -152,38 +152,34 @@ export class PrismaTransactionRepository implements ITransactionRepository {
     };
   }
 
-  async deleteTransaction(id: number, userId: number): Promise<boolean> {
+  async deleteTransaction(id: number, userId: number): Promise<void> {
     const existingTransaction = await prisma.transaction.findUnique({
       where: { id },
     });
 
-    if (!existingTransaction) {
-      return false;
-    }
-
-    await prisma.transaction.delete({
-      where: { id },
-    });
-
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-    });
-
-    if (user) {
-      let newBalance = user.balance;
-
-      if (existingTransaction.type === TransactionType.INCOME) {
-        newBalance -= existingTransaction.amount;
-      } else {
-        newBalance += existingTransaction.amount;
-      }
-
-      await prisma.user.update({
-        where: { id: userId },
-        data: { balance: newBalance },
+    if (existingTransaction) {
+      await prisma.transaction.delete({
+        where: { id },
       });
-    }
 
-    return true;
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+      });
+
+      if (user) {
+        let newBalance = user.balance;
+
+        if (existingTransaction.type === TransactionType.INCOME) {
+          newBalance -= existingTransaction.amount;
+        } else {
+          newBalance += existingTransaction.amount;
+        }
+
+        await prisma.user.update({
+          where: { id: userId },
+          data: { balance: newBalance },
+        });
+      }
+    }
   }
 }
