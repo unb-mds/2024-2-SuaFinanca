@@ -18,6 +18,7 @@ import {
 
 import { CreateCategoryReturn } from "@/main/config/helpers/protocol/category/createCategoryProtocols";
 import { CreateTransactionReturn } from "../protocol/transaction/createTransactionProtocols";
+import { DeleteTransactionReturn } from "../protocol/transaction/deleteTransactionProtocols";
 import { DeleteUserReturn } from "../protocol/user/deleteUserProtocols";
 import { GetCategoryByUserIdReturn } from "@/main/config/helpers/protocol/category/getCategoryProtocols";
 import { GetUserBalanceReturn } from "../protocol/transaction/getUserBalanceProtocols";
@@ -78,5 +79,8 @@ export interface IUpdateTransactionUseCase {
 }
 
 export interface IDeleteTransactionUseCase {
-  execute(transactionId: number, userId: number): Promise<void | string>;
+  execute(
+    transactionId: number,
+    userId: number,
+  ): Promise<DeleteTransactionReturn | string>;
 }

@@ -1,8 +1,18 @@
-export interface DeleteTransactionRequest {
-  transactionId: string;
+export interface DeleteTransactionReturn {
+  transaction: {
+    type: string;
+    amount: number;
+    categoryName?: string;
+    date: Date;
+  };
 }
 
 export interface DeleteTransactionResponse {
-  success: boolean;
-  message?: string;
+  message: string;
+  transaction: {
+    type: string;
+    amount: number;
+    categoryName?: string;
+    date: Date;
+  };
 }
