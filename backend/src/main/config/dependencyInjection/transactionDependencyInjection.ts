@@ -39,6 +39,7 @@ const getRecentTransactionsUseCase = new GetRecentTransactionsUseCase(
 );
 const getRecentTransactionsController = new GetRecentTransactionsController(
   getRecentTransactionsUseCase,
+);
 
 // Update
 const updateTransactionUseCase = new UpdateTransactionUseCase(
@@ -47,7 +48,6 @@ const updateTransactionUseCase = new UpdateTransactionUseCase(
 );
 const updateTransactionController = new UpdateTransactionController(
   updateTransactionUseCase,
-
 );
 
 export {

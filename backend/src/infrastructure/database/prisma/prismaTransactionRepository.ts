@@ -102,6 +102,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
       type: transaction.type as unknown as TransactionType,
       date: transaction.date as Date,
     }));
+  }
 
   async findByIdAndUserId(
     id: number,

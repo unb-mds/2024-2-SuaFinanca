@@ -34,7 +34,10 @@ export async function getRecentTransactions(
   const { body, statusCode } = await getRecentTransactionsController.handle({
     userId: req.userId,
     query: req.query,
-    
+  });
+  res.status(statusCode).send(body);
+}
+
 export async function updateTransaction(
   req: Request,
   res: Response,

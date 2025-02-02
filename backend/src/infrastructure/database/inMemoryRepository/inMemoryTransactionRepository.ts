@@ -63,6 +63,8 @@ export class InMemoryTransactionRepository implements ITransactionRepository {
       .sort((a, b) => b.date.getTime() - a.date.getTime());
 
     return userTransactions.slice(0, limit);
+  }
+
   async findByIdAndUserId(
     id: number,
     userId: number,

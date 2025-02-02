@@ -73,15 +73,14 @@ export interface IGetUserBalanceUseCase {
   execute(params: GetUserBalanceParams): Promise<GetUserBalanceReturn>;
 }
 
-
 export interface IGetRecentTransactionsUseCase {
   execute(
     params: GetRecentTransactionsParams,
   ): Promise<GetRecentTransactionsReturn>;
+}
 
 export interface IUpdateTransactionUseCase {
   execute(
     params: UpdateTransactionWithCategoryNameParams,
   ): Promise<UpdateTransactionReturn | string>;
-
 }
