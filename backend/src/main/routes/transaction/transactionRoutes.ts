@@ -16,6 +16,7 @@ transactionRoutes.get(
   "/transaction/summary",
   authMiddleware,
   getUserBalanceSummary,
+);
 transactionRoutes.patch(
   "/transaction/update/:id",
   authMiddleware,

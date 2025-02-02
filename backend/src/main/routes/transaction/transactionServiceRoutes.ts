@@ -34,6 +34,10 @@ export async function getUserBalanceSummary(
   const { body, statusCode } = await getUserBalanceSummaryController.handle({
     query: req.query,
     userId: req.userId,
+  });
+  res.status(statusCode).send(body);
+}
+
 export async function updateTransaction(
   req: Request,
   res: Response,

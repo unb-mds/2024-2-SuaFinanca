@@ -36,6 +36,8 @@ const getUserBalanceController = new GetUserBalanceController(
 // GetBalanceSummary
 const getUserBalanceSummaryController = new GetUserBalanceSummaryController(
   getUserBalanceUseCase,
+);
+
 // Update
 const updateTransactionUseCase = new UpdateTransactionUseCase(
   prismaTransactionRepository,
