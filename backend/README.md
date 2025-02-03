@@ -65,8 +65,6 @@ npm run dev
 | `npm run dev`           | Inicia o servidor em modo de desenvolvimento. |
 | `npm run build`         | Cria o build de produção.                     |
 | `npm run test:unit`     | Executa os testes unitários com Vitest.       |
-| `npm run test:integration` | Executa os testes de integração com Jest e Supertest. |
-| `npm run test:e2e`      | Executa os testes E2E com Cypress.            |
 
 ## Ferramentas e Tecnologias
 - **Node.js**: Ambiente de execução para JavaScript no servidor.
@@ -74,8 +72,6 @@ npm run dev
 - **Prisma**: ORM para Node.js.
 - **TypeScript**: Superset de JavaScript que adiciona tipagem estática.
 - **Vitest**: Ferramenta de testes unitários.
-- **Jest e Supertest**: Ferramentas de testes de integração.
-- **Cypress**: Ferramenta de testes end-to-end.
 
 ## Estrutura do Projeto
 ```
