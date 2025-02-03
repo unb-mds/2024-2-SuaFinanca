@@ -2,6 +2,7 @@ import categoryRoutes from "./main/routes/category/categoryRoutes";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import { setupSwagger } from "./main/config/swaggerConfig";
 import transactionRoutes from "./main/routes/transaction/transactionRoutes";
 import userRoutes from "./main/routes/user/userRoutes";
 
@@ -16,6 +17,8 @@ app.use(cors());
 app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(transactionRoutes);
+
+setupSwagger(app);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
