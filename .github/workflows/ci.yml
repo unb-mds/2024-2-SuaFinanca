@@ -1,4 +1,4 @@
-name: CI
+name: CI Pipeline
 
 on:
   push:
@@ -31,4 +31,8 @@ jobs:
 
       - name: Run unit tests
         run: npm run test:run
+        working-directory: ./backend
+
+      - name: Build project
+        run: npm run build
         working-directory: ./backend
