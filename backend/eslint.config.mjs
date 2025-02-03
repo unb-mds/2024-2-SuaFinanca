@@ -22,4 +22,7 @@ export default [
       ],
     },
   },
+  {
+    ignores: ["dist/"],
+  },
 ];
