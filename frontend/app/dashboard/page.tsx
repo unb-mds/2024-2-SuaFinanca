@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
 import {
   FaHome,
@@ -13,96 +13,123 @@ import {
   FaBullseye,
   FaCog,
   FaSignOutAlt,
-  FaBars,
   FaUser,
+  FaSync,
 } from "react-icons/fa"
 import "./dashboard.css"
 
 interface DashboardProps {
   isAuthenticated?: boolean
-  onLoginClick?: () => void
+  onLoginClick?: (redirectUrl?: string) => void
+  children?: React.ReactNode
 }
 
-export default function Dashboard({ isAuthenticated, onLoginClick }: DashboardProps) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-  const [username, setUsername] = useState("")
+export default function Dashboard({ isAuthenticated: propIsAuthenticated, onLoginClick, children }: DashboardProps) {
+  const [username, setUsername] = useState<string>("")
+  const [isAuthenticated, setIsAuthenticated] = useState(propIsAuthenticated)
   const router = useRouter()
+  const pathname = usePathname()
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }
+  useEffect(() => {
+    // Check authentication status on mount and when prop changes
+    const token = localStorage.getItem("token")
+    const storedUsername = localStorage.getItem("username")
+    setIsAuthenticated(!!token)
+    if (storedUsername) {
+      setUsername(storedUsername)
+    }
+  }, [propIsAuthenticated]) //Fixed unnecessary dependency
 
   const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("username")
     sessionStorage.clear()
-    window.location.reload()
+    setIsAuthenticated(false)
+    setUsername("")
+    router.push("/")
   }
-
-  useEffect(() => {
-    const storedUsername = localStorage.getItem("username")
-    if (storedUsername) {
-      setUsername(storedUsername)
-    }
-  }, [])
 
   const handleProtectedLink = (e: React.MouseEvent, path: string) => {
     if (!isAuthenticated) {
       e.preventDefault()
-      if (onLoginClick) {
-        onLoginClick()
-      }
+      router.push("/login?redirect=" + encodeURIComponent(path))
     }
   }
 
   return (
     <div className="dashboard-container">
-      <aside className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
+      <aside className="sidebar">
         <div className="logo">
+          <FaSync className="logo-icon" />
           <h2>Sua Finança</h2>
-          <button className="toggle-button" onClick={toggleSidebar}>
-            <FaBars />
-          </button>
         </div>
         <nav className="sidebar-nav">
           <ul>
             <li>
-              <Link href="/dashboard">
+              <Link href="/dashboard" className={pathname === "/dashboard" ? "active" : ""}>
                 <FaHome /> <span>Dashboard</span>
               </Link>
             </li>
             <li>
-              <Link href="/saldo" onClick={(e) => handleProtectedLink(e, "/saldo")}>
+              <Link
+                href="/saldo"
+                className={pathname === "/saldo" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/saldo")}
+              >
                 <FaWallet /> <span>Saldo</span>
               </Link>
             </li>
             <li>
-              <Link href="/receitas" onClick={(e) => handleProtectedLink(e, "/receitas")}>
+              <Link
+                href="/receitas"
+                className={pathname === "/receitas" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/receitas")}
+              >
                 <FaArrowUp /> <span>Receitas</span>
               </Link>
             </li>
             <li>
-              <Link href="/despesas" onClick={(e) => handleProtectedLink(e, "/despesas")}>
+              <Link
+                href="/despesas"
+                className={pathname === "/despesas" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/despesas")}
+              >
                 <FaArrowDown /> <span>Despesas</span>
               </Link>
             </li>
             <li>
-              <Link href="/relatorios" onClick={(e) => handleProtectedLink(e, "/relatorios")}>
+              <Link
+                href="/relatorios"
+                className={pathname === "/relatorios" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/relatorios")}
+              >
                 <FaChartLine /> <span>Relatórios</span>
               </Link>
             </li>
             <li>
-              <Link href="/transacoes" onClick={(e) => handleProtectedLink(e, "/transacoes")}>
+              <Link
+                href="/transacoes"
+                className={pathname === "/transacoes" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/transacoes")}
+              >
                 <FaExchangeAlt /> <span>Transações</span>
               </Link>
             </li>
             <li>
-              <Link href="/metas" onClick={(e) => handleProtectedLink(e, "/metas")}>
+              <Link
+                href="/metas"
+                className={pathname === "/metas" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/metas")}
+              >
                 <FaBullseye /> <span>Metas</span>
               </Link>
             </li>
             <li>
-              <Link href="/configuracoes" onClick={(e) => handleProtectedLink(e, "/configuracoes")}>
+              <Link
+                href="/configuracoes"
+                className={pathname === "/configuracoes" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/configuracoes")}
+              >
                 <FaCog /> <span>Configurações</span>
               </Link>
             </li>
@@ -113,54 +140,58 @@ export default function Dashboard({ isAuthenticated, onLoginClick }: DashboardPr
             <FaSignOutAlt /> <span>Sair</span>
           </button>
         ) : (
-          <button className="login-button" onClick={onLoginClick}>
+          <button className="login-button" onClick={() => router.push("/login")}>
             <FaUser /> <span>Entrar</span>
           </button>
         )}
       </aside>
 
       <div className="main-content">
-        <header className="main-header">
-          <h2>{isAuthenticated ? `Olá, ${username}` : "Bem-vindo ao Sua Finança"}</h2>
-        </header>
+        {children || (
+          <>
+            <header className="main-header">
+              <h2>{isAuthenticated ? `Olá, ${username}` : "Bem-vindo ao Sua Finança"}</h2>
+            </header>
 
-        <div className="card-container">
-          <div className="card">
-            <h3>Saldo Atual</h3>
-            <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
-          </div>
-          <div className="card">
-            <h3>Receitas</h3>
-            <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
-          </div>
-          <div className="card">
-            <h3>Despesas</h3>
-            <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
-          </div>
-        </div>
-
-        {!isAuthenticated && (
-          <div className="login-prompt">
-            <p>Faça login para acessar todos os recursos</p>
-            <button onClick={onLoginClick}>Entrar</button>
-          </div>
-        )}
-
-        {isAuthenticated && (
-          <div className="sections">
-            <div className="section">
-              <h3>Receitas</h3>
-              <div className="content">
-                <p>Nenhuma receita registrada</p>
+            <div className="card-container">
+              <div className="card">
+                <h3>Saldo Atual</h3>
+                <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
+              </div>
+              <div className="card">
+                <h3>Receitas</h3>
+                <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
+              </div>
+              <div className="card">
+                <h3>Despesas</h3>
+                <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
               </div>
             </div>
-            <div className="section">
-              <h3>Despesas</h3>
-              <div className="content">
-                <p>Nenhuma despesa registrada</p>
+
+            {!isAuthenticated && (
+              <div className="login-prompt">
+                <p>Faça login para acessar todos os recursos</p>
+                <button onClick={() => router.push("/login")}>Entrar</button>
               </div>
-            </div>
-          </div>
+            )}
+
+            {isAuthenticated && (
+              <div className="sections">
+                <div className="section">
+                  <h3>Receitas</h3>
+                  <div className="content">
+                    <p>Nenhuma receita registrada</p>
+                  </div>
+                </div>
+                <div className="section">
+                  <h3>Despesas</h3>
+                  <div className="content">
+                    <p>Nenhuma despesa registrada</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
