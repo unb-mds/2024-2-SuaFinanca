@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { FaUser, FaLock } from "react-icons/fa"
 import { useState } from "react"
 import axios from "axios"
@@ -13,6 +15,8 @@ export default function Login({ onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -28,13 +32,23 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
       if (onLoginSuccess) {
         onLoginSuccess()
+      } else {
+        const redirectUrl = searchParams.get("redirect")
+        if (redirectUrl) {
+          router.push(decodeURIComponent(redirectUrl))
+        } else {
+          router.push("/dashboard")
+        }
       }
     } catch (err) {
       setError("Credenciais inválidas!")
     }
   }
 
-  return (
+  // If this is rendered as a standalone page (not in a modal), add the wrapper div
+  const isStandalone = typeof window !== "undefined" && window.location.pathname === "/login"
+
+  const content = (
     <div className="login-container">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
@@ -60,5 +74,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       </form>
     </div>
   )
+
+  return isStandalone ? <div className="login-page">{content}</div> : content
 }
 

@@ -15,6 +15,8 @@ import {
   FaSignOutAlt,
   FaUser,
   FaSync,
+  FaBars,
+  FaTimes,
 } from "react-icons/fa"
 import "./dashboard.css"
 
@@ -27,18 +29,18 @@ interface DashboardProps {
 export default function Dashboard({ isAuthenticated: propIsAuthenticated, onLoginClick, children }: DashboardProps) {
   const [username, setUsername] = useState<string>("")
   const [isAuthenticated, setIsAuthenticated] = useState(propIsAuthenticated)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
 
   useEffect(() => {
-    // Check authentication status on mount and when prop changes
     const token = localStorage.getItem("token")
     const storedUsername = localStorage.getItem("username")
     setIsAuthenticated(!!token)
     if (storedUsername) {
       setUsername(storedUsername)
     }
-  }, [propIsAuthenticated]) //Fixed unnecessary dependency
+  }, [])
 
   const handleLogout = () => {
     localStorage.removeItem("token")
@@ -54,11 +56,28 @@ export default function Dashboard({ isAuthenticated: propIsAuthenticated, onLogi
       e.preventDefault()
       router.push("/login?redirect=" + encodeURIComponent(path))
     }
+    setIsMobileMenuOpen(false)
+  }
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
   return (
     <div className="dashboard-container">
-      <aside className="sidebar">
+      {/* Mobile Menu Button */}
+      <button className="mobile-menu-button" onClick={toggleMobileMenu}>
+        {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      {/* Mobile Overlay */}
+      <div
+        className={`mobile-overlay ${isMobileMenuOpen ? "visible" : ""}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${isMobileMenuOpen ? "open" : ""}`}>
         <div className="logo">
           <FaSync className="logo-icon" />
           <h2>Sua Finança</h2>

@@ -137,3 +137,40 @@
   color: #4caf50;
 }
 
+@media (max-width: 768px) {
+  .page-container {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .content-area {
+    padding: 1rem;
+  }
+
+  .header-section {
+    flex-wrap: wrap;
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+  }
+
+  .month-selector {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .goals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .new-goal-card {
+    height: 150px;
+  }
+
+  .summary-cards {
+    width: 100%;
+  }
+}
+
