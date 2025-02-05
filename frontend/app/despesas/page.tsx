@@ -56,9 +56,9 @@ const months = [
           </table>
         </div>
 
-        <button className="new-button">
-          <FaPlus /> Nova Despesa
-        </button>
+        <Link href="/despesas/nova" className="new-button">
+            <FaPlus /> Nova Despesa
+          </Link>
       </div>
 
       <div className="summary-cards">
