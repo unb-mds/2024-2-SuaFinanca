@@ -35,7 +35,7 @@ const months = [
           <button onClick={previousMonth} className="month-nav-button">
             <FaArrowLeft />
           </button>
-          <span className="current-month">{currentMonthIndex}</span>
+          <span className="current-month">{months[currentMonthIndex]}</span>
           <button onClick={nextMonth} className="month-nav-button">
             <FaArrowRight />
           </button>

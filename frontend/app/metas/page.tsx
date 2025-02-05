@@ -6,16 +6,21 @@ import { FaArrowLeft, FaArrowRight, FaPlus, FaBullseye, FaCheckCircle } from "re
 import "./metas.css"
 import Dashboard from "../dashboard/page"
 
+const months = [
+  "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
+  "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro " 
+]
+
 export default function Metas() {
-  const [currentMonth, setCurrentMonth] = useState("Dezembro 2024")
+  const [currentMonth, setCurrentMonthIndex] = useState(months.length - 1)
   const [goals, setGoals] = useState([])
 
   const previousMonth = () => {
-    // Add month navigation logic here
+    setCurrentMonthIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : months.length - 1))
   }
 
   const nextMonth = () => {
-    // Add month navigation logic here
+    setCurrentMonthIndex((prevIndex) => (prevIndex < months.length - 1 ? prevIndex + 1 : 0))
   }
 
   const handleNewGoal = () => {
@@ -36,7 +41,7 @@ export default function Metas() {
             <button onClick={previousMonth} className="month-nav-button">
               <FaArrowLeft />
             </button>
-            <span className="current-month">{currentMonth}</span>
+            <span className="current-month">{months[currentMonth]}</span>
             <button onClick={nextMonth} className="month-nav-button">
               <FaArrowRight />
             </button>
