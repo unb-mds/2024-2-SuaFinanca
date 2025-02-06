@@ -35,7 +35,7 @@ const months = [
           <button onClick={previousMonth} className="month-nav-button">
             <FaArrowLeft />
           </button>
-          <span className="current-month">{currentMonthIndex}</span>
+          <span className="current-month">{months[currentMonthIndex]}</span>
           <button onClick={nextMonth} className="month-nav-button">
             <FaArrowRight />
           </button>
@@ -56,9 +56,9 @@ const months = [
           </table>
         </div>
 
-        <button className="new-button">
-          <FaPlus /> Nova Despesa
-        </button>
+        <Link href="/despesas/nova" className="new-button">
+            <FaPlus /> Nova Despesa
+          </Link>
       </div>
 
       <div className="summary-cards">

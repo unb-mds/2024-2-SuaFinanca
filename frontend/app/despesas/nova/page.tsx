@@ -19,6 +19,7 @@ export default function NovaDespesa() {
   }
 
   return (
+    <Dashboard>
       <div className="new-transaction-container">
         <div className="new-transaction-card">
           <div className="header-section">
@@ -97,6 +98,7 @@ export default function NovaDespesa() {
           </form>
         </div>
       </div>
+    </Dashboard>
   )
 }
 

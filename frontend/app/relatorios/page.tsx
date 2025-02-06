@@ -10,8 +10,16 @@ import Dashboard from "../dashboard/page"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
+const months = [
+  "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
+  "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro " 
+]
+
+
 export default function Relatorios() {
-  const [currentMonth, setCurrentMonth] = useState("Dezembro 2024")
+  const [currentMonth, setCurrentMonthIndex] = useState(months.length - 1)
+
+
 
   const chartData = {
     labels: ["Categoria 1", "Categoria 2", "Categoria 3", "Categoria 4"],
@@ -42,11 +50,11 @@ export default function Relatorios() {
   }
 
   const previousMonth = () => {
-    // Add month navigation logic here
+    setCurrentMonthIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : months.length - 1))
   }
 
   const nextMonth = () => {
-    // Add month navigation logic here
+    setCurrentMonthIndex((prevIndex) => (prevIndex < months.length - 1 ? prevIndex + 1 : 0))
   }
 
   const handleDownloadAll = () => {
@@ -67,7 +75,7 @@ export default function Relatorios() {
             <button onClick={previousMonth} className="month-nav-button">
               <FaArrowLeft />
             </button>
-            <span className="current-month">{currentMonth}</span>
+            <span className="current-month">{months[currentMonth]}</span>
             <button onClick={nextMonth} className="month-nav-button">
               <FaArrowRight />
             </button>

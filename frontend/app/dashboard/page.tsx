@@ -1,142 +1,219 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { 
-  FaHome, 
-  FaWallet, 
-  FaArrowUp, 
-  FaArrowDown, 
-  FaChartLine, 
+import { useEffect, useState } from "react"
+import { useRouter, usePathname } from "next/navigation"
+import Link from "next/link"
+import {
+  FaHome,
+  FaWallet,
+  FaArrowUp,
+  FaArrowDown,
+  FaChartLine,
   FaExchangeAlt,
   FaBullseye,
   FaCog,
   FaSignOutAlt,
-  FaBars
-} from "react-icons/fa";
-import "./dashboard.css";
+  FaUser,
+  FaSync,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa"
+import "./dashboard.css"
 
-const Dashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [username, setUsername] = useState("");
-  const router = useRouter();
+interface DashboardProps {
+  isAuthenticated?: boolean
+  onLoginClick?: (redirectUrl?: string) => void
+  children?: React.ReactNode
+}
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    sessionStorage.clear();
-    router.push("/login");
-  };
+export default function Dashboard({ isAuthenticated: propIsAuthenticated, onLoginClick, children }: DashboardProps) {
+  const [username, setUsername] = useState<string>("")
+  const [isAuthenticated, setIsAuthenticated] = useState(propIsAuthenticated)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
+    const token = localStorage.getItem("token")
+    const storedUsername = localStorage.getItem("username")
+    setIsAuthenticated(!!token)
     if (storedUsername) {
-      setUsername(storedUsername);
-    } else {
-      router.push("/login");
+      setUsername(storedUsername)
     }
-  }, [router]);
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("username")
+    sessionStorage.clear()
+    setIsAuthenticated(false)
+    setUsername("")
+    router.push("/")
+  }
+
+  const handleProtectedLink = (e: React.MouseEvent, path: string) => {
+    if (!isAuthenticated) {
+      e.preventDefault()
+      router.push("/login?redirect=" + encodeURIComponent(path))
+    }
+    setIsMobileMenuOpen(false)
+  }
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
 
   return (
     <div className="dashboard-container">
-      <aside className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
+      {/* Mobile Menu Button */}
+      <button className="mobile-menu-button" onClick={toggleMobileMenu}>
+        {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      {/* Mobile Overlay */}
+      <div
+        className={`mobile-overlay ${isMobileMenuOpen ? "visible" : ""}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${isMobileMenuOpen ? "open" : ""}`}>
         <div className="logo">
+          <FaSync className="logo-icon" />
           <h2>Sua Finança</h2>
-          <button className="toggle-button" onClick={toggleSidebar}>
-            <FaBars />
-          </button>
         </div>
         <nav className="sidebar-nav">
           <ul>
             <li>
-              <Link href="/dashboard">
+              <Link href="/dashboard" className={pathname === "/dashboard" ? "active" : ""}>
                 <FaHome /> <span>Dashboard</span>
               </Link>
             </li>
             <li>
-              <Link href="/saldo">
+              <Link
+                href="/saldo"
+                className={pathname === "/saldo" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/saldo")}
+              >
                 <FaWallet /> <span>Saldo</span>
               </Link>
             </li>
             <li>
-              <Link href="/receitas">
+              <Link
+                href="/receitas"
+                className={pathname === "/receitas" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/receitas")}
+              >
                 <FaArrowUp /> <span>Receitas</span>
               </Link>
             </li>
             <li>
-              <Link href="/despesas">
+              <Link
+                href="/despesas"
+                className={pathname === "/despesas" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/despesas")}
+              >
                 <FaArrowDown /> <span>Despesas</span>
               </Link>
             </li>
             <li>
-              <Link href="/relatorios">
+              <Link
+                href="/relatorios"
+                className={pathname === "/relatorios" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/relatorios")}
+              >
                 <FaChartLine /> <span>Relatórios</span>
               </Link>
             </li>
             <li>
-              <Link href="/transacoes">
+              <Link
+                href="/transacoes"
+                className={pathname === "/transacoes" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/transacoes")}
+              >
                 <FaExchangeAlt /> <span>Transações</span>
               </Link>
             </li>
             <li>
-              <Link href="/metas">
+              <Link
+                href="/metas"
+                className={pathname === "/metas" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/metas")}
+              >
                 <FaBullseye /> <span>Metas</span>
               </Link>
             </li>
             <li>
-              <Link href="/configuracoes">
+              <Link
+                href="/configuracoes"
+                className={pathname === "/configuracoes" ? "active" : ""}
+                onClick={(e) => handleProtectedLink(e, "/configuracoes")}
+              >
                 <FaCog /> <span>Configurações</span>
               </Link>
             </li>
           </ul>
         </nav>
-        <button className="logout-button" onClick={handleLogout}>
-          <FaSignOutAlt /> <span>Sair</span>
-        </button>
+        {isAuthenticated ? (
+          <button className="logout-button" onClick={handleLogout}>
+            <FaSignOutAlt /> <span>Sair</span>
+          </button>
+        ) : (
+          <button className="login-button" onClick={() => router.push("/login")}>
+            <FaUser /> <span>Entrar</span>
+          </button>
+        )}
       </aside>
 
       <div className="main-content">
-        <header className="main-header">
-          <h2>Olá, {username}</h2>
-        </header>
+        {children || (
+          <>
+            <header className="main-header">
+              <h2>{isAuthenticated ? `Olá, ${username}` : "Bem-vindo ao Sua Finança"}</h2>
+            </header>
 
-        <div className="card-container">
-          <div className="card">
-            <h3>Saldo Atual</h3>
-            <p>R$ 0,00</p>
-          </div>
-          <div className="card">
-            <h3>Receitas</h3>
-            <p>R$ 0,00</p>
-          </div>
-          <div className="card">
-            <h3>Despesas</h3>
-            <p>R$ 0,00</p>
-          </div>
-        </div>
+            <div className="card-container">
+              <div className="card">
+                <h3>Saldo Atual</h3>
+                <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
+              </div>
+              <div className="card">
+                <h3>Receitas</h3>
+                <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
+              </div>
+              <div className="card">
+                <h3>Despesas</h3>
+                <p>{isAuthenticated ? "R$ 0,00" : "******"}</p>
+              </div>
+            </div>
 
-        <div className="sections">
-          <div className="section">
-            <h3>Receitas</h3>
-            <div className="content">
-              <p>Nenhuma receita registrada</p>
-            </div>
-          </div>
-          <div className="section">
-            <h3>Despesas</h3>
-            <div className="content">
-              <p>Nenhuma despesa registrada</p>
-            </div>
-          </div>
-        </div>
+            {!isAuthenticated && (
+              <div className="login-prompt">
+                <p>Faça login para acessar todos os recursos</p>
+                <button onClick={() => router.push("/login")}>Entrar</button>
+              </div>
+            )}
+
+            {isAuthenticated && (
+              <div className="sections">
+                <div className="section">
+                  <h3>Receitas</h3>
+                  <div className="content">
+                    <p>Nenhuma receita registrada</p>
+                  </div>
+                </div>
+                <div className="section">
+                  <h3>Despesas</h3>
+                  <div className="content">
+                    <p>Nenhuma despesa registrada</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;

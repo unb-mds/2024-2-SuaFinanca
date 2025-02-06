@@ -1,16 +1,22 @@
 "use client"
 
+import type React from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { FaUser, FaLock } from "react-icons/fa"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import axios from "axios"
 import "./login.css"
 
-const Login = () => {
+interface LoginProps {
+  onLoginSuccess?: () => void
+}
+
+export default function Login({ onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -24,14 +30,26 @@ const Login = () => {
       localStorage.setItem("token", token)
       localStorage.setItem("username", name)
 
-      window.location.href = "/dashboard";
+      if (onLoginSuccess) {
+        onLoginSuccess()
+      } else {
+        const redirectUrl = searchParams.get("redirect")
+        if (redirectUrl) {
+          router.push(decodeURIComponent(redirectUrl))
+        } else {
+          router.push("/dashboard")
+        }
+      }
     } catch (err) {
       setError("Credenciais inválidas!")
     }
   }
 
-  return (
-    <div className="container">
+  // If this is rendered as a standalone page (not in a modal), add the wrapper div
+  const isStandalone = typeof window !== "undefined" && window.location.pathname === "/login"
+
+  const content = (
+    <div className="login-container">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         {error && <p className="error-message">{error}</p>}
@@ -56,7 +74,7 @@ const Login = () => {
       </form>
     </div>
   )
-}
 
-export default Login
+  return isStandalone ? <div className="login-page">{content}</div> : content
+}
 
