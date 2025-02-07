@@ -1,11 +1,10 @@
 "use client"
 
-import type React from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { FaUser, FaLock } from "react-icons/fa"
 import { useState } from "react"
+import { FaUser, FaLock } from "react-icons/fa"
 import axios from "axios"
 import "./login.css"
+import { useAuth } from "../contexts/AuthContext"
 
 interface LoginProps {
   onLoginSuccess?: () => void
@@ -15,8 +14,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  const { login } = useAuth()
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -27,28 +25,17 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       })
 
       const { token, name } = response.data
-      localStorage.setItem("token", token)
-      localStorage.setItem("username", name)
+      login(token, name)
 
       if (onLoginSuccess) {
         onLoginSuccess()
-      } else {
-        const redirectUrl = searchParams.get("redirect")
-        if (redirectUrl) {
-          router.push(decodeURIComponent(redirectUrl))
-        } else {
-          router.push("/dashboard")
-        }
       }
     } catch (err) {
       setError("Credenciais inválidas!")
     }
   }
 
-  // If this is rendered as a standalone page (not in a modal), add the wrapper div
-  const isStandalone = typeof window !== "undefined" && window.location.pathname === "/login"
-
-  const content = (
+  return (
     <div className="login-container">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
@@ -74,7 +61,5 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       </form>
     </div>
   )
-
-  return isStandalone ? <div className="login-page">{content}</div> : content
 }
 

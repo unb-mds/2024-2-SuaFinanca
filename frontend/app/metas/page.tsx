@@ -4,7 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { FaArrowLeft, FaArrowRight, FaPlus, FaBullseye, FaCheckCircle } from "react-icons/fa"
 import "./metas.css"
-import Dashboard from "../dashboard/page"
+import Layout from "../components/Layout"
+import { useAuth } from "../contexts/AuthContext"
 
 const months = [
   "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
@@ -12,7 +13,8 @@ const months = [
 ]
 
 export default function Metas() {
-  const [currentMonth, setCurrentMonthIndex] = useState(months.length - 1)
+  const { isAuthenticated } = useAuth()
+  const [currentMonth, setCurrentMonthIndex] = useState("Dezembro 2024")
   const [goals, setGoals] = useState([])
 
   const previousMonth = () => {
@@ -27,7 +29,21 @@ export default function Metas() {
     // Add new goal logic here
   }
 
+  if (!isAuthenticated) {
+    return (
+      <Layout>
+        <div className="login-prompt">
+          <p>Faça login para acessar as metas</p>
+          <Link href="/dashboard">
+            <button>Voltar para o Dashboard</button>
+          </Link>
+        </div>
+      </Layout>
+    )
+  }
+
   return (
+    <Layout>
       <div className="page-container">
         <div className="content-area">
           <div className="header-section">
@@ -41,7 +57,7 @@ export default function Metas() {
             <button onClick={previousMonth} className="month-nav-button">
               <FaArrowLeft />
             </button>
-            <span className="current-month">{months[currentMonth]}</span>
+            <span className="current-month">{currentMonth}</span>
             <button onClick={nextMonth} className="month-nav-button">
               <FaArrowRight />
             </button>
@@ -80,6 +96,7 @@ export default function Metas() {
           </div>
         </div>
       </div>
+    </Layout>
   )
 }
 
