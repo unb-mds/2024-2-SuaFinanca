@@ -1,84 +1,70 @@
-// Dashboard.test.tsx
-import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import Dashboard from "./page"; 
-import { useRouter } from "next/navigation";
-import "@testing-library/jest-dom"; // Garante os matchers do jest-dom
+// tests/Dashboard.test.tsx
+import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom/extend-expect';
+import Dashboard from "../components/Dashboard";
+import { useRouter } from "next/router";
 
-jest.mock("next/navigation", () => ({
+jest.mock("next/router", () => ({
   useRouter: jest.fn(),
 }));
 
 describe("Dashboard Component", () => {
-  const pushMock = jest.fn();
+  let pushMock: jest.Mock;
 
   beforeEach(() => {
-    (useRouter as jest.Mock).mockReturnValue({
-      push: pushMock,
-    });
+    pushMock = jest.fn();
+    (useRouter as jest.Mock).mockReturnValue({ push: pushMock });
     localStorage.clear();
     sessionStorage.clear();
-    pushMock.mockClear();
   });
 
-  it("deve renderizar o dashboard com o username armazenado no localStorage", async () => {
-    localStorage.setItem("username", "TestUser");
+  test("Renderiza corretamente o username do localStorage", () => {
+    // Arrange: Configuração inicial
+    localStorage.setItem("username", "Usuário Teste");
     render(<Dashboard />);
+
+    // Act: Nenhuma ação necessária
     
-    // Debug: imprime o DOM renderizado para ajudar a inspecionar o conteúdo
-    screen.debug();
-    
-    // Tenta encontrar o elemento pelo texto com um timeout aumentado para 2000ms
-    const greeting = await screen.findByText(/Olá, TestUser/i, undefined, { timeout: 2000 });
-    expect(greeting).toBeInTheDocument();
+    // Assert: Verifica se o username foi renderizado corretamente
+    expect(screen.getByText("Usuário Teste")).toBeInTheDocument();
   });
 
-  it("deve redirecionar para /login se o username não estiver presente no localStorage", async () => {
+  test("Redireciona para /login se não houver username no localStorage", () => {
+    // Arrange: Nenhuma configuração adicional necessária
     render(<Dashboard />);
-    await waitFor(() => {
-      expect(pushMock).toHaveBeenCalledWith("/login");
-    });
+
+    // Act: Nenhuma ação necessária, apenas renderização
+    
+    // Assert: Verifica se houve redirecionamento
+    expect(pushMock).toHaveBeenCalledWith("/login");
   });
 
-  it("deve alternar a classe da sidebar ao clicar no botão de toggle", async () => {
-    localStorage.setItem("username", "TestUser");
-    const { container } = render(<Dashboard />);
-    
-    // Aguarda que a sidebar esteja presente no DOM
-    const sidebar = await waitFor(() => {
-      const sb = container.querySelector(".sidebar");
-      if (!sb) throw new Error("Sidebar não encontrada");
-      return sb;
-    });
-    
-    // Verifica a classe inicial da sidebar
-    expect(sidebar.className).toContain("open");
-    
-    // Seleciona o botão de toggle
-    const toggleButton = container.querySelector(".toggle-button");
-    if (!toggleButton) throw new Error("Botão de toggle não encontrado");
-    
+  test("Alterna classe da sidebar ao clicar no botão de toggle", () => {
+    // Arrange
+    render(<Dashboard />);
+    const toggleButton = screen.getByTestId("sidebar-toggle");
+    const sidebar = screen.getByTestId("sidebar");
+
+    // Act: Clica no botão de toggle
     fireEvent.click(toggleButton);
-    
-    // Aguarda que a classe da sidebar seja atualizada para "closed"
-    await waitFor(() => {
-      expect(sidebar.className).toContain("closed");
-    });
+
+    // Assert: Verifica se a classe foi alterada
+    expect(sidebar).toHaveClass("closed");
   });
 
-  it("deve limpar os storages e redirecionar para /login ao clicar no botão de logout", async () => {
-    localStorage.setItem("username", "TestUser");
-    localStorage.setItem("token", "sometoken");
+  test("Limpa localStorage e sessionStorage ao clicar no botão de logout", () => {
+    // Arrange
+    localStorage.setItem("authToken", "token123");
+    sessionStorage.setItem("sessionData", "data123");
     render(<Dashboard />);
-    
-    const logoutButton = screen.getByRole("button", { name: /sair/i });
+    const logoutButton = screen.getByTestId("logout-button");
+
+    // Act: Clica no botão de logout
     fireEvent.click(logoutButton);
-    
-    await waitFor(() => {
-      expect(localStorage.getItem("username")).toBeNull();
-      expect(localStorage.getItem("token")).toBeNull();
-      expect(sessionStorage.length).toBe(0);
-      expect(pushMock).toHaveBeenCalledWith("/login");
-    });
+
+    // Assert: Verifica se os storages foram limpos e se houve redirecionamento
+    expect(localStorage.getItem("authToken")).toBeNull();
+    expect(sessionStorage.getItem("sessionData")).toBeNull();
+    expect(pushMock).toHaveBeenCalledWith("/login");
   });
 });
