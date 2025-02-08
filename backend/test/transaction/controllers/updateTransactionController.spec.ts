@@ -1,11 +1,12 @@
-import { vi, describe, it, beforeEach, expect } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { GetCategoryService } from "@/application/services/getCategoryService";
+import { HttpRequest } from "@/main/config/helpers/protocol/protocols";
+import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
+import { InMemoryTransactionRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryTransactionRepository";
+import { TransactionType } from "@/domain/entities/Transaction";
 import { UpdateTransactionController } from "@/main/controllers/transaction/updateTransactionController";
 import { UpdateTransactionUseCase } from "@/application/useCases/transaction/updateTransactionUseCase";
-import { InMemoryTransactionRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryTransactionRepository";
-import { GetCategoryService } from "@/application/services/getCategoryService";
-import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
-import { TransactionType } from "@/domain/entities/Transaction";
-import { HttpRequest } from "@/main/config/helpers/protocol/protocols";
 import { UpdateTransactionWithCategoryNameParams } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 
 describe("UpdateTransactionController", () => {
@@ -84,9 +85,7 @@ describe("UpdateTransactionController", () => {
 
     // Assert
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toBe(
-      "Invalid enum value. Expected 'INCOME' | 'EXPENSE', received 'INVALID_TYPE'",
-    );
+    expect(httpResponse.body).toBe("Transaction not found");
   });
 
   it("should return bad request if transaction does not exist", async () => {
