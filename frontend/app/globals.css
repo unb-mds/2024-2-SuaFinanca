@@ -70,6 +70,8 @@ body {
   background: white;
   border-radius: 12px;
   margin-top: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .login-prompt p {
@@ -85,6 +87,10 @@ body {
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
+}
+
+.login-prompt button:hover {
+  background: #43a047;
 }
 
 .login-button {
@@ -104,5 +110,24 @@ body {
 
 .login-button:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.welcome-message,
+.login-prompt {
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.welcome-message h1,
+.login-prompt h1 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.welcome-message p,
+.login-prompt p {
+  margin-bottom: 1rem;
 }
 

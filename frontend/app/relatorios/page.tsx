@@ -6,7 +6,8 @@ import { FaArrowLeft, FaArrowRight, FaDownload } from "react-icons/fa"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js"
 import { Pie } from "react-chartjs-2"
 import "./relatorios.css"
-import Dashboard from "../dashboard/page"
+import Layout from "../components/Layout"
+import { useAuth } from "../contexts/AuthContext"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -15,11 +16,9 @@ const months = [
   "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro " 
 ]
 
-
 export default function Relatorios() {
-  const [currentMonth, setCurrentMonthIndex] = useState(months.length - 1)
-
-
+  const { isAuthenticated } = useAuth()
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(months.length - 1)
 
   const chartData = {
     labels: ["Categoria 1", "Categoria 2", "Categoria 3", "Categoria 4"],
@@ -38,7 +37,7 @@ export default function Relatorios() {
         display: true,
         position: "bottom" as const,
         labels: {
-          boxWidth: 15,
+          boxWidth: 10,
           font: {
             size: 10,
           },
@@ -61,7 +60,21 @@ export default function Relatorios() {
     // Add download logic here
   }
 
+  if (!isAuthenticated) {
+    return (
+      <Layout>
+        <div className="login-prompt">
+          <p>Faça login para acessar os relatórios</p>
+          <Link href="/dashboard">
+            <button>Voltar para o Dashboard</button>
+          </Link>
+        </div>
+      </Layout>
+    )
+  }
+
   return (
+    <Layout>
       <div className="page-container">
         <div className="content-area">
           <div className="header-section">
@@ -75,7 +88,7 @@ export default function Relatorios() {
             <button onClick={previousMonth} className="month-nav-button">
               <FaArrowLeft />
             </button>
-            <span className="current-month">{months[currentMonth]}</span>
+            <span className="current-month">{months[currentMonthIndex]}</span>
             <button onClick={nextMonth} className="month-nav-button">
               <FaArrowRight />
             </button>
@@ -118,6 +131,7 @@ export default function Relatorios() {
           </div>
         </div>
       </div>
+    </Layout>
   )
 }
 
