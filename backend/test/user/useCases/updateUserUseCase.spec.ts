@@ -4,34 +4,38 @@ import { BcryptPassword } from "@/application/utils/hashUtils";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
 import { UpdateUserUseCase } from "@/application/useCases/updateUserUseCase";
 
-let bcryptPassword: BcryptPassword;
-let authUserRepository: InMemoryAuthUserRepository;
-let updateUserUseCase: UpdateUserUseCase;
-
 describe("UpdateUserUseCase", () => {
+  let bcryptPassword: BcryptPassword;
+  let inMemoryAuthUserRepository: InMemoryAuthUserRepository;
+  let updateUserUseCase: UpdateUserUseCase;
+
   beforeEach(() => {
     bcryptPassword = new BcryptPassword();
-    authUserRepository = new InMemoryAuthUserRepository();
+    inMemoryAuthUserRepository = new InMemoryAuthUserRepository();
     updateUserUseCase = new UpdateUserUseCase(
-      authUserRepository,
+      inMemoryAuthUserRepository,
       bcryptPassword,
     );
+
+    inMemoryAuthUserRepository.createUser({
+      name: "John Doe",
+      email: "john@example.com",
+      password: "password",
+    });
   });
 
   it("should return correct user format without id", async () => {
-    await authUserRepository.createUser({
-      name: "John Doe",
-      email: "john@example.com",
-      password: "password123",
-    });
-
+    // Arrange
     const params = {
       id: 1,
       name: "John Updated",
       email: "johnupdated@example.com",
     };
+
+    // Act
     const result = await updateUserUseCase.execute(params);
 
+    // Assert
     expect(result).toEqual({
       user: {
         name: "John Updated",
@@ -41,18 +45,16 @@ describe("UpdateUserUseCase", () => {
   });
 
   it("should keep original email if not provided in update", async () => {
-    await authUserRepository.createUser({
-      name: "John Doe",
-      email: "john@example.com",
-      password: "password123",
-    });
-
+    // Arrange
     const params = {
       id: 1,
       name: "John Updated",
     };
+
+    // Act
     const result = await updateUserUseCase.execute(params);
 
+    // Assert
     expect(result).toEqual({
       user: {
         name: "John Updated",
@@ -62,18 +64,16 @@ describe("UpdateUserUseCase", () => {
   });
 
   it("should keep original name if not provided in update", async () => {
-    await authUserRepository.createUser({
-      name: "John Doe",
-      email: "john@example.com",
-      password: "password123",
-    });
-
+    // Arrange
     const params = {
       id: 1,
       email: "johnupdated@example.com",
     };
+
+    // Act
     const result = await updateUserUseCase.execute(params);
 
+    // Assert
     expect(result).toEqual({
       user: {
         name: "John Doe",
@@ -83,31 +83,29 @@ describe("UpdateUserUseCase", () => {
   });
 
   it("should return 'User not found' for non-existent user", async () => {
+    // Arrange
     const params = { id: 2 };
+
+    // Act
     const result = await updateUserUseCase.execute(params);
 
+    // Assert
     expect(result).toBe("User not found");
   });
 
   it("should hash the password if provided", async () => {
-    await authUserRepository.createUser({
-      name: "John Doe",
-      email: "john@example.com",
-      password: "password123",
-    });
-
-    const params = { id: 1, password: "newpassword123" };
+    // Arrange
+    const params = { id: 1, password: "newPassword" };
     await updateUserUseCase.execute(params);
+    const updatedUser = await inMemoryAuthUserRepository.findUserById(1);
 
-    const updatedUser = await authUserRepository.findUserById(1);
-    if (updatedUser) {
-      const isPasswordHashed = await bcryptPassword.compare(
-        "newpassword123",
-        updatedUser.password,
-      );
-      expect(isPasswordHashed).toBe(true);
-    } else {
-      throw new Error("User not found after update");
-    }
+    // Act
+    const isPasswordHashed = await bcryptPassword.compare(
+      "newPassword",
+      updatedUser!.password,
+    );
+
+    // Assert
+    expect(isPasswordHashed).toBe(true);
   });
 });
