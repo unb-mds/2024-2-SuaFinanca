@@ -3,12 +3,10 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { BcryptPassword } from "@/application/utils/hashUtils";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
 import { UpdateUserUseCase } from "@/application/useCases/updateUserUseCase";
-import { UserFactory } from "@/domain/factories/userFactory";
 
 let bcryptPassword: BcryptPassword;
 let authUserRepository: InMemoryAuthUserRepository;
 let updateUserUseCase: UpdateUserUseCase;
-let userFactory: UserFactory;
 
 describe("UpdateUserUseCase", () => {
   beforeEach(() => {
@@ -18,10 +16,9 @@ describe("UpdateUserUseCase", () => {
       authUserRepository,
       bcryptPassword,
     );
-    userFactory = new UserFactory(bcryptPassword);
   });
 
-  it("should update user successfully", async () => {
+  it("should return correct user format without id", async () => {
     await authUserRepository.createUser({
       name: "John Doe",
       email: "john@example.com",
@@ -37,20 +34,56 @@ describe("UpdateUserUseCase", () => {
 
     expect(result).toEqual({
       user: {
-        id: "1",
         name: "John Updated",
         email: "johnupdated@example.com",
       },
     });
   });
 
-  it("should return 'User not found' if user does not exist", async () => {
+  it("should keep original email if not provided in update", async () => {
+    await authUserRepository.createUser({
+      name: "John Doe",
+      email: "john@example.com",
+      password: "password123",
+    });
+
     const params = {
-      id: 0,
+      id: 1,
       name: "John Updated",
-      email: "johnupdated@example.com",
-      password: "newpassword123",
     };
+    const result = await updateUserUseCase.execute(params);
+
+    expect(result).toEqual({
+      user: {
+        name: "John Updated",
+        email: "john@example.com",
+      },
+    });
+  });
+
+  it("should keep original name if not provided in update", async () => {
+    await authUserRepository.createUser({
+      name: "John Doe",
+      email: "john@example.com",
+      password: "password123",
+    });
+
+    const params = {
+      id: 1,
+      email: "johnupdated@example.com",
+    };
+    const result = await updateUserUseCase.execute(params);
+
+    expect(result).toEqual({
+      user: {
+        name: "John Doe",
+        email: "johnupdated@example.com",
+      },
+    });
+  });
+
+  it("should return 'User not found' for non-existent user", async () => {
+    const params = { id: 2 };
     const result = await updateUserUseCase.execute(params);
 
     expect(result).toBe("User not found");
