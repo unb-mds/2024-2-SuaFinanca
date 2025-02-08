@@ -2,24 +2,11 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import '@testing-library/jest-dom';
-import Dashboard from "../dashboard/page"; // Certifique-se que o caminho está correto
+import Dashboard from "../dashboard/page"; // Certifique-se de que o caminho está correto
 import { useRouter } from "next/navigation";
 
-// --- Mock do AuthContext ---
-// Como não existe um módulo "app/contexts/AuthContext", usamos { virtual: true } para criar um módulo virtual.
-jest.mock("app/contexts/AuthContext", () => {
-  return {
-    useAuth: () => ({
-      user: { name: "Dummy User", email: "dummy@example.com" },
-      login: async () => {},
-      logout: async () => {},
-    }),
-    AuthContext: {
-      Provider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-    },
-  };
-}, { virtual: true });
-// --- Fim do mock do AuthContext ---
+// Mock do AuthContext usando o mock manual criado em __mocks__
+jest.mock("frontend/app/contexts/mocks/AuthContext.tsx");
 
 // Mock do hook do Next.js (App Router)
 jest.mock("next/navigation", () => ({
