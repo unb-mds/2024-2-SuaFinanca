@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import {
   FaHome,
@@ -19,6 +19,7 @@ import {
 } from "react-icons/fa"
 import { useAuth } from "../contexts/AuthContext"
 import "../dashboard/dashboard.css"
+import Login from "../login/page"
 
 interface LayoutProps {
   children: React.ReactNode
@@ -27,9 +28,19 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const { isAuthenticated, username, logout } = useAuth()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(false)
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const handleLoginClick = () => {
+    setShowLoginModal(true)
+    setIsMobileMenuOpen(false) // Close mobile menu if open
+  }
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false)
   }
 
   return (
@@ -100,13 +111,27 @@ export default function Layout({ children }: LayoutProps) {
             <FaSignOutAlt /> <span>Sair</span>
           </button>
         ) : (
-          <button className="login-button">
+          <button className="login-button" onClick={handleLoginClick}>
             <FaUser /> <span>Entrar</span>
           </button>
         )}
       </aside>
 
-      <div className="main-content">{children}</div>
+      <div className="main-content">
+        {children}
+
+        {/* Login Modal */}
+        {showLoginModal && (
+          <div className="login-overlay">
+            <div className="login-modal">
+              <button className="close-button" onClick={() => setShowLoginModal(false)}>
+                ×
+              </button>
+              <Login onLoginSuccess={handleLoginSuccess} />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
