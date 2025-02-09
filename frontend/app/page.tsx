@@ -1,13 +1,6 @@
-import Login from './login/page'
-import './globals.css'
+import Dashboard from "./dashboard/page"
 
-function Home() {
-  return (
-    <div  className="Home">
-      <Login />
-
-    </div>
-  )
+export default function Home() {
+  return <Dashboard />
 }
 
-export default Home;

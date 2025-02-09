@@ -1,16 +1,20 @@
 "use client"
 
-import { FaUser, FaLock } from "react-icons/fa"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { FaUser, FaLock } from "react-icons/fa"
 import axios from "axios"
 import "./login.css"
+import { useAuth } from "../contexts/AuthContext"
 
-const Login = () => {
+interface LoginProps {
+  onLoginSuccess?: () => void
+}
+
+export default function Login({ onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
-  const router = useRouter()
+  const { login } = useAuth()
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -21,17 +25,18 @@ const Login = () => {
       })
 
       const { token, name } = response.data
-      localStorage.setItem("token", token)
-      localStorage.setItem("username", name)
+      login(token, name)
 
-      window.location.href = "/dashboard";
+      if (onLoginSuccess) {
+        onLoginSuccess()
+      }
     } catch (err) {
       setError("Credenciais inválidas!")
     }
   }
 
   return (
-    <div className="container">
+    <div className="login-container">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         {error && <p className="error-message">{error}</p>}
@@ -57,6 +62,4 @@ const Login = () => {
     </div>
   )
 }
-
-export default Login
 

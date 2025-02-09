@@ -1,60 +1,78 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+.register-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.container {
-    background-color: #fff; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    padding: 20px 30px;
-    width: 300px; 
-    text-align: center;
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
+.register-container h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
 }
 
-input {
-    width: 100%; 
-    padding: 10px;
-    margin: 10px 0; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    font-size: 14px;
-    box-sizing: border-box; 
+.back-button {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border-radius: 4px;
 }
 
-button {
-    background-color: #4CAF50; 
-    color: #fff; 
-    border: none;
-    padding: 10px;
-    width: 100%; 
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
+.back-button:hover {
+  background: rgba(76, 175, 80, 0.1);
 }
 
-button:hover {
-    background-color: #4CAF50; 
+.input-field {
+  position: relative;
 }
 
-a {
-    color: #4CAF50;
-    text-decoration: none; 
-    font-size: 14px;
+.input-field input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
-a:hover {
-    text-decoration: underline;
+.input-field .icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
 }
+
+button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.error-message {
+  color: #dc3545;
+  text-align: center;
+  font-size: 0.875rem;
+}
+

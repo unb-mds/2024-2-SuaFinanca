@@ -1,0 +1,137 @@
+.new-transaction-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  min-height: 100%;
+}
+
+.new-transaction-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  color: #dc3545;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.new-transaction-card h1 {
+  color: #dc3545;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.value-input {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.currency {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1rem;
+  color: #666;
+}
+
+.value-input input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 0;
+  font-size: 2rem;
+  color: #333;
+  outline: none;
+  padding-left: 2rem;
+}
+
+.date-selector {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.date-selector button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #dc3545;
+  background: none;
+  color: #dc3545;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.date-selector button.active {
+  background: #dc3545;
+  color: white;
+}
+
+.input-field {
+  margin-bottom: 1rem;
+}
+
+.input-field input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+}
+
+.input-field input::placeholder {
+  color: #999;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.secondary-button {
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.primary-button {
+  padding: 0.75rem 1.5rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.primary-button:hover {
+  background: #c82333;
+}
+

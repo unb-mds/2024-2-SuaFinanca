@@ -9,9 +9,8 @@ on:
       - main
 
 jobs:
-  build:
+  backend:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -21,18 +20,38 @@ jobs:
         with:
           node-version: '22.12.0'
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: npm install
         working-directory: ./backend
 
-      - name: Run linter
+      - name: Run backend linter
         run: npm run lint:fix
         working-directory: ./backend
 
-      - name: Run unit tests
+      - name: Run backend tests
         run: npm run test:run
         working-directory: ./backend
-
+        
       - name: Build project
         run: npm run build
         working-directory: ./backend
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.12.0'
+
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Run frontend tests
+        if: false
+        run: npm run test
+        working-directory: ./frontend

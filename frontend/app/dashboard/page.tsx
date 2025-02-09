@@ -1,142 +1,95 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { 
-  FaHome, 
-  FaWallet, 
-  FaArrowUp, 
-  FaArrowDown, 
-  FaChartLine, 
-  FaExchangeAlt,
-  FaBullseye,
-  FaCog,
-  FaSignOutAlt,
-  FaBars
-} from "react-icons/fa";
-import "./dashboard.css";
+import { useState } from "react"
+import { FaWallet, FaArrowUp, FaArrowDown } from "react-icons/fa"
+import Layout from "../components/Layout"
+import { useAuth } from "../contexts/AuthContext"
+import Login from "../login/page"
 
-const Dashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [username, setUsername] = useState("");
-  const router = useRouter();
+export default function Dashboard() {
+  const { isAuthenticated, username } = useAuth()
+  const [showLogin, setShowLogin] = useState(false)
+  const [currentMonth] = useState("novembro")
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    sessionStorage.clear();
-    router.push("/login");
-  };
-
-  useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
-      setUsername(storedUsername);
-    } else {
-      router.push("/login");
-    }
-  }, [router]);
+  const handleLoginSuccess = () => {
+    setShowLogin(false)
+  }
 
   return (
-    <div className="dashboard-container">
-      <aside className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
-        <div className="logo">
-          <h2>Sua Finança</h2>
-          <button className="toggle-button" onClick={toggleSidebar}>
-            <FaBars />
-          </button>
-        </div>
-        <nav className="sidebar-nav">
-          <ul>
-            <li>
-              <Link href="/dashboard">
-                <FaHome /> <span>Dashboard</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/saldo">
-                <FaWallet /> <span>Saldo</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/receitas">
-                <FaArrowUp /> <span>Receitas</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/despesas">
-                <FaArrowDown /> <span>Despesas</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/relatorios">
-                <FaChartLine /> <span>Relatórios</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/transacoes">
-                <FaExchangeAlt /> <span>Transações</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/metas">
-                <FaBullseye /> <span>Metas</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/configuracoes">
-                <FaCog /> <span>Configurações</span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        <button className="logout-button" onClick={handleLogout}>
-          <FaSignOutAlt /> <span>Sair</span>
-        </button>
-      </aside>
-
-      <div className="main-content">
-        <header className="main-header">
-          <h2>Olá, {username}</h2>
-        </header>
-
-        <div className="card-container">
-          <div className="card">
-            <h3>Saldo Atual</h3>
-            <p>R$ 0,00</p>
-          </div>
-          <div className="card">
-            <h3>Receitas</h3>
-            <p>R$ 0,00</p>
-          </div>
-          <div className="card">
-            <h3>Despesas</h3>
-            <p>R$ 0,00</p>
-          </div>
+    <Layout>
+      <div className="dashboard-content">
+        <div className="dashboard-header">
+          <div className="month-selector">{currentMonth}</div>
+          <div className="welcome-message">Olá, {isAuthenticated ? username : "undefined"}</div>
         </div>
 
-        <div className="sections">
-          <div className="section">
-            <h3>Receitas</h3>
-            <div className="content">
-              <p>Nenhuma receita registrada</p>
+        <div className="cards-grid">
+          <div className="dashboard-card">
+            <div className="card-content">
+              <div className="card-header">
+                <h3>Saldo Atual</h3>
+                <FaWallet className="card-icon" />
+              </div>
+              <p className="card-value">{isAuthenticated ? "R$ 0,00" : "****"}</p>
             </div>
           </div>
-          <div className="section">
-            <h3>Despesas</h3>
-            <div className="content">
-              <p>Nenhuma despesa registrada</p>
+
+          <div className="dashboard-card">
+            <div className="card-content">
+              <div className="card-header">
+                <h3>Receitas</h3>
+                <FaArrowUp className="card-icon income" />
+              </div>
+              <p className="card-value">{isAuthenticated ? "R$ 0,00" : "****"}</p>
+            </div>
+          </div>
+
+          <div className="dashboard-card">
+            <div className="card-content">
+              <div className="card-header">
+                <h3>Despesas</h3>
+                <FaArrowDown className="card-icon expense" />
+              </div>
+              <p className="card-value">{isAuthenticated ? "R$ 0,00" : "****"}</p>
             </div>
           </div>
         </div>
+
+        {isAuthenticated ? (
+          <div className="dashboard-sections">
+            <div className="section-card">
+              <h3>Receita</h3>
+              <div className="section-content">
+                <p>Nenhuma receita registrada</p>
+              </div>
+            </div>
+
+            <div className="section-card">
+              <h3>Despesas</h3>
+              <div className="section-content">
+                <p>Nenhuma despesa registrada</p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="login-prompt">
+            <p>Faça login para acessar todos os recursos</p>
+            <button onClick={() => setShowLogin(true)}>Entrar</button>
+          </div>
+        )}
+
+        {showLogin && (
+          <div className="login-overlay">
+            <div className="login-modal">
+              <button className="close-button" onClick={() => setShowLogin(false)}>
+                ×
+              </button>
+              <Login onLoginSuccess={handleLoginSuccess} />
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-  );
-};
+    </Layout>
+  )
+}
 
-export default Dashboard;

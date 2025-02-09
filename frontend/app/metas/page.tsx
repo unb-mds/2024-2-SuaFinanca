@@ -4,25 +4,46 @@ import { useState } from "react"
 import Link from "next/link"
 import { FaArrowLeft, FaArrowRight, FaPlus, FaBullseye, FaCheckCircle } from "react-icons/fa"
 import "./metas.css"
-import Dashboard from "../dashboard/page"
+import Layout from "../components/Layout"
+import { useAuth } from "../contexts/AuthContext"
+
+const months = [
+  "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
+  "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro " 
+]
 
 export default function Metas() {
-  const [currentMonth, setCurrentMonth] = useState("Dezembro 2024")
+  const { isAuthenticated } = useAuth()
+  const [currentMonth, setCurrentMonthIndex] = useState("Dezembro 2024")
   const [goals, setGoals] = useState([])
 
   const previousMonth = () => {
-    // Add month navigation logic here
+    setCurrentMonthIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : months.length - 1))
   }
 
   const nextMonth = () => {
-    // Add month navigation logic here
+    setCurrentMonthIndex((prevIndex) => (prevIndex < months.length - 1 ? prevIndex + 1 : 0))
   }
 
   const handleNewGoal = () => {
     // Add new goal logic here
   }
 
+  if (!isAuthenticated) {
+    return (
+      <Layout>
+        <div className="login-prompt">
+          <p>Faça login para acessar as metas</p>
+          <Link href="/dashboard">
+            <button>Voltar para o Dashboard</button>
+          </Link>
+        </div>
+      </Layout>
+    )
+  }
+
   return (
+    <Layout>
       <div className="page-container">
         <div className="content-area">
           <div className="header-section">
@@ -75,6 +96,7 @@ export default function Metas() {
           </div>
         </div>
       </div>
+    </Layout>
   )
 }
 
