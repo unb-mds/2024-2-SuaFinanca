@@ -15,7 +15,7 @@ const options = {
         url: "http://localhost:8000",
       },
       {
-        url: "https://your-app-name.onrender.com",
+        url: process.env.RENDER_URL || "http://default-url.com",
       },
     ],
     components: {
