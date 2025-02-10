@@ -15,10 +15,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [username, setUsername] = useState("")
+  
+
 
   useEffect(() => {
     const token = localStorage.getItem("token")
     const storedUsername = localStorage.getItem("username")
+
     if (token && storedUsername) {
       setIsAuthenticated(true)
       setUsername(storedUsername)
@@ -26,11 +29,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [])
 
   const login = (token: string, username: string) => {
-    localStorage.setItem("token", token)
-    localStorage.setItem("username", username)
-    setIsAuthenticated(true)
-    setUsername(username)
-  }
+    localStorage.setItem("token", token);
+    localStorage.setItem("username", username);
+    setIsAuthenticated(true);
+    setUsername(username);
+
+  };
 
   const logout = () => {
     localStorage.removeItem("token")
@@ -49,4 +53,5 @@ export const useAuth = () => {
   }
   return context
 }
+
 

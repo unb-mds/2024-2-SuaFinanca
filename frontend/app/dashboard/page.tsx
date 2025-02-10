@@ -1,13 +1,14 @@
 "use client"
-
-import { useState } from "react"
+import { useState, useEffect } from "react";
 import { FaWallet, FaArrowUp, FaArrowDown } from "react-icons/fa"
 import Layout from "../components/Layout"
 import { useAuth } from "../contexts/AuthContext"
 import Login from "../login/page"
 
+
 export default function Dashboard() {
   const { isAuthenticated, username } = useAuth()
+  const [loadedUsername, setLoadedUsername] = useState("");
   const [showLogin, setShowLogin] = useState(false)
   const [currentMonth] = useState("novembro")
 
@@ -15,12 +16,18 @@ export default function Dashboard() {
     setShowLogin(false)
   }
 
+  useEffect(() => {
+    if (isAuthenticated && username) {
+      setLoadedUsername(username);
+    }
+  }, [isAuthenticated, username]);
+
   return (
     <Layout>
       <div className="dashboard-content">
         <div className="dashboard-header">
           <div className="month-selector">{currentMonth}</div>
-          <div className="welcome-message">Olá, {isAuthenticated ? username : "undefined"}</div>
+          <div className="welcome-message">Olá, {isAuthenticated ? loadedUsername || "Carregando..." : "Visitante"}</div>
         </div>
 
         <div className="cards-grid">

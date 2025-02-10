@@ -24,8 +24,10 @@ export default function Login({ onLoginSuccess }: LoginProps) {
         password: password,
       })
 
-      const { token, name } = response.data
-      login(token, name)
+      console.log("Resposta da API:", response.data);
+
+      const { token, user } = response.data
+      login(token, user.name)
 
       if (onLoginSuccess) {
         onLoginSuccess()
