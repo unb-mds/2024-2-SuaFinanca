@@ -7,12 +7,8 @@ module.exports = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy', // trata importações de CSS
   },
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest', // transforma arquivos TS e TSX
-  },
-  globals: {
-    'ts-jest': {
-      useESM: true, // habilita o suporte a ESM
-    },
+    // Passa a configuração do ts-jest (useESM: true) diretamente na propriedade transform
+    '^.+\\.(ts|tsx)$': ['ts-jest', { useESM: true }],
   },
   // Indica ao Jest que os arquivos com extensão .ts e .tsx devem ser tratados como módulos ESM
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
