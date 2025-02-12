@@ -1,11 +1,12 @@
 import {
-  UpdateUserParams,
   IAuthUserRepository,
+  UpdateUserParams,
 } from "@/application/interfaces/domain/entities/user/IauthUser";
+
 import { IUpdateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
+import { PasswordHash } from "../../interfaces/utils/passwordHash";
 import { UpdateUserReturn } from "@/main/config/helpers/protocol/user/updateUserProtocols";
 import { log } from "@/main/config/logs/log";
-import { PasswordHash } from "../interfaces/utils/passwordHash";
 
 const logger = log("UpdateUserUseCase");
 
