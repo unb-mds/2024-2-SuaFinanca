@@ -7,6 +7,7 @@ const CreateTransactionSchema = z.object({
       message: "Invalid transaction type",
     }),
   amount: z.number().positive("Amount must be a positive number"),
+  description: z.string().min(1, "Description cannot be empty").optional(),
   userId: z.number().int().positive("User ID must be a positive integer"),
   categoryName: z.string().optional(),
   date: z.string().refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
