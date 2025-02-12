@@ -5,7 +5,7 @@ import { HttpRequest } from "@/main/config/helpers/protocol/protocols";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
 import { UpdateUserController } from "@/main/controllers/user/updateUserController";
 import { UpdateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
-import { UpdateUserUseCase } from "@/application/useCases/updateUserUseCase";
+import { UpdateUserUseCase } from "@/application/useCases/user/updateUserUseCase";
 
 describe("UpdateUserController", () => {
   let updateUserController: UpdateUserController;

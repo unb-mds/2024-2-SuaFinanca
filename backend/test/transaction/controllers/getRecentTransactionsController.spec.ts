@@ -26,7 +26,7 @@ describe("GetRecentTransactionsController", () => {
     // Arrange
     const userId = 1;
     const httpRequest: HttpRequest<GetRecentTransactionsParams> = {
-      query: { limit: "1" },
+      query: { limit: "2" },
       userId,
     };
 
@@ -34,14 +34,22 @@ describe("GetRecentTransactionsController", () => {
       type: TransactionType.INCOME,
       amount: 2000,
       userId,
-      date: "2025-02-01T03:00:00Z",
+      date: "2025-01-01T03:00:00Z",
     });
 
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.EXPENSE,
       amount: 500,
       userId,
-      date: "2025-02-10T03:00:00Z",
+      date: "2025-01-02T03:00:00Z",
+    });
+
+    await inMemoryTransactionRepository.createTransaction({
+      type: TransactionType.INCOME,
+      amount: 2000,
+      description: "Description",
+      userId,
+      date: "2025-01-03T03:00:00Z",
     });
 
     const httpResponse =
@@ -53,10 +61,18 @@ describe("GetRecentTransactionsController", () => {
       recent: {
         transaction: [
           {
-            type: "EXPENSE",
+            type: "INCOME",
+            amount: 2000,
+            description: "Description",
             categoryId: null,
+            date: new Date("2025-01-03T03:00:00.000Z"),
+          },
+          {
+            type: "EXPENSE",
             amount: 500,
-            date: new Date("2025-02-10T03:00:00.000Z"),
+            description: null,
+            categoryId: null,
+            date: new Date("2025-01-02T03:00:00.000Z"),
           },
         ],
       },

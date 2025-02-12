@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { BcryptPassword } from "@/application/utils/hashUtils";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
 import { LoginUserReturn } from "@/main/config/helpers/protocol/user/authUserProtocols";
-import { LoginUserUseCase } from "@/application/useCases/loginUserUseCase";
+import { LoginUserUseCase } from "@/application/useCases/user/loginUserUseCase";
 import { TokenGenerator } from "@/application/interfaces/utils/tokenGenerator";
 import { UserFactory } from "@/domain/factories/userFactory";
 

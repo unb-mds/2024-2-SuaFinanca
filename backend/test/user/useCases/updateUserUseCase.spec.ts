@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import { BcryptPassword } from "@/application/utils/hashUtils";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
-import { UpdateUserUseCase } from "@/application/useCases/updateUserUseCase";
+import { UpdateUserUseCase } from "@/application/useCases/user/updateUserUseCase";
 
 describe("UpdateUserUseCase", () => {
   let bcryptPassword: BcryptPassword;
