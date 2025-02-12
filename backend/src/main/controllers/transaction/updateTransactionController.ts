@@ -70,6 +70,7 @@ export class UpdateTransactionController implements IController {
         transaction: {
           type: updatedTransaction.transaction.type,
           amount: updatedTransaction.transaction.amount,
+          description: updatedTransaction.transaction.description,
           categoryName: updatedTransaction.transaction.categoryName,
           date: updatedTransaction.transaction.date,
         },

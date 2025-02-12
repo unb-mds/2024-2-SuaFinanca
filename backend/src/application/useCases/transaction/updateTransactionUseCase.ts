@@ -45,12 +45,18 @@ export class UpdateTransactionUseCase implements IUpdateTransactionUseCase {
       }
     }
 
+    const description =
+      params.description === null
+        ? null
+        : (params.description ?? existingTransaction.description);
+
     const updatedTransaction =
       await this.transactionRepository.updateTransaction({
         id: params.id,
-        userId: params.userId,
         type: params.type ?? existingTransaction.type,
         amount: params.amount ?? existingTransaction.amount,
+        description,
+        userId: params.userId,
         categoryId,
         date: params.date ?? existingTransaction.date.toISOString(),
       });
@@ -78,6 +84,7 @@ export class UpdateTransactionUseCase implements IUpdateTransactionUseCase {
       transaction: {
         type: updatedTransaction.type,
         amount: updatedTransaction.amount,
+        description: updatedTransaction.description ?? undefined,
         categoryName: categoryName ?? undefined,
         date: updatedTransaction.date,
       },

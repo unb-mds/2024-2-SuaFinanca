@@ -32,6 +32,7 @@ export class GetRecentTransactionsController implements IController {
         recentTransactions.recent.transaction.map((transaction) => ({
           type: transaction.type,
           amount: transaction.amount,
+          description: transaction.description ?? null,
           categoryId: transaction.categoryId ?? null,
           date: transaction.date,
         }));
