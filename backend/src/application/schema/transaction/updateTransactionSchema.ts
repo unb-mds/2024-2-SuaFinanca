@@ -9,6 +9,11 @@ const UpdateTransactionSchema = z.object({
     .int()
     .positive("Amount must be a positive integer")
     .optional(),
+  description: z
+    .string()
+    .min(1, "Description cannot be empty")
+    .max(255, "Description cannot exceed 255 characters")
+    .optional(),
   categoryName: z.string().nullable().optional(),
   date: z.string().min(1, "Date cannot be empty").optional(),
 });
