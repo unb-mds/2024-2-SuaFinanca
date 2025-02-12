@@ -2,6 +2,7 @@ export interface UpdateTransactionReturn {
   transaction: {
     type: string;
     amount: number;
+    description?: string;
     categoryName?: string;
     date: Date;
   };
@@ -12,6 +13,7 @@ export interface UpdateTransactionResponse {
   transaction: {
     type: string;
     amount: number;
+    description?: string;
     categoryName?: string;
     date: Date;
   };
