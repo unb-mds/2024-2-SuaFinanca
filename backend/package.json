@@ -9,7 +9,7 @@
   "scripts": {
     "commit": "cz",
     "start": "node dist/src/server.js",
-    "dev": "tsx src/server.ts",
+    "dev": "tsx watch src/server.ts",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "vitest --passWithNoTests",
