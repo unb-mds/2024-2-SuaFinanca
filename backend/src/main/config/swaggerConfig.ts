@@ -21,6 +21,7 @@ const options = {
     tags: [
       { name: "Users", description: "User management" },
       { name: "Transactions", description: "Transaction management" },
+      { name: "Categories", description: "Category management" },
     ],
     components: {
       securitySchemes: {
@@ -40,6 +41,7 @@ const options = {
   apis: [
     "./src/main/routes/user/userRoutes.ts",
     "./src/main/routes/transaction/transactionRoutes.ts",
+    "./src/main/routes/category/categoryRoutes.ts",
   ],
 };
 
