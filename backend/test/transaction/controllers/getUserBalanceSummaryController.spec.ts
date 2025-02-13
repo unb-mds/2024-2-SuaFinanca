@@ -48,6 +48,7 @@ describe("GetUserBalanceController", () => {
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.INCOME,
       amount: 2000,
+      description: "Description",
       userId,
       date: "2025-02-01T03:00:00Z",
     });
@@ -55,6 +56,7 @@ describe("GetUserBalanceController", () => {
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.EXPENSE,
       amount: 500,
+      description: "Description",
       userId,
       date: "2025-02-10T03:00:00Z",
     });
@@ -71,16 +73,18 @@ describe("GetUserBalanceController", () => {
         incomeTransactions: [
           {
             type: "INCOME",
-            categoryId: null,
             amount: 2000,
+            description: "Description",
+            categoryId: null,
             date: new Date("2025-02-01T03:00:00.000Z"),
           },
         ],
         expenseTransactions: [
           {
             type: "EXPENSE",
-            categoryId: null,
             amount: 500,
+            description: "Description",
+            categoryId: null,
             date: new Date("2025-02-10T03:00:00.000Z"),
           },
         ],
@@ -142,6 +146,7 @@ describe("GetUserBalanceController", () => {
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.INCOME,
       amount: 1000,
+      description: "Description",
       userId,
       date: "2025-02-01T03:00:00Z",
     });
@@ -156,6 +161,7 @@ describe("GetUserBalanceController", () => {
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.EXPENSE,
       amount: 300,
+      description: "Description",
       userId,
       date: "2025-02-10T03:00:00Z",
     });
@@ -179,28 +185,32 @@ describe("GetUserBalanceController", () => {
         incomeTransactions: [
           {
             type: "INCOME",
-            categoryId: null,
             amount: 1000,
+            description: "Description",
+            categoryId: null,
             date: new Date("2025-02-01T03:00:00.000Z"),
           },
           {
             type: "INCOME",
-            categoryId: null,
             amount: 500,
+            description: null,
+            categoryId: null,
             date: new Date("2025-02-05T03:00:00.000Z"),
           },
         ],
         expenseTransactions: [
           {
             type: "EXPENSE",
-            categoryId: null,
             amount: 300,
+            description: "Description",
+            categoryId: null,
             date: new Date("2025-02-10T03:00:00.000Z"),
           },
           {
             type: "EXPENSE",
-            categoryId: null,
             amount: 200,
+            description: null,
+            categoryId: null,
             date: new Date("2025-02-15T03:00:00.000Z"),
           },
         ],

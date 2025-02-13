@@ -1,6 +1,6 @@
 import { ICategoryRepository } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 import { ICategoryWithId } from "@/domain/entities/Category";
-import { IGetCategoryService } from "../interfaces/services/IgetCategoryService";
+import { IGetCategoryService } from "@/application/interfaces/services/IgetCategoryService";
 
 export class GetCategoryService implements IGetCategoryService {
   constructor(private readonly categoryRepository: ICategoryRepository) {}

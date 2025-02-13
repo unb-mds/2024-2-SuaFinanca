@@ -1,11 +1,12 @@
-import { vi, describe, it, beforeEach, expect } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { DeleteTransactionController } from "@/main/controllers/transaction/deleteTransactionController";
 import { DeleteTransactionUseCase } from "@/application/useCases/transaction/deleteTransactionUseCase";
-import { InMemoryTransactionRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryTransactionRepository";
 import { GetCategoryService } from "@/application/services/getCategoryService";
-import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
-import { TransactionType } from "@/domain/entities/Transaction";
 import { HttpRequest } from "@/main/config/helpers/protocol/protocols";
+import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
+import { InMemoryTransactionRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryTransactionRepository";
+import { TransactionType } from "@/domain/entities/Transaction";
 
 describe("DeleteTransactionController", () => {
   let deleteTransactionController: DeleteTransactionController;

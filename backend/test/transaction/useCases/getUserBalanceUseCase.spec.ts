@@ -39,6 +39,7 @@ describe("GetUserBalanceUseCase", () => {
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.INCOME,
       amount: 2000,
+      description: "Description",
       userId,
       date: "2025-02-01T03:00:00Z",
     });
@@ -46,6 +47,7 @@ describe("GetUserBalanceUseCase", () => {
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.EXPENSE,
       amount: 500,
+      description: "Description",
       userId,
       date: "2025-02-10T03:00:00Z",
     });
@@ -64,6 +66,7 @@ describe("GetUserBalanceUseCase", () => {
             id: 1,
             userId: 1,
             amount: 2000,
+            description: "Description",
             date: new Date("2025-02-01T03:00:00.000Z"),
             type: TransactionType.INCOME,
           },
@@ -73,6 +76,7 @@ describe("GetUserBalanceUseCase", () => {
             id: 2,
             userId: 1,
             amount: 500,
+            description: "Description",
             date: new Date("2025-02-10T03:00:00.000Z"),
             type: TransactionType.EXPENSE,
           },
@@ -135,6 +139,7 @@ describe("GetUserBalanceUseCase", () => {
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.INCOME,
       amount: 1000,
+      description: "Description",
       userId,
       date: "2025-02-01T03:00:00Z",
     });
@@ -149,6 +154,7 @@ describe("GetUserBalanceUseCase", () => {
     await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.EXPENSE,
       amount: 300,
+      description: "Description",
       userId,
       date: "2025-02-10T03:00:00Z",
     });
@@ -174,6 +180,7 @@ describe("GetUserBalanceUseCase", () => {
             id: 1,
             userId: 1,
             amount: 1000,
+            description: "Description",
             date: new Date("2025-02-01T03:00:00.000Z"),
             type: TransactionType.INCOME,
           },
@@ -190,6 +197,7 @@ describe("GetUserBalanceUseCase", () => {
             id: 3,
             userId: 1,
             amount: 300,
+            description: "Description",
             date: new Date("2025-02-10T03:00:00.000Z"),
             type: TransactionType.EXPENSE,
           },

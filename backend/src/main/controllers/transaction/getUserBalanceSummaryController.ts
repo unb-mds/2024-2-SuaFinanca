@@ -31,6 +31,7 @@ export class GetUserBalanceSummaryController implements IController {
         balanceResult.balance.incomeTransactions.map((transaction) => ({
           type: transaction.type,
           amount: transaction.amount,
+          description: transaction.description ?? null,
           categoryId: transaction.categoryId ?? null,
           date: transaction.date,
         }));
@@ -39,6 +40,7 @@ export class GetUserBalanceSummaryController implements IController {
         balanceResult.balance.expenseTransactions.map((transaction) => ({
           type: transaction.type,
           amount: transaction.amount,
+          description: transaction.description ?? null,
           categoryId: transaction.categoryId ?? null,
           date: transaction.date,
         }));

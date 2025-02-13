@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { UpdateTransactionUseCase } from "@/application/useCases/transaction/updateTransactionUseCase";
-import { InMemoryTransactionRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryTransactionRepository";
-import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
+
 import { GetCategoryService } from "@/application/services/getCategoryService";
+import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
+import { InMemoryTransactionRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryTransactionRepository";
 import { TransactionType } from "@/domain/entities/Transaction";
+import { UpdateTransactionUseCase } from "@/application/useCases/transaction/updateTransactionUseCase";
 
 describe("UpdateTransactionUseCase", () => {
   let updateTransactionUseCase: UpdateTransactionUseCase;
@@ -60,6 +61,10 @@ describe("UpdateTransactionUseCase", () => {
       name: "Salary",
       userId,
     });
+    await inMemoryCategoryRepository.createCategory({
+      name: "Transport",
+      userId,
+    });
 
     const transaction = await inMemoryTransactionRepository.createTransaction({
       type: TransactionType.INCOME,
@@ -72,7 +77,7 @@ describe("UpdateTransactionUseCase", () => {
     const updateParams = {
       id: transaction.id,
       userId,
-      categoryName: "Salary",
+      categoryName: "Transport",
     };
 
     // Act
@@ -84,7 +89,7 @@ describe("UpdateTransactionUseCase", () => {
         type: TransactionType.INCOME,
         amount: 1000,
         date: new Date("2024-01-01T00:00:00Z"),
-        categoryName: "Salary",
+        categoryName: "Transport",
       },
     });
   });
@@ -158,7 +163,80 @@ describe("UpdateTransactionUseCase", () => {
         type: TransactionType.INCOME,
         amount: 1000,
         date: new Date("2024-01-01T00:00:00Z"),
-        categoryName: undefined,
+      },
+    });
+  });
+
+  it("should update a transaction with description", async () => {
+    // Arrange
+    const userId = 1;
+    const category = await inMemoryCategoryRepository.createCategory({
+      name: "Salary",
+      userId,
+    });
+    await inMemoryCategoryRepository.createCategory({
+      name: "Transport",
+      userId,
+    });
+
+    const transaction = await inMemoryTransactionRepository.createTransaction({
+      type: TransactionType.INCOME,
+      amount: 1000,
+      description: "string",
+      userId,
+      date: "2024-01-01T00:00:00Z",
+      categoryId: category.id,
+    });
+
+    const updateParams = {
+      id: transaction.id,
+      description: "description",
+      userId,
+      categoryName: "Transport",
+    };
+
+    // Act
+    const result = await updateTransactionUseCase.execute(updateParams);
+
+    // Assert
+    expect(result).toEqual({
+      transaction: {
+        type: TransactionType.INCOME,
+        amount: 1000,
+        description: "description",
+        date: new Date("2024-01-01T00:00:00Z"),
+        categoryName: "Transport",
+      },
+    });
+  });
+
+  it("should remove the description when it is null", async () => {
+    // Arrange
+    const userId = 1;
+
+    const transaction = await inMemoryTransactionRepository.createTransaction({
+      type: TransactionType.INCOME,
+      amount: 1000,
+      description: "description",
+      userId,
+      date: "2024-01-01T00:00:00Z",
+    });
+
+    const updateParams = {
+      id: transaction.id,
+      description: null,
+      userId,
+    };
+
+    // Act
+    const result = await updateTransactionUseCase.execute(updateParams);
+
+    // Assert
+    expect(result).toEqual({
+      transaction: {
+        type: TransactionType.INCOME,
+        amount: 1000,
+        date: new Date("2024-01-01T00:00:00Z"),
       },
     });
   });

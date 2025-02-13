@@ -12,7 +12,7 @@ import { formatISO, parseISO } from "date-fns";
 
 import { CreateTransactionParams } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 import { CreateTransactionResponse } from "@/main/config/helpers/protocol/transaction/createTransactionProtocols";
-import { CreateTransactionSchema } from "@/application/services/createTransactionSchema";
+import { CreateTransactionSchema } from "@/application/schema/transaction/createTransactionSchema";
 import { ICreateTransactionUseCase } from "@/main/config/helpers/useCases/IuseCases";
 import { log } from "@/main/config/logs/log";
 

@@ -11,7 +11,7 @@ import {
 
 import { CreateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
 import { CreateUserResponse } from "@/main/config/helpers/protocol/user/authUserProtocols";
-import { CreateUserSchema } from "@/application/services/createUserSchema";
+import { CreateUserSchema } from "@/application/schema/user/createUserSchema";
 import { ICreateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
 
 export class CreateUserController implements IController {

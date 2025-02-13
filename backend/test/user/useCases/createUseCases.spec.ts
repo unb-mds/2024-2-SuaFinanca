@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
 import { BcryptPassword } from "@/application/utils/hashUtils";
-import { CreateUserUseCase } from "@/application/useCases/createUseCases";
+import { CreateUserUseCase } from "@/application/useCases/user/createUseCases";
 import { DefaultCategoryService } from "@/application/services/defaultCategoryService";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
 import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
