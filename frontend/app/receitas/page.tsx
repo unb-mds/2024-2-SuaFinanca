@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa"
 import "./receitas.css"
@@ -8,21 +8,62 @@ import Layout from "../components/Layout"
 import { useAuth } from "../contexts/AuthContext"
 
 const months = [
-  "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
-  "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro " 
+  "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ]
 
 export default function Receitas() {
   const { isAuthenticated } = useAuth()
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(months.length - 1)
-  
-    const previousMonth = () => {
-      setCurrentMonthIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : months.length - 1))
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
+  const BASE_URL = "http://localhost:8000"
+
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(new Date().getMonth())
+  const [totalRecebido, setTotalRecebido] = useState(0)
+  const [totalGasto, setTotalGasto] = useState(0)
+
+  // Busca o balanço de receitas e despesas do mês selecionado
+  useEffect(() => {
+    if (!isAuthenticated || !token) return
+
+    const fetchBalance = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/transaction/balance?month=${currentMonthIndex + 1}&year=${new Date().getFullYear()}`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        })
+
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar balanço: ${response.statusText}`)
+        }
+
+        const data = await response.json()
+
+        // Verifica se "balance" existe na resposta
+        if (!data || !data.balance || typeof data.balance !== "object") {
+          throw new Error("Estrutura da API não contém o balanço esperado.")
+        }
+
+        setTotalRecebido(data.balance.totalIncome || 0)
+        setTotalGasto(data.balance.totalExpense || 0)
+
+      } catch (error) {
+        console.error("Erro ao carregar balanço:", error)
+      }
     }
-  
-    const nextMonth = () => {
-      setCurrentMonthIndex((prevIndex) => (prevIndex < months.length - 1 ? prevIndex + 1 : 0))
-    }
+
+    fetchBalance()
+  }, [currentMonthIndex, token, isAuthenticated])
+
+  const previousMonth = () => {
+    setCurrentMonthIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : months.length - 1))
+  }
+
+  const nextMonth = () => {
+    setCurrentMonthIndex((prevIndex) => (prevIndex < months.length - 1 ? prevIndex + 1 : 0))
+  }
 
   if (!isAuthenticated) {
     return (
@@ -57,7 +98,6 @@ export default function Receitas() {
               <FaArrowRight />
             </button>
           </div>
-
           <div className="table-container">
             <table>
               <thead>
@@ -79,19 +119,19 @@ export default function Receitas() {
         </div>
 
         <div className="summary-cards">
-          <div className="summary-card pending">
-            <h3>Receitas Pendentes</h3>
-            <p className="amount">R$ 0,00</p>
-            <div className="icon up-arrow">↑</div>
-          </div>
           <div className="summary-card received">
             <h3>Receitas Recebidas</h3>
-            <p className="amount">R$ 0,00</p>
+            <p className="amount">R$ {totalRecebido.toFixed(2)}</p>
+            <div className="icon up-arrow">↑</div>
+          </div>
+          <div className="summary-card spent">
+            <h3>Despesas Totais</h3>
+            <p className="amount">R$ {totalGasto.toFixed(2)}</p>
             <div className="icon down-arrow">↓</div>
           </div>
           <div className="summary-card total">
-            <h3>Total</h3>
-            <p className="amount">R$ 0,00</p>
+            <h3>Saldo do Mês</h3>
+            <p className="amount">R$ {(totalRecebido - totalGasto).toFixed(2)}</p>
             <div className="icon balance">⚖</div>
           </div>
         </div>
@@ -99,4 +139,3 @@ export default function Receitas() {
     </Layout>
   )
 }
-

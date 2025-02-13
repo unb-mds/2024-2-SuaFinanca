@@ -5,21 +5,68 @@ import Link from "next/link"
 import { FaArrowLeft } from "react-icons/fa"
 import "./nova-despesa.css"
 import Dashboard from "../../dashboard/page"
+import { useAuth } from "../../contexts/AuthContext"
 
 export default function NovaDespesa() {
+  const { isAuthenticated } = useAuth()
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
+  const BASE_URL = "http://localhost:8000"
+
   const [valor, setValor] = useState("0.00")
   const [descricao, setDescricao] = useState("")
   const [conta, setConta] = useState("")
   const [situacao, setSituacao] = useState("")
   const [dataPagamento, setDataPagamento] = useState("HOJE")
+  const [dataPersonalizada, setDataPersonalizada] = useState(new Date().toISOString().split("T")[0])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Add submission logic here
+
+    if (!isAuthenticated || !token) {
+      alert("Usuário não autenticado! Faça login para continuar.")
+      return
+    }
+
+    // Definir a data correta com base na seleção do usuário
+    let formattedDate = new Date().toISOString().split("T")[0]
+    if (dataPagamento === "ONTEM") {
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+      formattedDate = yesterday.toISOString().split("T")[0]
+    } else if (dataPagamento === "OUTROS") {
+      formattedDate = dataPersonalizada
+    }
+
+    const payload = {
+      type: "EXPENSE",
+      amount: parseFloat(valor),
+      categoryName: descricao,
+      date: formattedDate
+    }
+
+    try {
+      const response = await fetch(`${BASE_URL}/transaction`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(`Erro ao criar despesa: ${errorData.message || response.statusText}`)
+      }
+
+      alert("Despesa criada com sucesso!")
+    } catch (error) {
+      console.error("Erro ao criar despesa:", error)
+      alert("Erro ao criar despesa. Tente novamente.")
+    }
   }
 
   return (
-    <Dashboard>
       <div className="new-transaction-container">
         <div className="new-transaction-card">
           <div className="header-section">
@@ -65,12 +112,23 @@ export default function NovaDespesa() {
               </button>
             </div>
 
+            {/* Se o usuário selecionar "OUTROS", exibe o campo de data */}
+            {dataPagamento === "OUTROS" && (
+              <div className="input-field">
+                <input
+                  type="date"
+                  value={dataPersonalizada}
+                  onChange={(e) => setDataPersonalizada(e.target.value)}
+                />
+              </div>
+            )}
+
             <div className="input-field">
               <input
                 type="text"
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
-                placeholder="Descrição"
+                placeholder="Categoria da despesa"
               />
             </div>
 
@@ -88,9 +146,6 @@ export default function NovaDespesa() {
             </div>
 
             <div className="form-actions">
-              <button type="button" className="secondary-button">
-                Salvar e criar conta
-              </button>
               <button type="submit" className="primary-button danger">
                 Salvar
               </button>
@@ -98,7 +153,5 @@ export default function NovaDespesa() {
           </form>
         </div>
       </div>
-    </Dashboard>
   )
 }
-
