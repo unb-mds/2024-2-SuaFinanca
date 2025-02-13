@@ -10,7 +10,7 @@ import { useAuth } from "../../contexts/AuthContext"
 export default function NovaDespesa() {
   const { isAuthenticated } = useAuth()
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
-  const BASE_URL = "http://localhost:8000"
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
   const [valor, setValor] = useState("0.00")
   const [descricao, setDescricao] = useState("")

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { FaArrowLeft } from "react-icons/fa"
 import "./nova-receita.css"
@@ -9,45 +9,38 @@ import { useAuth } from "../../contexts/AuthContext"
 export default function NovaReceita() {
   const { isAuthenticated } = useAuth()
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
-  const BASE_URL = "http://localhost:8000"
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
+
 
   const [valor, setValor] = useState("0.00")
-  const [descricao, setDescricao] = useState("")
-  const [dataPagamento, setDataPagamento] = useState("2025-01-01")
+  const [categoria, setCategoria] = useState("")
+  const [dataPagamento, setDataPagamento] = useState("HOJE")
+  const [dataPersonalizada, setDataPersonalizada] = useState(new Date().toISOString().split("T")[0])
 
-  // Carrega a última transação para sugerir uma categoria válida
-  useEffect(() => {
-    if (!token || !isAuthenticated) return
+  // Criar categoria se não existir
+  const criarCategoria = async (categoriaNome: string) => {
+    if (!categoriaNome) return null
 
-    const fetchTransaction = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/transaction/recent?limit=1`, {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        })
+    try {
+      const response = await fetch(`${BASE_URL}/category`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: categoriaNome })
+      })
 
-        if (!response.ok) {
-          throw new Error(`Erro ao buscar transação: ${response.statusText}`)
-        }
-
-        const data = await response.json()
-
-        if (data.length > 0) {
-          const lastTransaction = data[0] 
-          setValor(lastTransaction.amount.toString())
-          setDescricao(lastTransaction.categoryName) // Preenche com uma categoria válida
-          setDataPagamento(lastTransaction.date)
-        }
-      } catch (error) {
-        console.error("Erro ao carregar transação:", error)
+      if (!response.ok) {
+        throw new Error(`Erro ao criar categoria: ${response.statusText}`)
       }
-    }
 
-    fetchTransaction()
-  }, [token, isAuthenticated])
+      return categoriaNome
+    } catch (error) {
+      console.error("Erro ao criar categoria:", error)
+      return null
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,11 +50,29 @@ export default function NovaReceita() {
       return
     }
 
+    // Definir a data correta com base na seleção do usuário
+    let formattedDate = new Date().toISOString().split("T")[0]
+    if (dataPagamento === "ONTEM") {
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+      formattedDate = yesterday.toISOString().split("T")[0]
+    } else if (dataPagamento === "OUTROS") {
+      formattedDate = dataPersonalizada
+    }
+
+    // Criar categoria antes de cadastrar a receita
+    const categoriaFinal = await criarCategoria(categoria)
+    if (!categoriaFinal) {
+      alert("Erro ao definir a categoria.")
+      return
+    }
+
     const payload = {
       type: "INCOME",
       amount: parseFloat(valor),
-      categoryName: descricao,
-      date: dataPagamento
+      description: "",
+      categoryName: categoriaFinal,
+      date: formattedDate
     }
 
     try {
@@ -75,72 +86,89 @@ export default function NovaReceita() {
       })
 
       if (!response.ok) {
-        const contentType = response.headers.get("content-type")
-        let errorMessage = "Erro desconhecido"
-
-        if (contentType && contentType.includes("application/json")) {
-          const errorData = await response.json()
-          errorMessage = errorData.message || response.statusText
-        } else {
-          errorMessage = await response.text() // Captura mensagens de erro em texto simples
-        }
-
-        throw new Error(`Erro ao criar receita: ${errorMessage}`)
+        const errorData = await response.json()
+        throw new Error(`Erro ao criar receita: ${errorData.message || response.statusText}`)
       }
 
       alert("Receita criada com sucesso!")
     } catch (error) {
       console.error("Erro ao criar receita:", error)
-      alert(`Erro ao criar receita: ${error.message}`)
+      alert("Erro ao criar receita. Tente novamente.")
     }
   }
 
   return (
-      <div className="new-transaction-container">
-        <div className="new-transaction-card">
-          <div className="header-section">
-            <Link href="/receitas" className="back-button">
-              <FaArrowLeft />
-            </Link>
-            <h1>Nova Receita</h1>
+    <div className="new-transaction-container">
+      <div className="new-transaction-card">
+        <div className="header-section">
+          <Link href="/receitas" className="back-button">
+            <FaArrowLeft />
+          </Link>
+          <h1>Nova Receita</h1>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="value-input">
+            <span className="currency">R$</span>
+            <input
+              type="number"
+              step="0.01"
+              value={valor}
+              onChange={(e) => setValor(e.target.value)}
+              placeholder="0.00"
+            />
           </div>
 
-          <form onSubmit={handleSubmit}>
-            <div className="value-input">
-              <span className="currency">R$</span>
-              <input
-                type="number"
-                step="0.01"
-                value={valor}
-                onChange={(e) => setValor(e.target.value)}
-                placeholder="0.00"
-              />
-            </div>
+          <div className="date-selector">
+            <button
+              type="button"
+              className={dataPagamento === "HOJE" ? "active" : ""}
+              onClick={() => setDataPagamento("HOJE")}
+            >
+              HOJE
+            </button>
+            <button
+              type="button"
+              className={dataPagamento === "ONTEM" ? "active" : ""}
+              onClick={() => setDataPagamento("ONTEM")}
+            >
+              ONTEM
+            </button>
+            <button
+              type="button"
+              className={dataPagamento === "OUTROS" ? "active" : ""}
+              onClick={() => setDataPagamento("OUTROS")}
+            >
+              OUTROS
+            </button>
+          </div>
 
+          {dataPagamento === "OUTROS" && (
             <div className="input-field">
               <input
-                type="text"
-                value={descricao}
-                onChange={(e) => setDescricao(e.target.value)}
-                placeholder="Categoria"
-              />
-            </div>
-
-            <div className="date-selector">
-              <input
                 type="date"
-                value={dataPagamento}
-                onChange={(e) => setDataPagamento(e.target.value)}
+                value={dataPersonalizada}
+                onChange={(e) => setDataPersonalizada(e.target.value)}
               />
             </div>
+          )}
 
-            <div className="form-actions">
-              <button type="submit" className="primary-button">
-                Salvar Receita
-              </button>
-            </div>
-          </form>
-        </div>
+          <div className="input-field">
+            <input
+              type="text"
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+              placeholder="Digite a categoria da receita"
+            />
+          </div>
+
+          <div className="form-actions">
+            <button type="submit" className="primary-button">
+              Salvar Receita
+            </button>
+          </div>
+        </form>
       </div>
+    </div>
   )
 }

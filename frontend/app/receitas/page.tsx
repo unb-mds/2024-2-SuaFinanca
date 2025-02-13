@@ -15,19 +15,21 @@ const months = [
 export default function Receitas() {
   const { isAuthenticated } = useAuth()
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
-  const BASE_URL = "http://localhost:8000"
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
+
 
   const [currentMonthIndex, setCurrentMonthIndex] = useState(new Date().getMonth())
+  const [receitas, setReceitas] = useState([])
+  const [despesas, setDespesas] = useState([])
   const [totalRecebido, setTotalRecebido] = useState(0)
   const [totalGasto, setTotalGasto] = useState(0)
 
-  // Busca o balanço de receitas e despesas do mês selecionado
   useEffect(() => {
     if (!isAuthenticated || !token) return
 
-    const fetchBalance = async () => {
+    const fetchTransacoes = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/transaction/balance?month=${currentMonthIndex + 1}&year=${new Date().getFullYear()}`, {
+        const response = await fetch(`${BASE_URL}/transaction/recent?limit=100`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -36,25 +38,42 @@ export default function Receitas() {
         })
 
         if (!response.ok) {
-          throw new Error(`Erro ao buscar balanço: ${response.statusText}`)
+          throw new Error(`Erro ao buscar transações: ${response.statusText}`)
         }
 
         const data = await response.json()
 
-        // Verifica se "balance" existe na resposta
-        if (!data || !data.balance || typeof data.balance !== "object") {
-          throw new Error("Estrutura da API não contém o balanço esperado.")
+        if (!data || !data.recent || !Array.isArray(data.recent.transaction)) {
+          throw new Error("Estrutura da API inesperada")
         }
 
-        setTotalRecebido(data.balance.totalIncome || 0)
-        setTotalGasto(data.balance.totalExpense || 0)
+        // Filtra transações por mês
+        const receitasFiltradas = data.recent.transaction.filter(
+          (item: any) => item.type === "INCOME" &&
+                         new Date(item.date).getMonth() === currentMonthIndex
+        )
+
+        const despesasFiltradas = data.recent.transaction.filter(
+          (item: any) => item.type === "EXPENSE" &&
+                         new Date(item.date).getMonth() === currentMonthIndex
+        )
+
+        setReceitas(receitasFiltradas)
+        setDespesas(despesasFiltradas)
+
+        // Calcula os totais
+        const totalReceitas = receitasFiltradas.reduce((sum: number, r: any) => sum + r.amount, 0)
+        const totalDespesas = despesasFiltradas.reduce((sum: number, d: any) => sum + d.amount, 0)
+
+        setTotalRecebido(totalReceitas)
+        setTotalGasto(totalDespesas)
 
       } catch (error) {
-        console.error("Erro ao carregar balanço:", error)
+        console.error("Erro ao carregar transações:", error)
       }
     }
 
-    fetchBalance()
+    fetchTransacoes()
   }, [currentMonthIndex, token, isAuthenticated])
 
   const previousMonth = () => {
@@ -98,18 +117,32 @@ export default function Receitas() {
               <FaArrowRight />
             </button>
           </div>
+
           <div className="table-container">
+            <h2>Receitas</h2>
             <table>
               <thead>
                 <tr>
-                  <th>Situação</th>
                   <th>Data</th>
-                  <th>Descrição</th>
-                  <th>Conta</th>
+                  <th>Descrição (Categoria)</th>
                   <th>Valor</th>
                 </tr>
               </thead>
-              <tbody>{/* Table content will be populated here */}</tbody>
+              <tbody>
+                {receitas.length === 0 ? (
+                  <tr>
+                    <td colSpan={3} style={{ textAlign: "center" }}>Nenhuma receita encontrada</td>
+                  </tr>
+                ) : (
+                  receitas.map((receita: any, index: number) => (
+                    <tr key={index}>
+                      <td>{new Date(receita.date).toLocaleDateString()}</td>
+                      <td>{receita.categoryName || "Sem categoria"}</td>
+                      <td>R$ {receita.amount.toFixed(2)}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
             </table>
           </div>
 

@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [saldoTotal, setSaldoTotal] = useState(0)
 
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
-  const BASE_URL = "http://localhost:8000"
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
   useEffect(() => {
     if (!isAuthenticated || !token) return

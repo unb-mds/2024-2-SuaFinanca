@@ -12,11 +12,12 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8000/user", {
+      await axios.post(`${BASE_URL}/user`, {
         name,
         email,
         password,

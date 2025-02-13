@@ -15,11 +15,12 @@ export default function Login({ onLoginSuccess }: LoginProps) {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const { login } = useAuth()
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     try {
-      const response = await axios.post("http://localhost:8000/user/login", {
+      const response = await axios.post(`${BASE_URL}/user/login`, {
         email: username,
         password: password,
       })

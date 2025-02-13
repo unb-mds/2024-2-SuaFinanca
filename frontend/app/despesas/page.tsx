@@ -15,7 +15,7 @@ const months = [
 export default function Despesas() {
   const { isAuthenticated } = useAuth()
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
-  const BASE_URL = "http://localhost:8000"
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
   const [currentMonthIndex, setCurrentMonthIndex] = useState(new Date().getMonth())
   const [despesas, setDespesas] = useState([])
