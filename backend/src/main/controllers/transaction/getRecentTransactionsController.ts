@@ -33,7 +33,7 @@ export class GetRecentTransactionsController implements IController {
           type: transaction.type,
           amount: transaction.amount,
           description: transaction.description ?? null,
-          categoryId: transaction.categoryId ?? null,
+          categoryName: transaction.categoryName ?? null,
           date: transaction.date,
         }));
 
@@ -44,7 +44,7 @@ export class GetRecentTransactionsController implements IController {
         },
       };
 
-      return niceRequest(responseBody);
+      return niceRequest<GetRecentTransactionsResponse>(responseBody);
     } catch {
       return serverError();
     }
