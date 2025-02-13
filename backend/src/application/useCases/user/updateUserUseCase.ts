@@ -17,11 +17,19 @@ export class UpdateUserUseCase implements IUpdateUserUseCase {
   ) {}
 
   async execute(params: UpdateUserParams): Promise<UpdateUserReturn | string> {
-    const user = await this.authUserRepository.findUserById(params.id);
+    const existingUser = await this.authUserRepository.findUserById(params.id);
 
-    if (!user) {
-      logger.warn(`User not found: ${params.id}`);
+    if (!existingUser) {
       return "User not found";
+    }
+
+    if (params.email) {
+      const emailInUse = await this.authUserRepository.findUserByEmail(
+        params.email,
+      );
+      if (emailInUse && emailInUse.id !== params.id) {
+        return "Email already in use";
+      }
     }
 
     if (params.password) {
@@ -32,6 +40,7 @@ export class UpdateUserUseCase implements IUpdateUserUseCase {
     const updatedUser = await this.authUserRepository.updateUser(params);
 
     logger.info(`User updated: ${updatedUser.email}`);
+
     return {
       user: {
         name: updatedUser.name,
