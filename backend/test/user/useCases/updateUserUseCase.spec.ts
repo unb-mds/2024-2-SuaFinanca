@@ -82,6 +82,26 @@ describe("UpdateUserUseCase", () => {
     });
   });
 
+  it("should throw an error if email is already in use", async () => {
+    // Arrange
+    inMemoryAuthUserRepository.createUser({
+      name: "Jane Doe",
+      email: "jane@example.com",
+      password: "password",
+    });
+
+    const params = {
+      id: 1,
+      email: "jane@example.com",
+    };
+
+    // Act
+    const result = await updateUserUseCase.execute(params);
+
+    // Assert
+    expect(result).toBe("Email already in use");
+  });
+
   it("should return 'User not found' for non-existent user", async () => {
     // Arrange
     const params = { id: 2 };
