@@ -51,7 +51,6 @@ jobs:
         run: npm install
         working-directory: ./frontend
 
-      - name: Run frontend tests
-        if: false
-        run: npm run test
+      - name: Run frontend linter
+        run: npm run lint:fix
         working-directory: ./frontend
