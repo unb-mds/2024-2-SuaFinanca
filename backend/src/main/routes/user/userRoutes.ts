@@ -83,8 +83,6 @@ userRoutes.post("/user/login", loginUser);
  *   get:
  *     summary: Get protected user data
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Protected user data retrieved successfully
@@ -99,8 +97,6 @@ userRoutes.get("/user/protected", authMiddleware, authUser);
  *   patch:
  *     summary: Update a user
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -134,8 +130,6 @@ userRoutes.patch("/user/update", authMiddleware, updateUser);
  *   delete:
  *     summary: Delete a user
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: User deleted successfully

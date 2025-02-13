@@ -18,6 +18,11 @@ const options = {
         url: process.env.RENDER_URL || "http://default-url.com",
       },
     ],
+    tags: [
+      { name: "Users", description: "User management" },
+      { name: "Transactions", description: "Transaction management" },
+      { name: "Categories", description: "Category management" },
+    ],
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -33,7 +38,11 @@ const options = {
       },
     ],
   },
-  apis: ["./src/**/*.ts"], // Caminho para os arquivos que contêm as anotações JSDoc
+  apis: [
+    "./src/main/routes/user/userRoutes.ts",
+    "./src/main/routes/transaction/transactionRoutes.ts",
+    "./src/main/routes/category/categoryRoutes.ts",
+  ],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
