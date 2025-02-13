@@ -18,6 +18,10 @@ const options = {
         url: "https://your-app-name.onrender.com",
       },
     ],
+    tags: [
+      { name: "Users", description: "User management" },
+      { name: "Transactions", description: "Transaction management" },
+    ],
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -33,7 +37,10 @@ const options = {
       },
     ],
   },
-  apis: ["./src/**/*.ts"], // Caminho para os arquivos que contêm as anotações JSDoc
+  apis: [
+    "./src/main/routes/user/userRoutes.ts",
+    "./src/main/routes/transaction/transactionRoutes.ts",
+  ],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
