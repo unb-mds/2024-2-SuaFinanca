@@ -1,19 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { FaArrowLeft, FaPlus, FaDollarSign, FaWallet } from "react-icons/fa"
-import "./saldo.css"
-import Layout from "../components/Layout"
-import { useAuth } from "../contexts/AuthContext"
+import { useState } from "react";
+import Link from "next/link";
+import { FaArrowLeft, FaPlus, FaDollarSign, FaWallet } from "react-icons/fa";
+import "./saldo.css";
+import Layout from "../components/Layout";
+import { useAuth } from "../contexts/AuthContext";
+
+interface Account {
+  id: number;
+  name: string;
+  balance: number;
+  type: string;
+}
 
 export default function Contas() {
-  const { isAuthenticated } = useAuth()
-  const [accounts, setAccounts] = useState([])
+  const { isAuthenticated } = useAuth();
+  const [accounts, setAccounts] = useState<Account[]>([]);
 
   const handleNewAccount = () => {
-    // Add new account logic here
-  }
+    setAccounts((prevAccounts) => [
+      ...prevAccounts,
+      {
+        id: prevAccounts.length + 1,
+        name: "Nova Conta",
+        balance: 0,
+        type: "Corrente",
+      },
+    ]);
+  };
 
   if (!isAuthenticated) {
     return (
@@ -25,7 +40,7 @@ export default function Contas() {
           </Link>
         </div>
       </Layout>
-    )
+    );
   }
 
   return (
@@ -59,7 +74,12 @@ export default function Contas() {
         <div className="summary-cards">
           <div className="summary-card current-balance">
             <h3>Saldo Atual</h3>
-            <p className="amount">R$ {accounts.reduce((sum, account) => sum + account.balance, 0).toFixed(2)}</p>
+            <p className="amount">
+              R${" "}
+              {accounts
+                .reduce((sum, account) => sum + account.balance, 0)
+                .toFixed(2)}
+            </p>
             <div className="icon">
               <FaDollarSign />
             </div>
@@ -74,6 +94,5 @@ export default function Contas() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
-

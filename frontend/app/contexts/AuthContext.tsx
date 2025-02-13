@@ -9,7 +9,9 @@ export type AuthContextType = {
   logout: () => Promise<void>;
 };
 
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined,
+);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -40,12 +42,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       sessionStorage.clear();
-    }
+    },
   };
 
   return (
-    <AuthContext.Provider value={dummyValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={dummyValue}>{children}</AuthContext.Provider>
   );
 };

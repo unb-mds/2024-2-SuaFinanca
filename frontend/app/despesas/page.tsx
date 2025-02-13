@@ -1,28 +1,42 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa"
-import "./despesas.css"
-import Layout from "../components/Layout"
-import { useAuth } from "../contexts/AuthContext"
+import { useState } from "react";
+import Link from "next/link";
+import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
+import "./despesas.css";
+import Layout from "../components/Layout";
+import { useAuth } from "../contexts/AuthContext";
 
 const months = [
-  "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
-  "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro " 
-]
+  "Janeiro ",
+  "Fevereiro ",
+  "Março ",
+  "Abril ",
+  "Maio ",
+  "Junho ",
+  "Julho ",
+  "Agosto ",
+  "Setembro ",
+  "Outubro ",
+  "Novembro ",
+  "Dezembro ",
+];
 
 export default function Despesas() {
-  const { isAuthenticated } = useAuth()
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(months.length - 1)
+  const { isAuthenticated } = useAuth();
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(months.length - 1);
 
   const previousMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : months.length - 1))
-  }
+    setCurrentMonthIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : months.length - 1,
+    );
+  };
 
   const nextMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex < months.length - 1 ? prevIndex + 1 : 0))
-  }
+    setCurrentMonthIndex((prevIndex) =>
+      prevIndex < months.length - 1 ? prevIndex + 1 : 0,
+    );
+  };
 
   if (!isAuthenticated) {
     return (
@@ -34,7 +48,7 @@ export default function Despesas() {
           </Link>
         </div>
       </Layout>
-    )
+    );
   }
 
   return (
@@ -97,6 +111,5 @@ export default function Despesas() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
-

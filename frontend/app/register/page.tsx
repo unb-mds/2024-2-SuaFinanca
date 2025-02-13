@@ -1,37 +1,37 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { FaUser, FaLock, FaEnvelope, FaArrowLeft } from "react-icons/fa"
-import axios from "axios"
-import "./register.css"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FaUser, FaLock, FaEnvelope, FaArrowLeft } from "react-icons/fa";
+import axios from "axios";
+import "./register.css";
 
 export default function Register() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const router = useRouter()
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
     try {
       await axios.post("http://localhost:8000/user/register", {
         name,
         email,
         password,
-      })
-      router.push("/?showLogin=true")
-    } catch (err) {
-      setError("Erro ao registrar usuário!")
+      });
+      router.push("/?showLogin=true");
+    } catch (error) {
+      console.error("Erro ao registrar usuário:", error);
+      setError("Erro ao registrar usuário!");
     }
-  }
+  };
 
   const handleBack = (e: React.MouseEvent) => {
-    e.preventDefault()
-    router.push("/")
-  }
+    e.preventDefault();
+    router.push("/");
+  };
 
   return (
     <div className="register-container">
@@ -42,11 +42,23 @@ export default function Register() {
         <h1>Registrar</h1>
         {error && <p className="error-message">{error}</p>}
         <div className="input-field">
-          <input type="text" placeholder="Nome" value={name} onChange={(e) => setName(e.target.value)} required />
+          <input
+            type="text"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
           <FaUser className="icon" />
         </div>
         <div className="input-field">
-          <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
           <FaEnvelope className="icon" />
         </div>
         <div className="input-field">
@@ -62,6 +74,5 @@ export default function Register() {
         <button type="submit">Registrar</button>
       </form>
     </div>
-  )
+  );
 }
-

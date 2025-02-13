@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { FaArrowLeft } from "react-icons/fa"
-import "./nova-despesa.css"
-import Dashboard from "../../dashboard/page"
+import { useState } from "react";
+import Link from "next/link";
+import { FaArrowLeft } from "react-icons/fa";
+import "./nova-despesa.css";
+import Dashboard from "../../dashboard/page";
 
 export default function NovaDespesa() {
-  const [valor, setValor] = useState("0.00")
-  const [descricao, setDescricao] = useState("")
-  const [conta, setConta] = useState("")
-  const [situacao, setSituacao] = useState("")
-  const [dataPagamento, setDataPagamento] = useState("HOJE")
+  const [valor, setValor] = useState("0.00");
+  const [descricao, setDescricao] = useState("");
+  const [conta, setConta] = useState("");
+  const [situacao, setSituacao] = useState("");
+  const [dataPagamento, setDataPagamento] = useState("HOJE");
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Add submission logic here
-  }
+  };
 
   return (
     <Dashboard>
@@ -75,7 +75,12 @@ export default function NovaDespesa() {
             </div>
 
             <div className="input-field">
-              <input type="text" value={conta} onChange={(e) => setConta(e.target.value)} placeholder="Conta" />
+              <input
+                type="text"
+                value={conta}
+                onChange={(e) => setConta(e.target.value)}
+                placeholder="Conta"
+              />
             </div>
 
             <div className="input-field">
@@ -99,6 +104,5 @@ export default function NovaDespesa() {
         </div>
       </div>
     </Dashboard>
-  )
+  );
 }
-
