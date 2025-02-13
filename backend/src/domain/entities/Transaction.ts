@@ -26,6 +26,6 @@ export interface ITransactionSummary {
   type: TransactionType;
   amount: number;
   description?: string | null;
-  categoryId?: number | null;
+  categoryName?: string | null;
   date: Date;
 }
