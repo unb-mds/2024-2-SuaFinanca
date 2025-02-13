@@ -1,21 +1,28 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { GetCategoryService } from "@/application/services/getCategoryService";
 import { GetRecentTransactionsController } from "@/main/controllers/transaction/getRecentTransactionsController";
 import { GetRecentTransactionsParams } from "@/application/interfaces/domain/entities/transaction/ItransactionRepository";
 import { GetRecentTransactionsUseCase } from "@/application/useCases/transaction/getRecentTransactionsUseCase";
 import { HttpRequest } from "@/main/config/helpers/protocol/protocols";
+import { InMemoryCategoryRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryCategoryRepository";
 import { InMemoryTransactionRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryTransactionRepository";
 import { TransactionType } from "@/domain/entities/Transaction";
 
 describe("GetRecentTransactionsController", () => {
-  let getRecentTransactionsController: GetRecentTransactionsController;
-  let getRecentTransactionsUseCase: GetRecentTransactionsUseCase;
+  let inMemoryCategoryRepository: InMemoryCategoryRepository;
   let inMemoryTransactionRepository: InMemoryTransactionRepository;
+  let getCategoryService: GetCategoryService;
+  let getRecentTransactionsUseCase: GetRecentTransactionsUseCase;
+  let getRecentTransactionsController: GetRecentTransactionsController;
 
   beforeEach(() => {
+    inMemoryCategoryRepository = new InMemoryCategoryRepository();
     inMemoryTransactionRepository = new InMemoryTransactionRepository();
+    getCategoryService = new GetCategoryService(inMemoryCategoryRepository);
     getRecentTransactionsUseCase = new GetRecentTransactionsUseCase(
       inMemoryTransactionRepository,
+      getCategoryService,
     );
     getRecentTransactionsController = new GetRecentTransactionsController(
       getRecentTransactionsUseCase,
@@ -64,14 +71,14 @@ describe("GetRecentTransactionsController", () => {
             type: "INCOME",
             amount: 2000,
             description: "Description",
-            categoryId: null,
+            categoryName: null,
             date: new Date("2025-01-03T03:00:00.000Z"),
           },
           {
             type: "EXPENSE",
             amount: 500,
             description: null,
-            categoryId: null,
+            categoryName: null,
             date: new Date("2025-01-02T03:00:00.000Z"),
           },
         ],
