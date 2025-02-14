@@ -1,12 +1,12 @@
 import {
   CreateUserParams,
   IAuthUserRepository,
-} from "../interfaces/domain/entities/user/IauthUser";
+} from "../../interfaces/domain/entities/user/IauthUser";
 
 import { CreateUserReturn } from "@/main/config/helpers/protocol/user/authUserProtocols";
 import { ICreateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
-import { IDefaultCategoryService } from "../interfaces/services/IdefaultCategoryService";
-import { IuserFactory } from "../interfaces/domain/factories/IuserFactory";
+import { IDefaultCategoryService } from "../../interfaces/services/IdefaultCategoryService";
+import { IuserFactory } from "../../interfaces/domain/factories/IuserFactory";
 
 export class CreateUserUseCase implements ICreateUserUseCase {
   constructor(

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { DeleteUserController } from "@/main/controllers/user/deleteUserController";
-import { DeleteUserUseCase } from "@/application/useCases/deleteUserUseCase";
+import { DeleteUserUseCase } from "@/application/useCases/user/deleteUserUseCase";
 import { HttpRequest } from "@/main/config/helpers/protocol/protocols";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
 

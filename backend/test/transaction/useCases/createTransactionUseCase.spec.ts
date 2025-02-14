@@ -84,4 +84,53 @@ describe("CreateTransactionUseCase", () => {
     // Assert
     expect(result).toBe("Category not found");
   });
+
+  it("should create a transaction without description", async () => {
+    // Arrange
+    const categoryParams = { name: "Salary", userId: 1 };
+    await inMemoryCategoryRepository.createCategory(categoryParams);
+    const transactionParams: CreateTransactionParamsWithCategoryName = {
+      type: TransactionType.INCOME,
+      amount: 1000,
+      categoryName: "Salary",
+      userId: 1,
+      date: new Date().toISOString(),
+    };
+
+    // Act
+    const result = await createTransactionUseCase.execute(transactionParams);
+
+    // Assert
+    expect(result).toEqual({
+      transaction: {
+        type: transactionParams.type,
+        amount: transactionParams.amount,
+      },
+    });
+  });
+
+  it("should create a transaction with description", async () => {
+    // Arrange
+    const categoryParams = { name: "Salary", userId: 1 };
+    await inMemoryCategoryRepository.createCategory(categoryParams);
+    const transactionParams: CreateTransactionParamsWithCategoryName = {
+      type: TransactionType.INCOME,
+      amount: 1000,
+      categoryName: "Salary",
+      description: "Description",
+      userId: 1,
+      date: new Date().toISOString(),
+    };
+
+    // Act
+    const result = await createTransactionUseCase.execute(transactionParams);
+
+    // Assert
+    expect(result).toEqual({
+      transaction: {
+        type: transactionParams.type,
+        amount: transactionParams.amount,
+      },
+    });
+  });
 });

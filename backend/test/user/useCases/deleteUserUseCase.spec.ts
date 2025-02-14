@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { DeleteUserUseCase } from "@/application/useCases/deleteUserUseCase";
+import { DeleteUserUseCase } from "@/application/useCases/user/deleteUserUseCase";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
 
 describe("DeleteUserUseCase", () => {

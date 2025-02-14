@@ -6,6 +6,7 @@ import {
 export interface CreateTransactionParams {
   type: TransactionType;
   amount: number;
+  description?: string | null;
   userId: number;
   categoryId?: number;
   date: string;
@@ -14,6 +15,7 @@ export interface CreateTransactionParams {
 export interface CreateTransactionParamsWithCategoryName {
   type: TransactionType;
   amount: number;
+  description?: string | null;
   userId: number;
   categoryName?: string;
   date: string;
@@ -21,18 +23,20 @@ export interface CreateTransactionParamsWithCategoryName {
 
 export interface UpdateTransactionWithCategoryNameParams {
   id: number;
-  userId: number;
   type?: TransactionType;
   amount?: number;
+  description?: string | null;
+  userId: number;
   categoryName?: string | null;
   date?: string;
 }
 
 export interface UpdateTransactionParams {
   id: number;
-  userId: number;
   type?: TransactionType;
   amount?: number;
+  description?: string | null;
+  userId: number;
   categoryId?: number | null;
   date?: string;
 }

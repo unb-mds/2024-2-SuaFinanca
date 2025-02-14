@@ -22,6 +22,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
       data: {
         type: params.type,
         amount: params.amount,
+        description: params.description,
         userId: params.userId,
         categoryId: params.categoryId,
         date: params.date,
@@ -136,6 +137,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
       data: {
         type: params.type,
         amount: params.amount,
+        description: params.description,
         categoryId: params.categoryId,
         date: params.date,
       },

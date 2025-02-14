@@ -1,6 +1,8 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
+
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
 import "./despesas.css";
@@ -8,12 +10,15 @@ import Layout from "../components/Layout";
 import { useAuth } from "../contexts/AuthContext";
 
 const months = [
+
   "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+
 ];
 
 export default function Despesas() {
   const { isAuthenticated } = useAuth();
+
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
@@ -69,6 +74,7 @@ export default function Despesas() {
 
     return () => document.body.classList.remove("despesas-page");
   }, []);
+
 
   if (!isAuthenticated) {
     return (

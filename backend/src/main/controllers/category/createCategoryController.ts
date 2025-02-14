@@ -11,7 +11,7 @@ import {
 
 import { CreateCategoryParams } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 import { CreateCategoryResponse } from "@/main/config/helpers/protocol/category/createCategoryProtocols";
-import { CreateCategorySchema } from "@/application/services/createCategorySchema";
+import { CreateCategorySchema } from "@/application/schema/category/createCategorySchema";
 import { ICreateCategoryUseCase } from "@/main/config/helpers/useCases/IuseCases";
 
 export class CreateCategoryController implements IController {

@@ -18,6 +18,7 @@ export default defineConfig({
         "dist",
         "vitest.config.ts",
         "eslint.config.mjs",
+        "**/swaggerConfig.ts",
         "**/authUtils.ts",
         "**/server.ts",
         "**/routes/**",

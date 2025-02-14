@@ -70,7 +70,7 @@ export default function Transacoes() {
     };
 
     fetchTransacoes();
-  }, [currentMonthIndex, token, isAuthenticated, BASE_URL]);
+  }, [currentMonthIndex, token, isAuthenticated]);
 
   if (!isAuthenticated) {
     return (

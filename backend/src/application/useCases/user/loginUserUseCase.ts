@@ -1,12 +1,12 @@
 import {
   IAuthUserRepository,
   LoginUserParams,
-} from "../interfaces/domain/entities/user/IauthUser";
+} from "../../interfaces/domain/entities/user/IauthUser";
 
 import { ILoginUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
-import { IuserFactory } from "../interfaces/domain/factories/IuserFactory";
+import { IuserFactory } from "../../interfaces/domain/factories/IuserFactory";
 import { LoginUserReturn } from "@/main/config/helpers/protocol/user/authUserProtocols";
-import { TokenGenerator } from "../interfaces/utils/tokenGenerator";
+import { TokenGenerator } from "../../interfaces/utils/tokenGenerator";
 
 export class LoginUserUseCase implements ILoginUserUseCase {
   constructor(

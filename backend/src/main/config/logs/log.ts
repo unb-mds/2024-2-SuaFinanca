@@ -8,7 +8,7 @@ const myFormat = winston.format.printf(
 
 export const log = (label: string) => {
   return winston.createLogger({
-    level: "info",
+    level: "crit",
     format: winston.format.combine(
       winston.format.colorize(),
       winston.format.label({ label: label }),

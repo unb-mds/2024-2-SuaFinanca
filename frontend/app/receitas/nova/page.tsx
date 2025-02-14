@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
@@ -137,6 +138,7 @@ export default function NovaReceita() {
       console.error("Erro ao criar receita:", error);
       alert("Erro ao criar receita. Tente novamente.");
     }
+
   };
 
   return (
@@ -185,6 +187,7 @@ export default function NovaReceita() {
             </button>
           </div>
 
+
           {dataPagamento === "OUTROS" && (
             <div className="input-field">
               <input
@@ -229,6 +232,7 @@ export default function NovaReceita() {
           <div className="form-actions">
             <button type="submit" className="primary-button">
               Salvar Receita
+
             </button>
           </div>
         </form>

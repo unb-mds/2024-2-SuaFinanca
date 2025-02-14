@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import { FaWallet, FaArrowUp, FaArrowDown, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Layout from "../components/Layout";
@@ -11,9 +12,11 @@ const months = [
   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
+
 export default function Dashboard() {
   const { isAuthenticated, username } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
+
   const [currentMonthIndex, setCurrentMonthIndex] = useState(new Date().getMonth());
 
   // Armazenam as transações filtradas do mês
@@ -123,6 +126,7 @@ export default function Dashboard() {
     setShowLogin(false);
   };
 
+
   const previousMonth = () => {
     setCurrentMonthIndex((prevIndex) =>
       prevIndex > 0 ? prevIndex - 1 : months.length - 1
@@ -135,10 +139,12 @@ export default function Dashboard() {
     );
   };
 
+
   return (
     <Layout>
       <div className="dashboard-content">
         <div className="dashboard-header">
+
           <div className="month-selector">
             <button onClick={previousMonth} className="month-nav-button">
               <FaArrowLeft />
@@ -150,6 +156,7 @@ export default function Dashboard() {
           </div>
           <div className="welcome-message">
             Olá, {isAuthenticated ? username : "visitante"}
+
           </div>
         </div>
 
@@ -161,7 +168,9 @@ export default function Dashboard() {
                 <FaWallet className="card-icon" />
               </div>
               <p className="card-value">
+
                 {isAuthenticated ? `R$ ${saldoTotal.toFixed(2)}` : "****"}
+
               </p>
             </div>
           </div>
@@ -173,9 +182,11 @@ export default function Dashboard() {
                 <FaArrowUp className="card-icon income" />
               </div>
               <p className="card-value">
+
                 {isAuthenticated
                   ? `R$ ${receitas.reduce((sum, r) => sum + r.amount, 0).toFixed(2)}`
                   : "****"}
+
               </p>
             </div>
           </div>
@@ -187,9 +198,11 @@ export default function Dashboard() {
                 <FaArrowDown className="card-icon expense" />
               </div>
               <p className="card-value">
+
                 {isAuthenticated
                   ? `R$ ${despesas.reduce((sum, d) => sum + d.amount, 0).toFixed(2)}`
                   : "****"}
+
               </p>
             </div>
           </div>
@@ -244,7 +257,9 @@ export default function Dashboard() {
 
         {showLogin && (
           <div className="login-overlay">
+
             <Login onLoginSuccess={handleLoginSuccess} />
+
           </div>
         )}
       </div>
