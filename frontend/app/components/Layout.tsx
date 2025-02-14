@@ -1,7 +1,9 @@
-"use client"
+// components/Layout.tsx
+"use client";
 
-import React, { useState } from "react"
-import Link from "next/link"
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   FaHome,
   FaWallet,
@@ -16,35 +18,38 @@ import {
   FaSync,
   FaBars,
   FaTimes,
-} from "react-icons/fa"
-import { useAuth } from "../contexts/AuthContext"
-import "../dashboard/dashboard.css"
-import Login from "../login/page"
+} from "react-icons/fa";
+import { useAuth } from "../contexts/AuthContext";
+import "../dashboard/dashboard.css";
 
 interface LayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const { isAuthenticated, username, logout } = useAuth()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
-  const [showLoginModal, setShowLoginModal] = useState(false)
+  const { isAuthenticated, username, logout } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const pathname = usePathname();
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   const handleLoginClick = () => {
-    setShowLoginModal(true)
-    setIsMobileMenuOpen(false) // Close mobile menu if open
-  }
+    setShowLoginModal(true);
+    setIsMobileMenuOpen(false); // Close mobile menu if open
+  };
 
   const handleLoginSuccess = () => {
-    setShowLoginModal(false)
-  }
+    setShowLoginModal(false);
+  };
+
+  // Determine the theme based on the current route
+  const themeClass = pathname.startsWith("/despesas") ? "despesas-page" : "receitas-page";
 
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${themeClass}`}>
       {/* Mobile Menu Button */}
       <button className="mobile-menu-button" onClick={toggleMobileMenu}>
         {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
@@ -133,6 +138,5 @@ export default function Layout({ children }: LayoutProps) {
         )}
       </div>
     </div>
-  )
+  );
 }
-

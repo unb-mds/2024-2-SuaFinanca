@@ -173,5 +173,15 @@ td {
   .summary-cards {
     width: 100%;
   }
+
+  .positive-balance {
+    color: #4caf50 !important; /* Verde para saldo positivo */
+    border-left: 4px solid #4caf50;
+  }
+  
+  .negative-balance {
+    color: #dc3545 !important; /* Vermelho para saldo negativo */
+    border-left: 4px solid #dc3545;
+  }
 }
 

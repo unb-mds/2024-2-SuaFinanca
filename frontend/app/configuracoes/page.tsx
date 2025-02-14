@@ -13,6 +13,9 @@ export default function Configuracoes() {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [email, setEmail] = useState("exemplo@gmail.com");
   const [password, setPassword] = useState("senhasegura123");
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [newUsername, setNewUsername] = useState(username);
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
   const handleDeleteAccount = () => {
     setShowDeleteAlert(true);
@@ -25,11 +28,11 @@ export default function Configuracoes() {
         alert("Usuário não autenticado!");
         return;
       }
-      
-      await axios.delete("http://localhost:8000/user/delete", {
+
+      await axios.delete(`${BASE_URL}/user/delete`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      
+
       await logout();
       alert("Conta apagada com sucesso!");
       window.location.href = "/dashboard";
@@ -38,6 +41,41 @@ export default function Configuracoes() {
       alert("Erro ao apagar conta. Tente novamente.");
     }
   };
+
+  const { setUsername } = useAuth(); // Adicione isso para atualizar o contexto
+
+const handleNameEdit = async () => {
+  if (!newUsername.trim()) return;
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Usuário não autenticado!");
+      return;
+    }
+
+    const response = await axios.patch(
+      `${BASE_URL}/user/update`,
+      { name: newUsername }, 
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    if (response.status === 200) {
+      alert("Nome atualizado com sucesso!");
+      setIsEditingName(false);
+      
+      // Atualiza o nome no contexto de autenticação para refletir em toda a aplicação
+      setUsername(newUsername);
+    } else {
+      alert("Erro ao atualizar nome.");
+    }
+  } catch (error) {
+    console.error("Erro ao atualizar nome:", error);
+    alert("Erro ao atualizar nome. Tente novamente.");
+  }
+};
+
 
   if (!isAuthenticated) {
     return (
@@ -67,12 +105,23 @@ export default function Configuracoes() {
             <div className="avatar">
               <FaUser />
             </div>
-            <div className="edit-icon">
+            <div className="edit-icon" onClick={() => setIsEditingName(true)}>
               <FaPencilAlt size={12} />
             </div>
           </div>
 
-          <h2 className="greeting">Olá, {username}</h2>
+          {isEditingName ? (
+            <div className="input-field">
+              <input
+                type="text"
+                value={newUsername}
+                onChange={(e) => setNewUsername(e.target.value)}
+                autoFocus
+              />
+            </div>
+          ) : (
+            <h2 className="greeting">Olá, {username}</h2>
+          )}
 
           <div className="input-field">
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
@@ -82,9 +131,15 @@ export default function Configuracoes() {
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Senha" />
           </div>
 
-          <button className="delete-button" onClick={handleDeleteAccount}>
-            Apagar conta!
-          </button>
+          {isEditingName ? (
+            <button className="save-button" onClick={handleNameEdit}>
+              Salvar nome
+            </button>
+          ) : (
+            <button className="delete-button" onClick={handleDeleteAccount}>
+              Apagar conta!
+            </button>
+          )}
         </div>
 
         {showDeleteAlert && (

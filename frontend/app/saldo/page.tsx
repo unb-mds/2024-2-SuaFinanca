@@ -1,19 +1,60 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { FaArrowLeft, FaPlus, FaDollarSign, FaWallet } from "react-icons/fa"
-import "./saldo.css"
-import Layout from "../components/Layout"
-import { useAuth } from "../contexts/AuthContext"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { FaArrowLeft, FaPlus, FaDollarSign, FaWallet } from "react-icons/fa";
+import "./saldo.css";
+import Layout from "../components/Layout";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Contas() {
-  const { isAuthenticated } = useAuth()
-  const [accounts, setAccounts] = useState([])
+  const { isAuthenticated } = useAuth();
+  const [accounts, setAccounts] = useState([]);
+  const [saldoTotal, setSaldoTotal] = useState(0);
 
-  const handleNewAccount = () => {
-    // Add new account logic here
-  }
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
+
+  useEffect(() => {
+    if (!isAuthenticated || !token) return;
+
+    const fetchSaldo = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/transaction/recent?limit=100`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar saldo: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (!data || !data.recent || !Array.isArray(data.recent.transaction)) {
+          throw new Error("Resposta inválida da API: estrutura inesperada");
+        }
+
+        const transacoes = data.recent.transaction;
+        const saldoCalculado = transacoes.reduce((total, t) => {
+          return t.type === "INCOME" ? total + t.amount : total - t.amount;
+        }, 0);
+
+        setSaldoTotal(saldoCalculado);
+      } catch (error) {
+        console.error("Erro ao carregar saldo:", error);
+      }
+    };
+
+    fetchSaldo();
+  }, [token, isAuthenticated]);
+
+  const handleDownloadAll = () => {
+    alert("Saldo ainda não implementado.");
+  };
 
   if (!isAuthenticated) {
     return (
@@ -25,7 +66,7 @@ export default function Contas() {
           </Link>
         </div>
       </Layout>
-    )
+    );
   }
 
   return (
@@ -40,7 +81,7 @@ export default function Contas() {
           </div>
 
           <div className="accounts-grid">
-            <button className="new-account-card" onClick={handleNewAccount}>
+            <button className="new-account-card" onClick={handleDownloadAll}>
               <div className="new-account-content">
                 <FaPlus className="plus-icon" />
                 <span>Novo saldo</span>
@@ -59,7 +100,7 @@ export default function Contas() {
         <div className="summary-cards">
           <div className="summary-card current-balance">
             <h3>Saldo Atual</h3>
-            <p className="amount">R$ {accounts.reduce((sum, account) => sum + account.balance, 0).toFixed(2)}</p>
+            <p className="amount">R$ {saldoTotal.toFixed(2)}</p>
             <div className="icon">
               <FaDollarSign />
             </div>
@@ -74,6 +115,5 @@ export default function Contas() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
-

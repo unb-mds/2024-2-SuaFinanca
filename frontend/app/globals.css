@@ -131,3 +131,7 @@ body {
   margin-bottom: 1rem;
 }
 
+.receitasContainer {
+  --primary-color: #4caf50; /* Verde */
+}
+
