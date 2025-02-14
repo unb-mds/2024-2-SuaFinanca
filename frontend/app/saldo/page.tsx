@@ -9,7 +9,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function Contas() {
   const { isAuthenticated } = useAuth();
-  const [accounts, setAccounts] = useState([]);
+  const [accounts, ] = useState([]);
   const [saldoTotal, setSaldoTotal] = useState(0);
 
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
@@ -50,7 +50,7 @@ export default function Contas() {
     };
 
     fetchSaldo();
-  }, [token, isAuthenticated]);
+  }, [token, isAuthenticated, BASE_URL]);
 
   const handleDownloadAll = () => {
     alert("Saldo ainda não implementado.");

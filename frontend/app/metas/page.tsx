@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaArrowLeft, FaArrowRight, FaPlus, FaBullseye, FaCheckCircle, FaDollarSign } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaPlus, FaCheckCircle, FaDollarSign } from "react-icons/fa";
 import "./metas.css";
 import Layout from "../components/Layout";
 import { useAuth } from "../contexts/AuthContext";
@@ -14,7 +14,7 @@ const months = [
 
 export default function Metas() {
   const { isAuthenticated } = useAuth();
-  const [goals, setGoals] = useState([]);
+  const [goals, ] = useState([]);
   const [saldoTotal, setSaldoTotal] = useState(0);
 
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;

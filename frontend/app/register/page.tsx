@@ -23,6 +23,7 @@ export default function Register() {
         password,
       });
       router.push("/?showLogin=true");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Erro ao registrar usuário! Verifique os dados e tente novamente.");
     }

@@ -24,7 +24,7 @@ export default function Dashboard() {
   const [saldoTotal, setSaldoTotal] = useState(0);
 
   // Dicionário de categorias, caso queira usar por ID ou exibir de outras formas
-  const [categorias, setCategorias] = useState<{ [key: string]: string }>({});
+  const [, setCategorias] = useState<{ [key: string]: string }>({});
 
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";

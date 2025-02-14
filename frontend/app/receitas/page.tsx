@@ -19,7 +19,7 @@ export default function Receitas() {
 
   const [currentMonthIndex, setCurrentMonthIndex] = useState(new Date().getMonth());
   const [receitas, setReceitas] = useState<any[]>([]);
-  const [despesas, setDespesas] = useState<any[]>([]);
+  const [, setDespesas] = useState<any[]>([]);
   const [totalRecebido, setTotalRecebido] = useState(0);
   const [totalGasto, setTotalGasto] = useState(0);
 
@@ -73,7 +73,7 @@ export default function Receitas() {
     };
 
     fetchTransacoes();
-  }, [currentMonthIndex, token, isAuthenticated]);
+  }, [currentMonthIndex, token, isAuthenticated, BASE_URL]);
 
   const previousMonth = () => setCurrentMonthIndex(prev => (prev > 0 ? prev - 1 : months.length - 1));
   const nextMonth = () => setCurrentMonthIndex(prev => (prev < months.length - 1 ? prev + 1 : 0));

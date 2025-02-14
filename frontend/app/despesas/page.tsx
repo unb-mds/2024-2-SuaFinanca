@@ -58,7 +58,7 @@ export default function Despesas() {
     };
 
     fetchDespesas();
-  }, [currentMonthIndex, token, isAuthenticated]);
+  }, [currentMonthIndex, token, isAuthenticated, BASE_URL]);
 
   const previousMonth = () => setCurrentMonthIndex(prev => (prev > 0 ? prev - 1 : months.length - 1));
   const nextMonth = () => setCurrentMonthIndex(prev => (prev < months.length - 1 ? prev + 1 : 0));

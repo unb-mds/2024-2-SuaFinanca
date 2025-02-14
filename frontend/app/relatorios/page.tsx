@@ -47,7 +47,7 @@ export default function Relatorios() {
     };
 
     fetchTransacoes();
-  }, [token, isAuthenticated]);
+  }, [token, isAuthenticated, BASE_URL]);
 
   const processarDados = (transacoes) => {
     const receitasPorMes = {};

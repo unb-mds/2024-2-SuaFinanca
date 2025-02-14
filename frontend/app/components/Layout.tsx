@@ -1,7 +1,7 @@
 // components/Layout.tsx
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -28,7 +28,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const { isAuthenticated, username, logout } = useAuth();
+  const { isAuthenticated,  logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const pathname = usePathname();

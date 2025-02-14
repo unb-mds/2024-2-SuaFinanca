@@ -38,6 +38,7 @@ export default function Login({ onLoginSuccess, onClose }: LoginProps) {
       if (onClose) {
         onClose()
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Credenciais inválidas! Verifique seu e-mail e senha.")
     }
