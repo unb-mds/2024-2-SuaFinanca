@@ -12,9 +12,11 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
   const handleSubmit = async (event) => {
+
     event.preventDefault();
     try {
       await axios.post(`${BASE_URL}/user`, {
@@ -23,12 +25,14 @@ export default function Register() {
         password,
       });
       router.push("/?showLogin=true");
+
     } catch (err) {
       setError("Erro ao registrar usuário! Verifique os dados e tente novamente.");
     }
   };
 
   const handleBack = (e) => {
+
     e.preventDefault();
     router.push("/");
   };

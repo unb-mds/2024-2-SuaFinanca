@@ -1,12 +1,13 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { FaUser, FaLock } from "react-icons/fa"
-import axios from "axios"
-import "./login.css"
-import { useAuth } from "../contexts/AuthContext"
+import { useState } from "react";
+import { FaUser, FaLock } from "react-icons/fa";
+import axios from "axios";
+import "./login.css";
+import { useAuth } from "../contexts/AuthContext";
 
 interface LoginProps {
+
   onLoginSuccess?: () => void
   onClose?: () => void
 }
@@ -18,32 +19,38 @@ export default function Login({ onLoginSuccess, onClose }: LoginProps) {
   const { login } = useAuth()
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com"
 
+
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
     try {
       const response = await axios.post(`${BASE_URL}/user/login`, {
         email: username,
         password: password,
-      })
+      });
+
 
       console.log("Resposta da API:", response.data)
 
       const { token, user } = response.data
       login(token, user.name)
 
+
       if (onLoginSuccess) {
-        onLoginSuccess()
+        onLoginSuccess();
       }
+
 
       if (onClose) {
         onClose()
       }
     } catch (err) {
       setError("Credenciais inválidas! Verifique seu e-mail e senha.")
+
     }
-  }
+  };
 
   return (
+
     <div className="login-overlay" onClick={(e) => e.target === e.currentTarget && onClose?.()}>
       <div className="login-modal">
         {onClose && (
@@ -74,7 +81,7 @@ export default function Login({ onLoginSuccess, onClose }: LoginProps) {
           </div>
         </form>
       </div>
-    </div>
-  )
-}
 
+    </div>
+  );
+}

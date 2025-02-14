@@ -32,13 +32,14 @@ model Category {
 }
 
 model Transaction {
-  id         Int             @id @default(autoincrement())
-  type       TransactionType
-  amount     Float
-  userId     Int
-  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  categoryId Int?
-  category   Category?       @relation(fields: [categoryId], references: [id], onDelete: SetNull)
-  createdAt  DateTime        @default(now())
-  date       DateTime?
+  id          Int             @id @default(autoincrement())
+  type        TransactionType
+  amount      Float
+  description String?
+  userId      Int
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId  Int?
+  category    Category?       @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  createdAt   DateTime        @default(now())
+  date        DateTime?
 }

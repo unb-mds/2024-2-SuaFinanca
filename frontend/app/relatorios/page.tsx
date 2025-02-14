@@ -1,8 +1,10 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaArrowLeft, FaDownload } from "react-icons/fa";
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import "./relatorios.css";
@@ -10,6 +12,7 @@ import Layout from "../components/Layout";
 import { useAuth } from "../contexts/AuthContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+
 
 export default function Relatorios() {
   const { isAuthenticated } = useAuth();
@@ -63,6 +66,7 @@ export default function Relatorios() {
       }
     });
 
+
     setDadosPorMes({ receitas: receitasPorMes, despesas: despesasPorMes });
   };
 
@@ -75,10 +79,12 @@ export default function Relatorios() {
         borderWidth: 1,
       },
     ],
+
   });
 
   const handleDownloadAll = () => {
     alert("Download de relatórios ainda não implementado.");
+
   };
 
   if (!isAuthenticated) {

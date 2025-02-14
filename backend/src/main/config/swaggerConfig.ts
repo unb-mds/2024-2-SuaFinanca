@@ -15,8 +15,13 @@ const options = {
         url: "http://localhost:8000",
       },
       {
-        url: "https://your-app-name.onrender.com",
+        url: process.env.RENDER_URL || "http://default-url.com",
       },
+    ],
+    tags: [
+      { name: "Users", description: "User management" },
+      { name: "Transactions", description: "Transaction management" },
+      { name: "Categories", description: "Category management" },
     ],
     components: {
       securitySchemes: {
@@ -33,11 +38,15 @@ const options = {
       },
     ],
   },
-  apis: ["./src/**/*.ts"], // Caminho para os arquivos que contêm as anotações JSDoc
+  apis: [
+    "./src/main/routes/user/userRoutes.ts",
+    "./src/main/routes/transaction/transactionRoutes.ts",
+    "./src/main/routes/category/categoryRoutes.ts",
+  ],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
 
 export const setupSwagger = (app: Express): void => {
-  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };

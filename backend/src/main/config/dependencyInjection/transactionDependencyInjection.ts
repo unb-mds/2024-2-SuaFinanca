@@ -40,6 +40,7 @@ const getUserBalanceController = new GetUserBalanceController(
 // GetRecentTransactions
 const getRecentTransactionsUseCase = new GetRecentTransactionsUseCase(
   prismaTransactionRepository,
+  getCategoryService,
 );
 const getRecentTransactionsController = new GetRecentTransactionsController(
   getRecentTransactionsUseCase,
@@ -48,6 +49,7 @@ const getRecentTransactionsController = new GetRecentTransactionsController(
 // GetBalanceSummary
 const getUserBalanceSummaryController = new GetUserBalanceSummaryController(
   getUserBalanceUseCase,
+  getCategoryService,
 );
 
 // Update

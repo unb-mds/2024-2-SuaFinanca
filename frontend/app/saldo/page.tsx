@@ -1,11 +1,13 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
-import Link from "next/link";
+om "next/link";
 import { FaArrowLeft, FaPlus, FaDollarSign, FaWallet } from "react-icons/fa";
 import "./saldo.css";
 import Layout from "../components/Layout";
 import { useAuth } from "../contexts/AuthContext";
+
 
 export default function Contas() {
   const { isAuthenticated } = useAuth();
@@ -54,6 +56,7 @@ export default function Contas() {
 
   const handleDownloadAll = () => {
     alert("Saldo ainda não implementado.");
+
   };
 
   if (!isAuthenticated) {
@@ -100,7 +103,9 @@ export default function Contas() {
         <div className="summary-cards">
           <div className="summary-card current-balance">
             <h3>Saldo Atual</h3>
+
             <p className="amount">R$ {saldoTotal.toFixed(2)}</p>
+
             <div className="icon">
               <FaDollarSign />
             </div>

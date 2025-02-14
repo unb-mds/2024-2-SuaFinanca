@@ -75,6 +75,25 @@ describe("CreateTransactionController", () => {
     );
   });
 
+  it("should return bad request if data is empty", async () => {
+    // Arrange
+    const httpRequest: HttpRequest<CreateTransactionParamsWithCategoryName> = {
+      body: {
+        type: TransactionType.INCOME,
+        amount: 1000,
+        userId: 1,
+        date: "",
+      },
+    };
+
+    // Act
+    const httpResponse = await createTransactionController.handle(httpRequest);
+
+    // Assert
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toBe("Date must be in the format YYYY-MM-DD");
+  });
+
   it("should return bad request if date format is incorrect", async () => {
     // Arrange
     const httpRequest: HttpRequest<CreateTransactionParamsWithCategoryName> = {
@@ -94,14 +113,15 @@ describe("CreateTransactionController", () => {
     expect(httpResponse.body).toBe("Date must be in the format YYYY-MM-DD");
   });
 
-  it("should return bad request if data is empty", async () => {
+  it("should return bad request if description is empty", async () => {
     // Arrange
     const httpRequest: HttpRequest<CreateTransactionParamsWithCategoryName> = {
       body: {
         type: TransactionType.INCOME,
         amount: 1000,
+        description: "",
         userId: 1,
-        date: "",
+        date: "2025-02-01",
       },
     };
 
@@ -110,7 +130,7 @@ describe("CreateTransactionController", () => {
 
     // Assert
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toBe("Date must be in the format YYYY-MM-DD");
+    expect(httpResponse.body).toBe("Description cannot be empty");
   });
 
   it("should return bad request if category does not exist", async () => {

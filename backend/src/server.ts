@@ -1,3 +1,5 @@
+import "module-alias/register";
+
 import categoryRoutes from "./main/routes/category/categoryRoutes";
 import cors from "cors";
 import dotenv from "dotenv";

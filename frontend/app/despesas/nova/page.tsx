@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
@@ -129,6 +130,7 @@ export default function NovaDespesa() {
       console.error("Erro ao criar despesa:", error);
       alert("Erro ao criar despesa. Tente novamente.");
     }
+
   };
 
   return (
@@ -159,6 +161,7 @@ export default function NovaDespesa() {
             </div>
           )}
 
+
           <div className="input-field">
             <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
               <option value="">Selecione uma categoria...</option>
@@ -167,6 +170,7 @@ export default function NovaDespesa() {
               ))}
             </select>
           </div>
+
 
           <div className="input-field">
             <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)} placeholder="Ou digite uma nova categoria" />
@@ -184,3 +188,4 @@ export default function NovaDespesa() {
     </div>
   );
 }
+

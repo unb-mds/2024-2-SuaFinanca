@@ -4,7 +4,7 @@ import { BcryptPassword } from "@/application/utils/hashUtils";
 import { InMemoryAuthUserRepository } from "@/infrastructure/database/inMemoryRepository/inMemoryAuthUserRepository";
 import { JWTTokenGenerator } from "@/application/utils/authUtils";
 import { LoginUserController } from "@/main/controllers/user/loginUserController";
-import { LoginUserUseCase } from "@/application/useCases/loginUserUseCase";
+import { LoginUserUseCase } from "@/application/useCases/user/loginUserUseCase";
 import { UserFactory } from "@/domain/factories/userFactory";
 
 let bcryptPassword: BcryptPassword;

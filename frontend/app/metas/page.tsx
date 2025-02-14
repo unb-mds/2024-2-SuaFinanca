@@ -1,19 +1,24 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight, FaPlus, FaBullseye, FaCheckCircle, FaDollarSign } from "react-icons/fa";
+
 import "./metas.css";
 import Layout from "../components/Layout";
 import { useAuth } from "../contexts/AuthContext";
 
 const months = [
+
   "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
   "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro "
+
 ];
 
 export default function Metas() {
   const { isAuthenticated } = useAuth();
+
   const [goals, setGoals] = useState([]);
   const [saldoTotal, setSaldoTotal] = useState(0);
 
@@ -70,6 +75,7 @@ export default function Metas() {
 
   const handleNewGoal = () => {
     alert("Funcionalidade de nova meta ainda não implementada.");
+
   };
 
   if (!isAuthenticated) {
@@ -115,7 +121,7 @@ export default function Metas() {
             </button>
             {goals.map((goal) => (
               <div key={goal.id} className="goal-card">
-                {/* Goal details */}
+                <p>{goal.title}</p>
               </div>
             ))}
           </div>

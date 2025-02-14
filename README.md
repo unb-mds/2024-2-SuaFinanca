@@ -4,14 +4,14 @@
 
 O **Sua Finança** é um sistema desenvolvido para facilitar o gerenciamento financeiro pessoal, proporcionando uma visão consolidada de receitas, despesas e saldo disponível. Com uma abordagem intuitiva e prática, a solução ajuda a simplificar o controle dos gastos diários e contribui para a prevenção de dívidas indesejadas.
 
-## Indice 
+## Índice
 
 1. [Motivação](#1-motivação)
-2. [Funcionalidades](#Funcionalidades)
-3. [Tecnologias Utilizadas](#Tecnologias-Utilizadas)
-4. [Como Usar](#Como-Usar)
-5. [Contribuição](#contribuição)
-6. [Licença](#licença)
+2. [Funcionalidades](#2-funcionalidades)
+3. [Tecnologias Utilizadas](#3-tecnologias-utilizadas)
+4. [Como Usar](#4-como-usar)
+5. [Contribuição](#5-contribuição)
+6. [Licença](#6-licença)
 7. [Desenvolvedores](#7-desenvolvedores)
 
 ## 1. Motivação
@@ -26,26 +26,27 @@ Esses fatores podem levar à perda de controle financeiro, dificultando a identi
 
 ## 2. Funcionalidades
 
-- Registro de receitas e despesas;  
-- Categorização de gastos e fontes de renda;  
-- Cálculo automático do saldo disponível;  
-- Gráficos e relatórios financeiros;  
-- Exportação de dados para análise externa;  
+- Registro de receitas e despesas;
+- Categorização de gastos e fontes de renda;
+- Cálculo automático do saldo disponível;
+- Gráficos e relatórios financeiros;
+- Exportação de dados para análise externa;
 
 ## 3. Tecnologias Utilizadas
 
-- **Back-end:** [TypeScript, Tsx, Vitest, Jest e Supertest, Cypress, Express, CORS, Prisma ORM, Dotenv, JSON Web Token (JWT), Winston, Bcrypt]
-- **Front-end:**[next.js, JavaScript, css, html, Vercel, Chart.js, Axios, Formik]
+- **Back-end:** TypeScript, Vitest, Express, Prisma ORM, Dotenv, JSON Web Token (JWT), Winston, Bcrypt;
+- **Front-end:** Next.js, JavaScript, CSS, HTML, Vercel, Chart.js e Axios.
 
 ## 4. Como Usar
 
-### **Pré-requisitos** 
+### Pré-requisitos
+
 - **node** v22.8.0.
 - **npx** 10.8.2
 
-### **Passos para Instalação**  
+### Passos para Instalação
 
-1. Clone o repositório:  
+1. Clone o repositório:
 ```bash
  git clone https://github.com/unb-mds/2024-2-SuaFinanca.git
 ```
@@ -119,12 +120,6 @@ Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) par
               <a href="https://github.com/cibelinda">
                   <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/150722212?v=4" width="150px;"/>
                   <h5 class="text-center">Cibelly Lourenço Ferreira</h5>
-              </a>
-          </td>
-          <td align="center">
-              <a href="https://github.com/PedroAraujo004">
-                  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/173406776?v=4" width="150px;"/>
-                  <h5 class="text-center">Pedro Araujo Lucena</h5>
               </a>
           </td>
   </table>

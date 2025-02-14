@@ -1,3 +1,4 @@
+
 "use client";
 
 import type React from "react";
@@ -48,6 +49,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
@@ -55,3 +57,5 @@ export const useAuth = () => {
   }
   return context;
 };
+
+

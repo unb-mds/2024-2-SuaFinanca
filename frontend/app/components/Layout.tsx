@@ -1,9 +1,11 @@
+
 // components/Layout.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import {
   FaHome,
   FaWallet,
@@ -21,21 +23,26 @@ import {
 } from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
 import "../dashboard/dashboard.css";
+
 import Login from "../login/page";
+
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
+
   const { isAuthenticated, username, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const pathname = usePathname();
 
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
 
   const handleLoginClick = () => {
     setShowLoginModal(true);
@@ -48,6 +55,7 @@ export default function Layout({ children }: LayoutProps) {
 
   // Determine the theme based on the current route
   const themeClass = pathname.startsWith("/despesas") ? "despesas-page" : "receitas-page";
+
 
   return (
     <div className={`dashboard-container ${themeClass}`}>
@@ -81,22 +89,34 @@ export default function Layout({ children }: LayoutProps) {
               </Link>
             </li>
             <li>
-              <Link href="/receitas" className={isAuthenticated ? "" : "disabled"}>
+              <Link
+                href="/receitas"
+                className={isAuthenticated ? "" : "disabled"}
+              >
                 <FaArrowUp /> <span>Receitas</span>
               </Link>
             </li>
             <li>
-              <Link href="/despesas" className={isAuthenticated ? "" : "disabled"}>
+              <Link
+                href="/despesas"
+                className={isAuthenticated ? "" : "disabled"}
+              >
                 <FaArrowDown /> <span>Despesas</span>
               </Link>
             </li>
             <li>
-              <Link href="/relatorios" className={isAuthenticated ? "" : "disabled"}>
+              <Link
+                href="/relatorios"
+                className={isAuthenticated ? "" : "disabled"}
+              >
                 <FaChartLine /> <span>Relatórios</span>
               </Link>
             </li>
             <li>
-              <Link href="/transacoes" className={isAuthenticated ? "" : "disabled"}>
+              <Link
+                href="/transacoes"
+                className={isAuthenticated ? "" : "disabled"}
+              >
                 <FaExchangeAlt /> <span>Transações</span>
               </Link>
             </li>
@@ -106,7 +126,10 @@ export default function Layout({ children }: LayoutProps) {
               </Link>
             </li>
             <li>
-              <Link href="/configuracoes" className={isAuthenticated ? "" : "disabled"}>
+              <Link
+                href="/configuracoes"
+                className={isAuthenticated ? "" : "disabled"}
+              >
                 <FaCog /> <span>Configurações</span>
               </Link>
             </li>
@@ -122,6 +145,7 @@ export default function Layout({ children }: LayoutProps) {
           </button>
         )}
       </aside>
+
 
       <div className="main-content">
         {children}
@@ -141,3 +165,4 @@ export default function Layout({ children }: LayoutProps) {
     </div>
   );
 }
+

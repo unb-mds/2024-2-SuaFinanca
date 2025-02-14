@@ -26,12 +26,12 @@ nav:
     - Sprint 3:  doc/sprints/sprint_3.md
     - Sprint 4:  doc/sprints/sprint_4.md
     - Sprint 5:  doc/sprints/sprint_5.md
-    #- Sprint 6: sprints/sprint-11.md
-    #- Sprint 7: sprints/sprint-12.md
-    #- Sprint 8: sprints/sprint-8.md
-    #- Sprint 9: sprints/sprint-9.md
-    #- Sprint 10: sprints/sprint-10.md
-    #- Sprint 11: sprints/sprint-11.md
+    - Sprint 6: doc/sprints/sprint_6.md
+    - Sprint 7: doc/sprints/sprint_7.md
+    - Sprint 8: doc/sprints/sprint_8.md
+    - Sprint 9: doc/sprints/sprint_9.md
+    - Sprint 10: doc/sprints/sprint_10.md
+    - Sprint 11: doc/sprints/sprint_11.md
     #- Sprint 12: sprints/sprint-12.md
     #- Sprint 13: sprints/sprint-13.md
 

@@ -12,7 +12,7 @@ import {
 import { IUpdateCategoryUseCase } from "@/main/config/helpers/useCases/IuseCases";
 import { UpdateCategoryParams } from "@/application/interfaces/domain/entities/category/IcategoryRepository";
 import { UpdateCategoryResponse } from "@/main/config/helpers/protocol/category/updateCategoryProtocols";
-import { UpdateCategorySchema } from "@/application/services/updateCategorySchema";
+import { UpdateCategorySchema } from "@/application/schema/category/updateCategorySchema";
 
 export class UpdateCategoryController implements IController {
   constructor(private readonly updateCategoryUseCase: IUpdateCategoryUseCase) {}

@@ -12,7 +12,7 @@ import {
 import { IUpdateUserUseCase } from "@/main/config/helpers/useCases/IuseCases";
 import { UpdateUserParams } from "@/application/interfaces/domain/entities/user/IauthUser";
 import { UpdateUserResponse } from "@/main/config/helpers/protocol/user/updateUserProtocols";
-import { UpdateUserSchema } from "@/application/services/updateUserSchema";
+import { UpdateUserSchema } from "@/application/schema/user/updateUserSchema";
 import { log } from "@/main/config/logs/log";
 
 const logger = log("UpdateUserController");

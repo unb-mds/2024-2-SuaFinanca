@@ -1,13 +1,16 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight, FaWallet, FaArrowUp, FaArrowDown } from "react-icons/fa";
+
 import "./transacoes.css";
 import Layout from "../components/Layout";
 import { useAuth } from "../contexts/AuthContext";
 
 const months = [
+
   "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
@@ -72,6 +75,7 @@ export default function Transacoes() {
     fetchTransacoes();
   }, [currentMonthIndex, token, isAuthenticated]);
 
+
   if (!isAuthenticated) {
     return (
       <Layout>
@@ -106,6 +110,13 @@ export default function Transacoes() {
             </button>
           </div>
 
+          <button
+            className="new-transaction-button"
+            onClick={handleNewTransaction}
+          >
+            Adicionar Transação
+          </button>
+
           <div className="table-container">
             <table>
               <thead>
@@ -117,6 +128,7 @@ export default function Transacoes() {
                 </tr>
               </thead>
               <tbody>
+
                 {transactions.length === 0 ? (
                   <tr>
                     <td colSpan={4} style={{ textAlign: "center" }}>Nenhuma transação encontrada</td>
@@ -133,29 +145,36 @@ export default function Transacoes() {
                     </tr>
                   ))
                 )}
+
               </tbody>
             </table>
           </div>
         </div>
 
         <div className="summary-cards">
+
           <div className={`summary-card balance ${saldoMensal >= 0 ? "positive-balance" : "negative-balance"}`}>
             <h3>Saldo do mês</h3>
             <p className="amount">R$ {saldoMensal.toFixed(2)}</p>
+
             <div className="icon">
               <FaWallet />
             </div>
           </div>
           <div className="summary-card income">
+
             <h3>Receitas do mês</h3>
             <p className="amount">R$ {totalReceitas.toFixed(2)}</p>
+
             <div className="icon">
               <FaArrowUp />
             </div>
           </div>
           <div className="summary-card expenses">
+
             <h3>Despesas do mês</h3>
             <p className="amount">R$ {totalDespesas.toFixed(2)}</p>
+
             <div className="icon">
               <FaArrowDown />
             </div>
@@ -165,3 +184,4 @@ export default function Transacoes() {
     </Layout>
   );
 }
+
