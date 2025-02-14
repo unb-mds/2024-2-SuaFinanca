@@ -21,6 +21,7 @@ import {
 } from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
 import "../dashboard/dashboard.css";
+import Login from "../login/page";
 
 interface LayoutProps {
   children: React.ReactNode;
