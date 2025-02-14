@@ -1,3 +1,14 @@
+![GitHub contributors](https://img.shields.io/github/contributors/unb-mds/2024-2-SuaFinanca)
+![GitHub](https://img.shields.io/github/license/unb-mds/2024-2-SuaFinanca)
+![GitHub Issues](https://img.shields.io/github/issues/unb-mds/2024-2-SuaFinanca)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/unb-mds/2024-2-SuaFinanca)
+![GitHub Open PRs](https://img.shields.io/github/issues-pr/unb-mds/2024-2-SuaFinanca)
+![GitHub closed PRs](https://img.shields.io/github/issues-pr-closed/unb-mds/2024-2-SuaFinanca)
+![Build Status](https://img.shields.io/github/actions/workflow/status/unb-mds/2024-2-SuaFinanca/ci.yml?branch=main)
+
+![Typescript](https://img.shields.io/badge/Typescript-5.7.2-blue)
+![Next](https://img.shields.io/badge/Next-15.0.4-black)
+
 ## Sua Finança
 
 ### Sistema de controle financeiro pessoal
