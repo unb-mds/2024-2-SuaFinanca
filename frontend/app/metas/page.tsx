@@ -1,33 +1,56 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { FaArrowLeft, FaArrowRight, FaPlus, FaBullseye, FaCheckCircle } from "react-icons/fa"
-import "./metas.css"
-import Layout from "../components/Layout"
-import { useAuth } from "../contexts/AuthContext"
+import { useState } from "react";
+import Link from "next/link";
+import {
+  FaArrowLeft,
+  FaArrowRight,
+  FaPlus,
+  FaBullseye,
+  FaCheckCircle,
+} from "react-icons/fa";
+import "./metas.css";
+import Layout from "../components/Layout";
+import { useAuth } from "../contexts/AuthContext";
 
 const months = [
-  "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
-  "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro " 
-]
+  "Janeiro ",
+  "Fevereiro ",
+  "Março ",
+  "Abril ",
+  "Maio ",
+  "Junho ",
+  "Julho ",
+  "Agosto ",
+  "Setembro ",
+  "Outubro ",
+  "Novembro ",
+  "Dezembro ",
+];
 
 export default function Metas() {
-  const { isAuthenticated } = useAuth()
-  const [currentMonth, setCurrentMonthIndex] = useState("Dezembro 2024")
-  const [goals, setGoals] = useState([])
+  const { isAuthenticated } = useAuth();
+  const [currentMonth, setCurrentMonthIndex] = useState("Dezembro 2024");
+  const [goals, setGoals] = useState<{ id: number; title: string }[]>([]);
 
   const previousMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : months.length - 1))
-  }
+    setCurrentMonthIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : months.length - 1,
+    );
+  };
 
   const nextMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex < months.length - 1 ? prevIndex + 1 : 0))
-  }
+    setCurrentMonthIndex((prevIndex) =>
+      prevIndex < months.length - 1 ? prevIndex + 1 : 0,
+    );
+  };
 
   const handleNewGoal = () => {
-    // Add new goal logic here
-  }
+    setGoals((prevGoals) => [
+      ...prevGoals,
+      { id: prevGoals.length + 1, title: "Nova Meta" },
+    ]);
+  };
 
   if (!isAuthenticated) {
     return (
@@ -39,7 +62,7 @@ export default function Metas() {
           </Link>
         </div>
       </Layout>
-    )
+    );
   }
 
   return (
@@ -71,9 +94,8 @@ export default function Metas() {
               </div>
             </button>
             {goals.map((goal) => (
-              // Goals will be rendered here
               <div key={goal.id} className="goal-card">
-                {/* Goal details */}
+                <p>{goal.title}</p>
               </div>
             ))}
           </div>
@@ -97,6 +119,5 @@ export default function Metas() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
-

@@ -1,24 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { FaArrowLeft, FaArrowRight, FaDownload } from "react-icons/fa"
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js"
-import { Pie } from "react-chartjs-2"
-import "./relatorios.css"
-import Layout from "../components/Layout"
-import { useAuth } from "../contexts/AuthContext"
+import { useState } from "react";
+import Link from "next/link";
+import { FaArrowLeft, FaArrowRight, FaDownload } from "react-icons/fa";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
+import "./relatorios.css";
+import Layout from "../components/Layout";
+import { useAuth } from "../contexts/AuthContext";
 
-ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const months = [
-  "Janeiro ", "Fevereiro ", "Março ", "Abril ", "Maio ", "Junho ",
-  "Julho ", "Agosto ", "Setembro ", "Outubro ", "Novembro ", "Dezembro " 
-]
+  "Janeiro ",
+  "Fevereiro ",
+  "Março ",
+  "Abril ",
+  "Maio ",
+  "Junho ",
+  "Julho ",
+  "Agosto ",
+  "Setembro ",
+  "Outubro ",
+  "Novembro ",
+  "Dezembro ",
+];
 
 export default function Relatorios() {
-  const { isAuthenticated } = useAuth()
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(months.length - 1)
+  const { isAuthenticated } = useAuth();
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(months.length - 1);
 
   const chartData = {
     labels: ["Categoria 1", "Categoria 2", "Categoria 3", "Categoria 4"],
@@ -29,7 +39,7 @@ export default function Relatorios() {
         borderWidth: 0,
       },
     ],
-  }
+  };
 
   const chartOptions = {
     plugins: {
@@ -46,19 +56,23 @@ export default function Relatorios() {
     },
     maintainAspectRatio: true,
     responsive: true,
-  }
+  };
 
   const previousMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : months.length - 1))
-  }
+    setCurrentMonthIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : months.length - 1,
+    );
+  };
 
   const nextMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex < months.length - 1 ? prevIndex + 1 : 0))
-  }
+    setCurrentMonthIndex((prevIndex) =>
+      prevIndex < months.length - 1 ? prevIndex + 1 : 0,
+    );
+  };
 
   const handleDownloadAll = () => {
     // Add download logic here
-  }
+  };
 
   if (!isAuthenticated) {
     return (
@@ -70,7 +84,7 @@ export default function Relatorios() {
           </Link>
         </div>
       </Layout>
-    )
+    );
   }
 
   return (
@@ -132,6 +146,5 @@ export default function Relatorios() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
-

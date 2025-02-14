@@ -1,8 +1,12 @@
-/// <reference types="@testing-library/jest-dom" />
 import React, { useEffect, useState } from "react";
-import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
-import '@testing-library/jest-dom';
-import dashboard from "../dashboard/page"; // Certifique-se de que o caminho está correto
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { useRouter } from "next/navigation";
 import { AuthProvider } from "../contexts/AuthContext"; // Importa o AuthProvider que criamos
 import { useAuth } from "../contexts/AuthContext";
@@ -44,10 +48,15 @@ const Dashboard = () => {
       >
         Sidebar Content
       </aside>
-      <button data-testid="logout-button" onClick={() => {
-        logout();
-        setTimeout(() => router.push("/login"), 0);
-      }}>Sair</button>
+      <button
+        data-testid="logout-button"
+        onClick={() => {
+          logout();
+          setTimeout(() => router.push("/login"), 0);
+        }}
+      >
+        Sair
+      </button>
     </div>
   );
 };
@@ -70,13 +79,15 @@ describe("Dashboard Component", () => {
     render(
       <AuthProvider>
         <Dashboard />
-      </AuthProvider>
+      </AuthProvider>,
     );
 
     screen.debug();
-    
+
     await waitFor(() => {
-      expect(screen.getByText((content) => content.includes("Olá, Usuário Teste"))).toBeInTheDocument();
+      expect(
+        screen.getByText((content) => content.includes("Olá, Usuário Teste")),
+      ).toBeInTheDocument();
     });
   });
 
@@ -87,7 +98,7 @@ describe("Dashboard Component", () => {
       render(
         <AuthProvider>
           <Dashboard />
-        </AuthProvider>
+        </AuthProvider>,
       );
     });
 
@@ -103,7 +114,7 @@ describe("Dashboard Component", () => {
     render(
       <AuthProvider>
         <Dashboard />
-      </AuthProvider>
+      </AuthProvider>,
     );
 
     const toggleButton = screen.getByTestId("toggle-sidebar");
@@ -126,7 +137,7 @@ describe("Dashboard Component", () => {
     render(
       <AuthProvider>
         <Dashboard />
-      </AuthProvider>
+      </AuthProvider>,
     );
 
     const logoutButton = screen.getByTestId("logout-button");
