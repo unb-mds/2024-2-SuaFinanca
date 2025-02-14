@@ -1,7 +1,10 @@
+
+// app/layout.tsx
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./contexts/AuthContext";
-import type React from "react"; // Added import for React
+import PageWrapper from "./components/PageWrapper"; // ajuste o caminho conforme sua estrutura
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,15 +13,15 @@ export const metadata = {
   description: "Gerencie suas finanças pessoais",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <PageWrapper>{children}</PageWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

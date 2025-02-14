@@ -12,23 +12,24 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8000/user/register", {
+      await axios.post(`${BASE_URL}/user`, {
         name,
         email,
         password,
       });
       router.push("/?showLogin=true");
-    } catch (error) {
-      console.error("Erro ao registrar usuário:", error);
-      setError("Erro ao registrar usuário!");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+      setError("Erro ao registrar usuário! Verifique os dados e tente novamente.");
     }
   };
 
-  const handleBack = (e: React.MouseEvent) => {
+  const handleBack = (e) => {
     e.preventDefault();
     router.push("/");
   };

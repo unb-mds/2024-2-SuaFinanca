@@ -1,7 +1,11 @@
+
+// components/Layout.tsx
 "use client";
 
-import React from "react";
+import React, { useState} from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import {
   FaHome,
   FaWallet,
@@ -20,20 +24,40 @@ import {
 import { useAuth } from "../contexts/AuthContext";
 import "../dashboard/dashboard.css";
 
+import Login from "../login/page";
+
+
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated,  logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const pathname = usePathname();
+
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+
+  const handleLoginClick = () => {
+    setShowLoginModal(true);
+    setIsMobileMenuOpen(false); // Close mobile menu if open
+  };
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
+  };
+
+  // Determine the theme based on the current route
+  const themeClass = pathname.startsWith("/despesas") ? "despesas-page" : "receitas-page";
+
+
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${themeClass}`}>
       {/* Mobile Menu Button */}
       <button className="mobile-menu-button" onClick={toggleMobileMenu}>
         {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
@@ -115,13 +139,29 @@ export default function Layout({ children }: LayoutProps) {
             <FaSignOutAlt /> <span>Sair</span>
           </button>
         ) : (
-          <button className="login-button">
+          <button className="login-button" onClick={handleLoginClick}>
             <FaUser /> <span>Entrar</span>
           </button>
         )}
       </aside>
 
-      <div className="main-content">{children}</div>
+
+      <div className="main-content">
+        {children}
+
+        {/* Login Modal */}
+        {showLoginModal && (
+          <div className="login-overlay">
+            <div className="login-modal">
+              <button className="close-button" onClick={() => setShowLoginModal(false)}>
+                ×
+              </button>
+              <Login onLoginSuccess={handleLoginSuccess} />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+

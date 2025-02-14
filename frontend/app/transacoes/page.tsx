@@ -1,78 +1,82 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaWallet,
-  FaArrowUp,
-  FaArrowDown,
-} from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaWallet, FaArrowUp, FaArrowDown } from "react-icons/fa";
 import "./transacoes.css";
 import Layout from "../components/Layout";
 import { useAuth } from "../contexts/AuthContext";
 
 const months = [
-  "Janeiro ",
-  "Fevereiro ",
-  "Março ",
-  "Abril ",
-  "Maio ",
-  "Junho ",
-  "Julho ",
-  "Agosto ",
-  "Setembro ",
-  "Outubro ",
-  "Novembro ",
-  "Dezembro ",
+  "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
-
-interface Transaction {
-  id: number;
-  date: string;
-  description: string;
-  account: string;
-  value: number;
-  status: string;
-}
 
 export default function Transacoes() {
   const { isAuthenticated } = useAuth();
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(months.length - 1);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
-  const previousMonth = () => {
-    setCurrentMonthIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : months.length - 1,
-    );
-  };
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(new Date().getMonth());
+  const [transactions, setTransactions] = useState([]);
+  const [totalReceitas, setTotalReceitas] = useState(0);
+  const [totalDespesas, setTotalDespesas] = useState(0);
+  const [saldoMensal, setSaldoMensal] = useState(0);
 
-  const nextMonth = () => {
-    setCurrentMonthIndex((prevIndex) =>
-      prevIndex < months.length - 1 ? prevIndex + 1 : 0,
-    );
-  };
+  useEffect(() => {
+    if (!isAuthenticated || !token) return;
 
-  const handleNewTransaction = () => {
-    setTransactions((prevTransactions) => [
-      ...prevTransactions,
-      {
-        id: prevTransactions.length + 1,
-        date: "2024-06-15",
-        description: "Nova Transação",
-        account: "Conta Corrente",
-        value: 100.0,
-        status: "Pendente",
-      },
-    ]);
-  };
+    const fetchTransacoes = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/transaction/recent?limit=100`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar transações: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (!data || !data.recent || !Array.isArray(data.recent.transaction)) {
+          throw new Error("Resposta inválida da API: estrutura inesperada");
+        }
+
+        const transacoes = data.recent.transaction;
+
+        const transacoesMes = transacoes.filter(
+          (item) => new Date(item.date).getMonth() === currentMonthIndex
+        );
+
+        setTransactions(transacoesMes);
+
+        const receitas = transacoesMes.filter((item) => item.type === "INCOME");
+        const despesas = transacoesMes.filter((item) => item.type === "EXPENSE");
+
+        const totalReceitas = receitas.reduce((sum, r) => sum + r.amount, 0);
+        const totalDespesas = despesas.reduce((sum, d) => sum + d.amount, 0);
+        const saldo = totalReceitas - totalDespesas;
+
+        setTotalReceitas(totalReceitas);
+        setTotalDespesas(totalDespesas);
+        setSaldoMensal(saldo);
+      } catch (error) {
+        console.error("Erro ao carregar transações:", error);
+      }
+    };
+
+    fetchTransacoes();
+  }, [currentMonthIndex, token, isAuthenticated]);
 
   if (!isAuthenticated) {
     return (
       <Layout>
         <div className="login-prompt">
-          <p>Faça login para acessar as transações</p>
+          <p>Faça login para acessar as Transações</p>
           <Link href="/dashboard">
             <button>Voltar para o Dashboard</button>
           </Link>
@@ -93,83 +97,65 @@ export default function Transacoes() {
           </div>
 
           <div className="month-selector">
-            <button onClick={previousMonth} className="month-nav-button">
+            <button onClick={() => setCurrentMonthIndex((prev) => (prev > 0 ? prev - 1 : months.length - 1))} className="month-nav-button">
               <FaArrowLeft />
             </button>
             <span className="current-month">{months[currentMonthIndex]}</span>
-            <button onClick={nextMonth} className="month-nav-button">
+            <button onClick={() => setCurrentMonthIndex((prev) => (prev < months.length - 1 ? prev + 1 : 0))} className="month-nav-button">
               <FaArrowRight />
             </button>
           </div>
-
-          <button
-            className="new-transaction-button"
-            onClick={handleNewTransaction}
-          >
-            Adicionar Transação
-          </button>
 
           <div className="table-container">
             <table>
               <thead>
                 <tr>
-                  <th>Situação</th>
                   <th>Data</th>
+                  <th>Categoria</th>
                   <th>Descrição</th>
-                  <th>Conta</th>
                   <th>Valor</th>
                 </tr>
               </thead>
               <tbody>
-                {transactions.map((transaction) => (
-                  <tr key={transaction.id}>
-                    <td>{transaction.status}</td>
-                    <td>{transaction.date}</td>
-                    <td>{transaction.description}</td>
-                    <td>{transaction.account}</td>
-                    <td>R$ {transaction.value.toFixed(2)}</td>
+                {transactions.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} style={{ textAlign: "center" }}>Nenhuma transação encontrada</td>
                   </tr>
-                ))}
+                ) : (
+                  transactions.map((transaction, index) => (
+                    <tr key={index}>
+                      <td>{new Date(transaction.date).toLocaleDateString()}</td>
+                      <td>{transaction.categoryName || "Sem categoria"}</td>
+                      <td>{transaction.description || "Sem descrição"}</td>
+                      <td className={transaction.type === "INCOME" ? "income" : "expense"}>
+                        R$ {transaction.amount.toFixed(2)}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         </div>
 
         <div className="summary-cards">
-          <div className="summary-card balance">
-            <h3>Saldo Atual</h3>
-            <p className="amount">
-              R${" "}
-              {transactions
-                .reduce((sum, transaction) => sum + transaction.value, 0)
-                .toFixed(2)}
-            </p>
+          <div className={`summary-card balance ${saldoMensal >= 0 ? "positive-balance" : "negative-balance"}`}>
+            <h3>Saldo do mês</h3>
+            <p className="amount">R$ {saldoMensal.toFixed(2)}</p>
             <div className="icon">
               <FaWallet />
             </div>
           </div>
           <div className="summary-card income">
-            <h3>Receitas</h3>
-            <p className="amount">
-              R${" "}
-              {transactions
-                .filter((t) => t.value > 0)
-                .reduce((sum, transaction) => sum + transaction.value, 0)
-                .toFixed(2)}
-            </p>
+            <h3>Receitas do mês</h3>
+            <p className="amount">R$ {totalReceitas.toFixed(2)}</p>
             <div className="icon">
               <FaArrowUp />
             </div>
           </div>
           <div className="summary-card expenses">
-            <h3>Despesas</h3>
-            <p className="amount">
-              R${" "}
-              {transactions
-                .filter((t) => t.value < 0)
-                .reduce((sum, transaction) => sum + transaction.value, 0)
-                .toFixed(2)}
-            </p>
+            <h3>Despesas do mês</h3>
+            <p className="amount">R$ {totalDespesas.toFixed(2)}</p>
             <div className="icon">
               <FaArrowDown />
             </div>

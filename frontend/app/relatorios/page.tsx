@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaArrowLeft, FaArrowRight, FaDownload } from "react-icons/fa";
+import { FaArrowLeft, FaDownload } from "react-icons/fa";
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import "./relatorios.css";
@@ -11,67 +13,78 @@ import { useAuth } from "../contexts/AuthContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const months = [
-  "Janeiro ",
-  "Fevereiro ",
-  "Março ",
-  "Abril ",
-  "Maio ",
-  "Junho ",
-  "Julho ",
-  "Agosto ",
-  "Setembro ",
-  "Outubro ",
-  "Novembro ",
-  "Dezembro ",
-];
 
 export default function Relatorios() {
   const { isAuthenticated } = useAuth();
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(months.length - 1);
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://default-url.com";
 
-  const chartData = {
-    labels: ["Categoria 1", "Categoria 2", "Categoria 3", "Categoria 4"],
+  const [dadosPorMes, setDadosPorMes] = useState({ receitas: {}, despesas: {} });
+
+  useEffect(() => {
+    if (!isAuthenticated || !token) return;
+
+    const fetchTransacoes = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/transaction/recent?limit=200`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar transações: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        if (!data || !data.recent || !Array.isArray(data.recent.transaction)) {
+          throw new Error("Resposta inválida da API: estrutura inesperada");
+        }
+
+        processarDados(data.recent.transaction);
+      } catch (error) {
+        console.error("Erro ao carregar transações:", error);
+      }
+    };
+
+    fetchTransacoes();
+  }, [token, isAuthenticated, BASE_URL]);
+
+  const processarDados = (transacoes) => {
+    const receitasPorMes = {};
+    const despesasPorMes = {};
+
+    transacoes.forEach((t) => {
+      const mes = t.date.slice(0, 7); // Formato YYYY-MM
+
+      if (t.type === "INCOME") {
+        receitasPorMes[mes] = (receitasPorMes[mes] || 0) + t.amount;
+      } else if (t.type === "EXPENSE") {
+        despesasPorMes[mes] = (despesasPorMes[mes] || 0) + t.amount;
+      }
+    });
+
+
+    setDadosPorMes({ receitas: receitasPorMes, despesas: despesasPorMes });
+  };
+
+  const criarDadosGrafico = (dados) => ({
+    labels: Object.keys(dados), // Cada mês será um rótulo
     datasets: [
       {
-        data: [25, 25, 25, 25],
-        backgroundColor: ["#FFE600", "#FF9900", "#6666FF", "#4CAF50"],
-        borderWidth: 0,
+        data: Object.values(dados), // Cada fatia será o total daquele mês
+        backgroundColor: ["#00CFFF", "#4CAF50", "#FF9900", "#6666FF", "#FFE600", "#FF0000"],
+        borderWidth: 1,
       },
     ],
-  };
 
-  const chartOptions = {
-    plugins: {
-      legend: {
-        display: true,
-        position: "bottom" as const,
-        labels: {
-          boxWidth: 10,
-          font: {
-            size: 10,
-          },
-        },
-      },
-    },
-    maintainAspectRatio: true,
-    responsive: true,
-  };
-
-  const previousMonth = () => {
-    setCurrentMonthIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : months.length - 1,
-    );
-  };
-
-  const nextMonth = () => {
-    setCurrentMonthIndex((prevIndex) =>
-      prevIndex < months.length - 1 ? prevIndex + 1 : 0,
-    );
-  };
+  });
 
   const handleDownloadAll = () => {
-    // Add download logic here
+    alert("Download de relatórios ainda não implementado.");
+
   };
 
   if (!isAuthenticated) {
@@ -98,44 +111,23 @@ export default function Relatorios() {
             <h1 className="page-title">Relatórios</h1>
           </div>
 
-          <div className="month-selector">
-            <button onClick={previousMonth} className="month-nav-button">
-              <FaArrowLeft />
-            </button>
-            <span className="current-month">{months[currentMonthIndex]}</span>
-            <button onClick={nextMonth} className="month-nav-button">
-              <FaArrowRight />
-            </button>
-          </div>
-
           <div className="charts-container">
-            <div className="charts-grid">
-              <div className="chart-card">
-                <h3>Conta BB</h3>
-                <Pie data={chartData} options={chartOptions} />
-              </div>
-              <div className="chart-card">
-                <h3>Conta Itaú</h3>
-                <Pie data={chartData} options={chartOptions} />
-              </div>
-              <div className="chart-card">
-                <h3>Conta NuBank</h3>
-                <Pie data={chartData} options={chartOptions} />
-              </div>
-              <div className="chart-card">
-                <h3>Conta PicPay</h3>
-                <Pie data={chartData} options={chartOptions} />
-              </div>
-            </div>
-
             <div className="summary-charts">
               <div className="chart-card">
-                <h3>Receitas</h3>
-                <Pie data={chartData} options={chartOptions} />
+                <h3>Receitas por mês</h3>
+                {Object.keys(dadosPorMes.receitas).length > 0 ? (
+                  <Pie data={criarDadosGrafico(dadosPorMes.receitas)} />
+                ) : (
+                  <p>Sem dados disponíveis</p>
+                )}
               </div>
               <div className="chart-card">
-                <h3>Despesas</h3>
-                <Pie data={chartData} options={chartOptions} />
+                <h3>Despesas por mês</h3>
+                {Object.keys(dadosPorMes.despesas).length > 0 ? (
+                  <Pie data={criarDadosGrafico(dadosPorMes.despesas)} />
+                ) : (
+                  <p>Sem dados disponíveis</p>
+                )}
               </div>
             </div>
 

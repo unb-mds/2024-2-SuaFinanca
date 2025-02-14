@@ -92,7 +92,7 @@
 .main-content {
   margin-left: 240px;
   flex: 1;
-  padding: 1rem;
+  padding: 0;
   overflow-x: hidden;
   width: calc(100% - 240px);
 }
@@ -245,29 +245,58 @@
 }
 
 .dashboard-content {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 1rem;
+  max-width: 100%;
+  margin: 0;
 }
 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .month-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   background: white;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-width: 200px;
+}
+
+.month-nav-button {
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.month-nav-button:hover {
+  color: #43a047;
+}
+
+.current-month {
   font-size: 0.875rem;
-  color: #666;
+  color: #333;
+  font-weight: 500;
+  min-width: 80px;
+  text-align: center;
 }
 
 .welcome-message {
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: #666;
   background: white;
   padding: 0.5rem 1rem;
@@ -278,20 +307,16 @@
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .dashboard-card {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
-  transition: transform 0.2s;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-2px);
+  padding: 1.25rem;
+  height: 100%;
 }
 
 .card-content {
@@ -336,37 +361,88 @@
 .dashboard-sections {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .section-card {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
-  min-height: 200px;
+  padding: 1.25rem;
+  height: 100%;
 }
 
 .section-card h3 {
   font-size: 1.125rem;
   color: #333;
   margin-bottom: 1rem;
-  font-weight: 500;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
 }
 
 .section-content {
   color: #666;
 }
 
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  background: white;
+}
+
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.transaction-date {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.transaction-description {
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.transaction-amount {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.transaction-amount.income {
+  color: #4caf50;
+}
+
+.transaction-amount.expense {
+  color: #dc3545;
+}
+
 @media (max-width: 768px) {
   .dashboard-content {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .dashboard-header {
     flex-direction: column;
-    gap: 1rem;
     align-items: stretch;
+  }
+
+  .month-selector {
+    width: 100%;
+  }
+
+  .welcome-message {
+    width: 100%;
     text-align: center;
   }
 
@@ -376,6 +452,46 @@
 
   .dashboard-sections {
     grid-template-columns: 1fr;
+  }
+
+  .section-card {
+    margin-bottom: 1rem;
+  }
+
+  .transaction-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+
+  .transaction-amount {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-content {
+    padding: 0.75rem;
+  }
+
+  .cards-grid {
+    gap: 0.75rem;
+  }
+
+  .dashboard-card {
+    padding: 1rem;
+  }
+
+  .section-card {
+    padding: 1rem;
+  }
+
+  .transaction-date,
+  .transaction-description {
+    font-size: 0.8125rem;
   }
 }
 
